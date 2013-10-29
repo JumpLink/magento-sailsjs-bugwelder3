@@ -356,8 +356,8 @@ module.exports = function (grunt) {
 
       devStylesJADE: {
         options: {
-          startTag: '// STYLES',
-          endTag: '// STYLES END',
+          startTag: '//- STYLES',
+          endTag: '//- STYLES END',
           fileTmpl: 'link(rel="stylesheet", href="%s")',
           appRoot: '.tmp/public'
         },
@@ -381,8 +381,8 @@ module.exports = function (grunt) {
       // Bring in JST template object
       devTplJADE: {
         options: {
-          startTag: '// TEMPLATES',
-          endTag: '// TEMPLATES END',
+          startTag: '//- TEMPLATES',
+          endTag: '//- TEMPLATES END',
           fileTmpl: 'script(type="text/javascript", src="%s")',
           appRoot: '.tmp/public'
         },
