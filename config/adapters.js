@@ -16,7 +16,7 @@ module.exports.adapters = {
 
   // If you leave the adapter config unspecified 
   // in a model definition, 'default' will be used.
-  'default': 'magento',
+  'default': 'magento-dnode',
 
   // Persistent adapter for DEVELOPMENT ONLY
   // (data is preserved when the server shuts down)
@@ -24,7 +24,15 @@ module.exports.adapters = {
     module: 'sails-disk'
   },
 
-  magento: {
+  mongo: {
+    module:   'sails-mongo',
+    host:     'localhost',
+    user:     '',
+    password: '',
+    database: 'magento'
+  },
+
+  'magento-dnode': {
     module: 'sails-magento',
     port: 6060
   },

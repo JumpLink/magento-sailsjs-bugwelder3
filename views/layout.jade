@@ -1,11 +1,22 @@
 doctype 5
-html
+html(ng-app="jumplink.magentoweb")
   head
     title:= title
 
     <!-- Viewport mobile tag for sensible mobile support -->
     meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1")
 
+
+    //- SCRIPTS
+    script(type="text/javascript", src="/linker/js/socket.io.js")
+    script(type="text/javascript", src="/linker/js/sails.io.js")
+    script(type="text/javascript", src="/bower_components/angular/angular.js")
+    script(type="text/javascript", src="/bower_components/angular-route/angular-route.js")
+    script(type="text/javascript", src="/bower_components/angular-sails/angular-sails.js")
+    script(type="text/javascript", src="/bower_components/angular-ui-bootstrap3/ui-bootstrap.js")
+    script(type="text/javascript", src="/linker/js/app.js")
+    script(type="text/javascript", src="/linker/js/routes.js")
+    //- SCRIPTS END
     
         //- Stylesheets and Preprocessors
         //- ==============================
@@ -26,8 +37,13 @@ html
         //-     + Use a different or additional preprocessor, like SASS, SCSS or Stylus
 
     //- STYLES
-    link(rel="stylesheet", href="/linker/styles/test.css")
+    link(rel="stylesheet", href="/linker/styles/style.css")
     //- STYLES END
+
+    //- ANGULAR TEMPLATES
+    script(type="text/ng-template", id="partials/partial1.jade"): include templates/partials/partial1.jade
+    script(type="text/ng-template", id="partials/category.jade"): include templates/partials/category.jade
+    //- ANGULAR TEMPLATES END
 
   body
     block content
@@ -55,7 +71,6 @@ html
       
       //- TEMPLATES END
 
-
       //- Client-side Javascript
       //- ========================
 
@@ -73,10 +88,3 @@ html
       //-     + Change the order of your scripts
       //-     + Import scripts from other directories
       //-     + Use a different preprocessor, like TypeScript
-
-
-    <!--SCRIPTS-->
-    script(src="/linker/js/socket.io.js")
-    script(src="/linker/js/sails.io.js")
-    script(src="/linker/js/app.js")
-    <!--SCRIPTS END-->

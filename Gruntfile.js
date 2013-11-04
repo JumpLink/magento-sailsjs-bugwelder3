@@ -52,11 +52,19 @@ module.exports = function (grunt) {
     // then beef it up with some convenience logic for talking to Sails.js
     'linker/js/sails.io.js',
 
+    // *->    put other dependencies here   <-*
+    'bower_components/angular/angular.js',
+    'bower_components/angular-route/angular-route.js',
+    'bower_components/angular-sails/angular-sails.js',
+    // TODO use tpls with templates, do not use this fork, just use the stuff you need
+    // used: dropdown, 
+    'bower_components/angular-ui-bootstrap3/ui-bootstrap.js',
+
     // A simpler boilerplate library for getting you up and running w/ an
     // automatic listener for incoming messages from Socket.io.
     'linker/js/app.js',
 
-    // *->    put other dependencies here   <-*
+    'linker/js/routes.js',
 
     // All of the rest of your app scripts imported here
     'linker/**/*.js'
@@ -76,7 +84,6 @@ module.exports = function (grunt) {
   var templateFilesToInject = [
     'linker/**/*.html'
   ];
-
 
 
   /////////////////////////////////////////////////////////////////
@@ -114,8 +121,7 @@ module.exports = function (grunt) {
   jsFilesToInject = jsFilesToInject.map(function (path) {
     return '.tmp/public/' + path;
   });
-  
-  
+ 
   templateFilesToInject = templateFilesToInject.map(function (path) {
     return 'assets/' + path;
   });
@@ -332,8 +338,8 @@ module.exports = function (grunt) {
 
       devJsJADE: {
         options: {
-          startTag: '// SCRIPTS',
-          endTag: '// SCRIPTS END',
+          startTag: '//- SCRIPTS',
+          endTag: '//- SCRIPTS END',
           fileTmpl: 'script(type="text/javascript", src="%s")',
           appRoot: '.tmp/public'
         },
@@ -344,8 +350,8 @@ module.exports = function (grunt) {
 
       prodJsJADE: {
         options: {
-          startTag: '// SCRIPTS',
-          endTag: '// SCRIPTS END',
+          startTag: '//- SCRIPTS',
+          endTag: '//- SCRIPTS END',
           fileTmpl: 'script(type="text/javascript", src="%s")',
           appRoot: '.tmp/public'
         },
@@ -368,13 +374,13 @@ module.exports = function (grunt) {
 
       prodStylesJADE: {
         options: {
-          startTag: '// STYLES',
-          endTag: '// STYLES END',
+          startTag: '//- STYLES',
+          endTag: '//- STYLES END',
           fileTmpl: 'link(rel="stylesheet", href="%s")',
           appRoot: '.tmp/public'
         },
         files: {
-          'views/**/*.jade': ['.tmp/public/min/production.css']
+          'views/**/*.jade': cssFilesToInject
         }
       },
 
@@ -389,7 +395,8 @@ module.exports = function (grunt) {
         files: {
           'views/**/*.jade': ['.tmp/public/jst.js']
         }
-      }
+      },
+
       /************************************
        * Jade linker end
        ************************************/

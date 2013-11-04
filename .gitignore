@@ -46,3 +46,9 @@ nbproject
 ########################
 config/local.js
 ssl
+
+
+########################
+# bower
+########################
+bower_components

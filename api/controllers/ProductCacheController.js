@@ -1,5 +1,5 @@
 /**
- * CustomerController
+ * ProductCacheController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -16,11 +16,16 @@
  */
 
 module.exports = {
+    
+  sync: function (req, res) {
+    console.log("ProductCacheController sync: "+req+" "+res);
+    SyncService.sync({model:"ProductCache"});
+  },
 
 
   /**
    * Overrides for the settings in `config/controllers.js`
-   * (specific to CustomerController)
+   * (specific to ProductCacheController)
    */
   _config: {}
 

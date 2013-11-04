@@ -1,0 +1,24 @@
+{
+  "name": "magento-sails-angularjs",
+  "version": "0.0.0",
+  "authors": [
+    "JumpLink <jumplink@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bugwelder-bootstrap3": "git@github.com:bugwelder/bugwelder-bootstrap3.git",
+    "angular-sails": "~0.0.3",
+    "angular": "1.2.0-rc.3",
+    "angular-route": "1.2.0-rc.3",
+    "bootstrap": "~3.0.1",
+    "angular-ui-bootstrap3": "~0.6.0"
+  }
+}

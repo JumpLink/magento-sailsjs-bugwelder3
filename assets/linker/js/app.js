@@ -69,3 +69,12 @@
   window.io
 
 );
+
+if (typeof jumplink === 'undefined') {
+  var jumplink = {};
+}
+
+jumplink.magentoweb = angular.module('jumplink.magentoweb', [
+  'ngRoute'
+  , 'ui.bootstrap'
+]);
