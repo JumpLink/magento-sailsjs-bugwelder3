@@ -8,19 +8,20 @@
 
 module.exports = {
 
+  adapter: 'magento-dnode',
+
   schema: true,
 
   attributes: {
   	
-  	/* e.g.
-  	nickname: 'string'
-  	*/
     customer_id: {
       type: "integer",
+      unique: true
     },
     email: {
       type: "email",
-      required: true
+      required: true,
+      unique: true,
     },
     firstname: {
       type: "string",

@@ -106,7 +106,7 @@ module.exports.sockets = {
   // use cases, Sails allows you to override the authorization behavior 
   // with your own custom logic by specifying a function, e.g:
   /*
-    authorization: function authorizeAttemptedSocketConnection(reqObj, cb) {
+    config/socket.js: function authorizeAttemptedSocketConnection(reqObj, cb) {
 
         // Any data saved in `handshake` is available in subsequent requests
         // from this as `req.socket.handshake.*`
@@ -116,9 +116,26 @@ module.exports.sockets = {
         // to prevent the connection, call `cb(null, false)`
         // to report an error, call `cb(err)`
     }
+
+    authorization: function authorizeAttemptedSocketConnection(handshake, accept) {
+      sails.log.debug("authorizeAttemptedSocketConnection");
+      sails.log.debug(req);
+      accept(null, true)
+    },
   */
   authorization: true,
-
+  //authorization: false, //TODO set to true
+/*  authorization: function authorizeAttemptedSocketConnection(handshake, accept) {
+    if(handshake.address.address == '127.0.0.1') {
+      sails.log.debug("try to connect from '127.0.0.1'");
+      accept(null, true);
+    } else {
+      // default sails.js authorization
+      var socketAttemptingToConnect = require("sails/lib/hooks/sockets/authorization.js")(sails);
+      socketAttemptingToConnect(handshake, accept); 
+    }
+  },
+*/
   // Match string representing the origins that are allowed to connect to the Socket.IO server
   origins: '*:*',
 

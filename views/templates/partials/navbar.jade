@@ -1,14 +1,13 @@
-extends ../layout
-
-block content
-  nav(role="navigation").navbar.navbar-default
+//-remove .container to use full size
+.container
+  nav(role="navigation").navbar.navbar-default  
     .navbar-header
       button(type="button", data-toggle="collapse", data-target=".navbar-ex1-collapse").navbar-toggle
         span.sr-only Toggle navigation
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a(href="#" ).navbar-brand Title
+      a(href="#").navbar-brand Title
     .collapse.navbar-collapse.navbar-ex1-collapse
       ul.nav.navbar-nav 
         li.active: a(href="#") Link
@@ -18,12 +17,12 @@ block content
           input(type="text", placeholder="Search").form-control
         button(type="submit").btn.btn-default Submit
       ul.nav.navbar-nav.navbar-right
-        li: a(href="#") Link
+        li: a(href="#", translate) Link
         li.dropdown
-          a(href="#", data-toggle="dropdown" dropdown-toggle) Dropdown <b class="caret"></b>
+          a(href="#", data-toggle="dropdown", dropdown-toggle) Dropdown
+            b.caret
           ul.dropdown-menu
-            li: a(href="#") Action
-            li: a(href="#") Another action
-            li: a(href="#") Something else here
-            li: a(href="#") Separated link
-  div(ng-view)
+            li: a(href="#", translate) Action
+            li: a(href="#", translate) Another action
+            li: a(href="#", translate) Something else here
+            li: a(href="#", translate) Separated link

@@ -29,7 +29,7 @@ module.exports = function (grunt) {
    */
 
   var cssFilesToInject = [
-    'linker/**/*.css'
+    'linker/styles/style.css'
   ];
 
 
@@ -53,16 +53,27 @@ module.exports = function (grunt) {
     'linker/js/sails.io.js',
 
     // *->    put other dependencies here   <-*
+    'bower_components/jquery/jquery.js',
     'bower_components/angular/angular.js',
+    'bower_components/angular-animate/angular-animate.js',
     'bower_components/angular-route/angular-route.js',
     'bower_components/angular-sails/angular-sails.js',
+    'bower_components/angular-gettext/dist/angular-gettext.js',
+    'linker/js/translations.js',
     // TODO use tpls with templates, do not use this fork, just use the stuff you need
     // used: dropdown, 
+    'bower_components/angular-notify/NotifyModule.js',
+    'bower_components/angular-notify/NotifyService.js',
+    'bower_components/angular-notify/NotifyController.js',
+    'bower_components/angular-notify/NotifyDirective.js',
+
     'bower_components/angular-ui-bootstrap3/ui-bootstrap.js',
 
     // A simpler boilerplate library for getting you up and running w/ an
     // automatic listener for incoming messages from Socket.io.
     'linker/js/app.js',
+
+    'linker/js/config.js',
 
     'linker/js/routes.js',
 
@@ -188,19 +199,52 @@ module.exports = function (grunt) {
       }
     },
 
+    jade: {
+      dev: {
+        options: {
+          data: {
+            debug: true
+          }
+        },
+        files: grunt.file.expandMapping(['**.jade'],
+          '.tmp/public/views/templates/', {
+            cwd: 'views/templates',
+            rename: function(destBase, destPath) {
+                return destBase + destPath.replace(/\.jade$/, '.html');
+            }
+        })
+      }
+    },
+
+    nggettext_extract: {
+      dev: {
+        files: {
+          'config/locales/template.pot': ['.tmp/public/views/**/*.html']
+        }
+      },
+    },
+
+    nggettext_compile: {
+      dev: {
+        files: {
+          'assets/linker/js/translations.js': ['config/locales/*.po']
+        }
+      },
+    },
+
     less: {
       dev: {
         files: [
           {
           expand: true,
           cwd: 'assets/styles/',
-          src: ['*.less'],
+          src: ['style.less'],
           dest: '.tmp/public/styles/',
           ext: '.css'
         }, {
           expand: true,
           cwd: 'assets/linker/styles/',
-          src: ['*.less'],
+          src: ['style.less'],
           dest: '.tmp/public/linker/styles/',
           ext: '.css'
         }
@@ -408,14 +452,23 @@ module.exports = function (grunt) {
         // API files to watch:
         files: ['api/**/*']
       },
-      assets: {
+      //assets: {
 
         // Assets to watch:
-        files: ['assets/**/*'],
+        //files: ['assets/**/*'],
 
         // When assets are changed:
-        tasks: ['compileAssets', 'linkAssets']
-      }
+        //tasks: ['compileAssets', 'linkAssets']
+      //},
+      less: {
+
+        // API files to watch:
+        files: ['assets/linker/styles/*.less'
+                , 'assets/bower_components/bugwelder-bootstrap3/less/*.less'
+                , 'assets/bower_components/angular-notify/*.less'
+               ],
+        tasks: ['less:dev']
+      },
     }
   });
 
@@ -430,6 +483,9 @@ module.exports = function (grunt) {
     'clean:dev',
     'jst:dev',
     'less:dev',
+    'jade:dev',
+    'nggettext_extract:dev',
+    'nggettext_compile:dev',
     'copy:dev',    
     'coffee:dev'
   ]);
@@ -460,6 +516,7 @@ module.exports = function (grunt) {
     'clean:dev',
     'jst:dev',
     'less:dev',
+    'jade:dev',
     'copy:dev',
     'coffee:dev',
     'concat',
@@ -472,6 +529,9 @@ module.exports = function (grunt) {
     'sails-linker:prodStylesJADE',
     'sails-linker:devTplJADE'
   ]);
+
+  grunt.loadNpmTasks('grunt-angular-gettext');
+  grunt.loadNpmTasks('grunt-contrib-jade');
 
   // When API files are changed:
   // grunt.event.on('watch', function(action, filepath) {

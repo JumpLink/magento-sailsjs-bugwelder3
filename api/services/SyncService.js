@@ -7,14 +7,18 @@ exports.sync = function(options) {
     case "productcache":
     case "ProductCache":
     case "Productcache":
-      ProductCache.find().where({id: 2}).done(function(err, appl) {
+      sails.log.debug("start du sync products..");
+      Product.find().where().done(function(err, appl) {
           if (err) {
-            return console.log('HAI');
+            return sails.log.error(err);
           }else{
-            console.log(appl);
+            sails.log.debug(appl);
+            //console.log(sails.io);
+            //MagentoEventService.server();
           }
       });
 
     break;
   }
 };
+

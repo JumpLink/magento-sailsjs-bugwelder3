@@ -75,6 +75,9 @@ if (typeof jumplink === 'undefined') {
 }
 
 jumplink.magentoweb = angular.module('jumplink.magentoweb', [
-  'ngRoute'
+  'ngAnimate'
+  , 'ngRoute'
   , 'ui.bootstrap'
+  , 'gettext'
+  , 'jumplink.notify'
 ]);

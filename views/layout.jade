@@ -10,12 +10,22 @@ html(ng-app="jumplink.magentoweb")
     //- SCRIPTS
     script(type="text/javascript", src="/linker/js/socket.io.js")
     script(type="text/javascript", src="/linker/js/sails.io.js")
+    script(type="text/javascript", src="/bower_components/jquery/jquery.js")
     script(type="text/javascript", src="/bower_components/angular/angular.js")
+    script(type="text/javascript", src="/bower_components/angular-animate/angular-animate.js")
     script(type="text/javascript", src="/bower_components/angular-route/angular-route.js")
     script(type="text/javascript", src="/bower_components/angular-sails/angular-sails.js")
+    script(type="text/javascript", src="/bower_components/angular-gettext/dist/angular-gettext.js")
+    script(type="text/javascript", src="/linker/js/translations.js")
+    script(type="text/javascript", src="/bower_components/angular-notify/NotifyModule.js")
+    script(type="text/javascript", src="/bower_components/angular-notify/NotifyService.js")
+    script(type="text/javascript", src="/bower_components/angular-notify/NotifyController.js")
+    script(type="text/javascript", src="/bower_components/angular-notify/NotifyDirective.js")
     script(type="text/javascript", src="/bower_components/angular-ui-bootstrap3/ui-bootstrap.js")
     script(type="text/javascript", src="/linker/js/app.js")
+    script(type="text/javascript", src="/linker/js/config.js")
     script(type="text/javascript", src="/linker/js/routes.js")
+    script(type="text/javascript", src="/linker/js/controllers.js")
     //- SCRIPTS END
     
         //- Stylesheets and Preprocessors
@@ -40,10 +50,7 @@ html(ng-app="jumplink.magentoweb")
     link(rel="stylesheet", href="/linker/styles/style.css")
     //- STYLES END
 
-    //- ANGULAR TEMPLATES
-    script(type="text/ng-template", id="partials/partial1.jade"): include templates/partials/partial1.jade
-    script(type="text/ng-template", id="partials/category.jade"): include templates/partials/category.jade
-    //- ANGULAR TEMPLATES END
+    include templateCache
 
   body
     block content

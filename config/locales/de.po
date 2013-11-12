@@ -1,0 +1,31 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Magento Bugwelder 3\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Pascal Garber <jumplink@gmail.com>\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .tmp/public/views/index.html .tmp/public/views/layout.html
+#: .tmp/public/views/templates/content/admin/signin.html
+msgid "Enter E-Mail"
+msgstr "E-Mail angeben"
+
+#: .tmp/public/views/index.html .tmp/public/views/layout.html
+#: .tmp/public/views/templates/content/admin/signin.html
+msgid "Enter Password"
+msgstr "Passwort angeben"
+
+#: .tmp/public/views/templates/content/admin/signin.html
+msgid "Please sign in"
+msgstr "Bitte melden Sie sich an"
+
+#: .tmp/public/views/templates/content/admin/signin.html
+msgid "Sign in"
+msgstr "Anmelden"
