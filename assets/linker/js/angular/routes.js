@@ -13,6 +13,10 @@ jumplink.magentoweb.config(['$routeProvider',
         templateUrl: 'content/admin/signin.jade',
         //controller: 'CategoryCtrl'
       }).
+      when('/admin/barcode-scanner', {
+        templateUrl: 'content/admin/barcode-scanner.jade',
+        controller: 'BarcodeScannerController'
+      }).
       when('/products', {
         templateUrl: 'content/products.jade',
         //controller: 'CategoryCtrl'

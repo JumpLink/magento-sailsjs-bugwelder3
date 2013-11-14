@@ -52,6 +52,10 @@ module.exports = function (grunt) {
     // then beef it up with some convenience logic for talking to Sails.js
     'linker/js/sails.io.js',
 
+    // A simpler boilerplate library for getting you up and running w/ an
+    // automatic listener for incoming messages from Socket.io.
+    'linker/js/app.js',
+
     // *->    put other dependencies here   <-*
     'bower_components/jquery/jquery.js',
     'bower_components/angular/angular.js',
@@ -67,15 +71,17 @@ module.exports = function (grunt) {
     'bower_components/angular-notify/NotifyController.js',
     'bower_components/angular-notify/NotifyDirective.js',
 
+    'bower_components/angular-magento-navbar/NavbarModule.js',
+    'bower_components/angular-magento-navbar/NavbarService.js',
+    'bower_components/angular-magento-navbar/NavbarController.js',
+    'bower_components/angular-magento-navbar/NavbarDirective.js',
+
+    'linker/js/angular/config.js',
+    'linker/js/angular/services.js',
+    'linker/js/angular/controllers.js',
+    'linker/js/angular/routes.js',
+
     'bower_components/angular-ui-bootstrap3/ui-bootstrap.js',
-
-    // A simpler boilerplate library for getting you up and running w/ an
-    // automatic listener for incoming messages from Socket.io.
-    'linker/js/app.js',
-
-    'linker/js/config.js',
-
-    'linker/js/routes.js',
 
     // All of the rest of your app scripts imported here
     'linker/**/*.js'

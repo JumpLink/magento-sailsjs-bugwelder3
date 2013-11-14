@@ -1,0 +1,18 @@
+.center-block
+  form.form-inline(action='', method='POST', role='form')
+    .form-group
+      label.sr-only(for='') label
+      input.form-control(type='sku', placeholder='SKU', ng-model="barcode.sku")
+    button.btn.btn-primary(type='submit', ng-click="get()") Get
+
+  form.form-inline(action='', method='POST', role='form')
+    .form-group
+      label.sr-only(for='') Bugwelder
+      input.form-control(type='text', placeholder='Bugwelder', ng-model="product.stock_strichweg_qty")
+    .form-group
+      label.sr-only(for='') VWHeritage
+      input.form-control(type='text', placeholder='VWHeritage', ng-model="product.stock_vwheritage_qty")
+    .form-group
+      label.sr-only(for='') Total
+      {{product.stock_strichweg_qty+product.stock_vwheritage_qty}}
+    button.btn.btn-primary(type='submit', ng-click="save()") Save
