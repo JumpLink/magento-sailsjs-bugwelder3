@@ -1,10 +1,13 @@
-form.form-inline(action='', method='POST', role='form')
-  h1 Notify
-  .form-group
-    label.sr-only(for='') Title
-    input.form-control(type='text', placeholder='Title', ng-model="try_notify.title")
-    label.sr-only(for='') Message
-    textarea.form-control(type='text', placeholder='Message', ng-model="try_notify.message")
-    label.sr-only(for='') Type
-    input.form-control(type='text', placeholder='Type', ng-model="try_notify.type")
-  button.btn.btn-primary(type='button', ng-click="notify_show(try_notify)") Show
+navbar(mode="admin")
+notify
+  .container
+  form.form-inline(action='', method='POST', role='form')
+    h1 Notify
+    .form-group
+      label.sr-only(for='') Title
+      input.form-control(type='text', placeholder='Title', ng-model="try_notify.title")
+      label.sr-only(for='') Message
+      textarea.form-control(type='text', placeholder='Message', ng-model="try_notify.message")
+      label.sr-only(for='') Type
+      input.form-control(type='text', placeholder='Type', ng-model="try_notify.type")
+    button.btn.btn-primary(type='button', ng-click="notify_show(try_notify)") Show

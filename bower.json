@@ -21,6 +21,8 @@
     "bootstrap": "~3.0.1",
     "angular-ui-bootstrap3": "~0.6.0",
     "angular-gettext": "~0.1.4",
-    "angular-animate": "1.2.0-rc.3"
+    "angular-animate": "1.2.0-rc.3",
+    "components-font-awesome": "~4.0.3",
+    "font-awesome": "~4.0.3"
   }
 }

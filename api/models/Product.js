@@ -15,7 +15,15 @@ module.exports = {
   	/* e.g.
   	nickname: 'string'
   	*/
-    
+    stock_data: {
+      type: "array"
+    }
+    stock_strichweg_qty: {
+       type: "integer"
+    }
+    stock_vwheritage_qty: {
+       type: "integer"
+    }
   }
 
 };

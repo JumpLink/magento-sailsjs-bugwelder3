@@ -1,18 +1,53 @@
-.center-block
-  form.form-inline(action='', method='POST', role='form')
-    .form-group
-      label.sr-only(for='') label
-      input.form-control(type='sku', placeholder='SKU', ng-model="barcode.sku")
-    button.btn.btn-primary(type='submit', ng-click="get()") Get
-
-  form.form-inline(action='', method='POST', role='form')
-    .form-group
-      label.sr-only(for='') Bugwelder
-      input.form-control(type='text', placeholder='Bugwelder', ng-model="product.stock_strichweg_qty")
-    .form-group
-      label.sr-only(for='') VWHeritage
-      input.form-control(type='text', placeholder='VWHeritage', ng-model="product.stock_vwheritage_qty")
-    .form-group
-      label.sr-only(for='') Total
-      {{product.stock_strichweg_qty+product.stock_vwheritage_qty}}
-    button.btn.btn-primary(type='submit', ng-click="save()") Save
+navbar(mode="admin")
+notify
+.container
+  div(style="padding: 24px;")
+    form(action='', method='POST', role='form')
+      .form-group
+        label.sr-only(for='') SKU
+        .input-group
+          span.input-group-addon(title="Strichweg Quantity")
+            #
+          input.form-control.input-lg(type='text', placeholder='SKU', ng-model="barcode.sku")
+          .input-group-btn
+            button.btn.btn-primary.btn-lg(type='submit', ng-click="get()") Get
+  .panel.panel-default
+    .panel-heading
+      h3.panel-title
+        | {{product.name.value}}
+        i.icon-truck
+    .panel-body
+          .form-group
+            legend Strichweg
+            .row
+              .col-lg-4
+                .input-group
+                  span.input-group-addon(title="Strichweg Quantity")
+                    #
+                  input.form-control#stock_strichweg_qty(required, type="number", min="0", ng-model="product.stock_strichweg_qty.value")
+              .col-lg-4
+                .input-group
+                  span.input-group-addon(title="Strichweg Range")
+                    i.fa.fa-columns
+                  input.form-control#stock_strichweg_range(required, type="text", ng-model="product.stock_strichweg_range.value")
+              .col-lg-4
+                .input-group
+                  span.input-group-addon(title="Strichweg Row")
+                    i.fa.fa-list
+                  input.form-control#stock_strichweg_row(required, type="text", ng-model="product.stock_strichweg_row.value")
+            legend Heritage
+            .row
+              .col-lg-4
+                .input-group
+                  span.input-group-addon(title="Heritage Quantity")
+                    #
+                  input.form-control#stock_vwheritage_qty(required, type="number", min="0", ng-model="product.stock_vwheritage_qty.value")
+            legend Total
+            .row
+              .col-lg-4
+                .input-group
+                  span.input-group-addon(title="Heritage Quantity")
+                    #
+                  .form-control#stock_vwheritage_qty(required, type="number", disabled="disabled") {{product.stock_strichweg_qty.value+product.stock_vwheritage_qty.value}}
+      .panel-footer
+        button.btn.btn-primary(type='submit', ng-click="save()") Save
