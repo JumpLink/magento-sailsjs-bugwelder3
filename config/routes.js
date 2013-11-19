@@ -35,6 +35,11 @@ module.exports.routes = {
   '/': {
     view: 'index'
   },
+
+  '/user/new': function (req, res) {
+    res.redirect('#/admin/user/new');
+  },
+
 /*
  '/get cors': {
     controller: 'Session',

@@ -2,3 +2,98 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "Users"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "color"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "email"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "name"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "action"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "show"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "edit"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "delete"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "create new user"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "creates new user"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "E-Mail address"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+#: .tmp/public/views/templates/content/admin/user/signin.html
+msgid "Enter E-Mail"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "Name"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "Enter Name"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "Color"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "Password"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+#: .tmp/public/views/templates/content/admin/user/signin.html
+msgid "Enter Password"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "Password confirmation"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "Enter Password again"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "Create"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/signin.html
+msgid "Please sign in"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/user/signin.html
+msgid "Sign in"
+msgstr ""
+
+#: .tmp/public/views/templates/content/site_notice.html
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "site notice"
+msgstr ""

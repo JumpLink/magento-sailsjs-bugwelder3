@@ -1,4 +1,4 @@
 angular.module("gettext").run(['gettextCatalog', function (gettextCatalog) {
-    gettextCatalog.setStrings('de', {"Enter E-Mail":"E-Mail angeben","Enter Password":"Passwort angeben","Please sign in":"Bitte melden Sie sich an","Sign in":"Anmelden"});
+    gettextCatalog.setStrings('de', {"Users":"Benutzer","color":"Farbe","email":"E-Mail","name":"Name","action":"Aktion","show":"anzeigen","edit":"bearbeiten","delete":"löschen","create new user":"Erstelle neuen Benutzer","creates new user":"erstellt neuen Benutzer","E-Mail address":"E-Mail addresse","Enter E-Mail":"E-Mail angeben","Name":"Name","Enter Name":"Name angeben","Color":"Farbe","Password":"Passwort","Enter Password":"Passwort angeben","Password confirmation":"Passwort Bestätigung","Enter Password again":"Passwort erneut eingeben","Create":"Erstellen","Please sign in":"Bitte melden Sie sich an","Sign in":"Anmelden","site notice":"Impressum"});
 
 }]);

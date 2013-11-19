@@ -16,9 +16,16 @@
  */
 
 module.exports = {
-    
-  
-
+   
+  create: function (req, res, next) {
+    User.create(req.params.all(), function userCreated (err, user) {
+      if (err) {
+        sails.log.error(err);
+        next(err);
+      }
+      res.json(user);
+    });
+  },
 
   /**
    * Overrides for the settings in `config/controllers.js`

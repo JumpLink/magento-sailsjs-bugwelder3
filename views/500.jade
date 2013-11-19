@@ -51,15 +51,14 @@ html
           | Something isn't right here.
         if (typeof errors !== 'undefined')
           pre.error
-            code
               each error in errors
-                {{error}}
+                code= JSON.stringify(error,null,2)
         else 
          p.error
             | A team of highly trained sea bass is working on this as we speak.
             br
             | If the problem persists, please
-            a(href="mailto://jumplink@gmail.com") contact the system administrator
+            a(href="mailto://admin@bugwelder.com") contact the system administrator
             | and inform them of the time that the error occured, and anything you might have done that may have caused the error.
       .logo
         a(href='http://sailsjs.org')

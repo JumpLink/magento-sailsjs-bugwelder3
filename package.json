@@ -10,7 +10,8 @@
     "jade": "~0.35.0",
     "sails-mongo": "~0.9.5",
     "dnode": "~1.0.5",
-    "sails": "0.9.7"
+    "sails": "0.9.7",
+    "bcrypt": "~0.7.7"
   },
   "scripts": {
     "start": "node app.js",

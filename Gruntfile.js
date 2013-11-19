@@ -82,6 +82,7 @@ module.exports = function (grunt) {
     'linker/js/angular/routes.js',
 
     'bower_components/angular-ui-bootstrap3/ui-bootstrap.js',
+    'bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
 
     // All of the rest of your app scripts imported here
     'linker/**/*.js'
@@ -212,7 +213,7 @@ module.exports = function (grunt) {
             debug: true
           }
         },
-        files: grunt.file.expandMapping(['**.jade'],
+        files: grunt.file.expandMapping(['content/**.*jade', 'content/*/**.*jade', 'content/*/*/**.*jade', 'partials/**.*jade'],
           '.tmp/public/views/templates/', {
             cwd: 'views/templates',
             rename: function(destBase, destPath) {

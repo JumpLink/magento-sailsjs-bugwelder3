@@ -9,9 +9,21 @@ jumplink.magentoweb.config(['$routeProvider',
         templateUrl: 'content/admin.jade',
         //controller: 'CategoryCtrl'
       }).
-      when('/admin/signin', {
-        templateUrl: 'content/admin/signin.jade',
-        //controller: 'CategoryCtrl'
+      when('/admin/user/new', {
+        templateUrl: 'content/admin/user/new.jade',
+        controller: 'UserCreateController'
+      }).
+      when('/admin/user/signin', {
+        templateUrl: 'content/admin/user/signin.jade',
+        controller: 'UserSigninController'
+      }).
+      when('/admin/user/show/:email', {
+        templateUrl: 'content/admin/user/show.jade',
+        controller: 'UserShowController'
+      }).
+      when('/admin/user', {
+        templateUrl: 'content/admin/user/list.jade',
+        controller: 'UserListController'
       }).
       when('/admin/barcode-scanner', {
         templateUrl: 'content/admin/barcode-scanner.jade',
@@ -19,12 +31,15 @@ jumplink.magentoweb.config(['$routeProvider',
       }).
       when('/products', {
         templateUrl: 'content/products.jade',
-        //controller: 'CategoryCtrl'
+        controller: 'ProductController'
       }).     
       when('/products/:product_id', {
         templateUrl: 'content/product-view.jade',
-        //controller: 'ProductViewCtrl'
+        controller: 'ProductController'
       }).
+      when('/site-notice', {
+        templateUrl: 'content/site_notice.jade'
+      }).   
       otherwise({
         redirectTo: '/'
       });

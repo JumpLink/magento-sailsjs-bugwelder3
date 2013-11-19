@@ -12,20 +12,98 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .tmp/public/views/index.html .tmp/public/views/layout.html
-#: .tmp/public/views/templates/content/admin/signin.html
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "Users"
+msgstr "Benutzer"
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+#, fuzzy
+msgid "color"
+msgstr "Farbe"
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "email"
+msgstr "E-Mail"
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "name"
+msgstr "Name"
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "action"
+msgstr "Aktion"
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "show"
+msgstr "anzeigen"
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "edit"
+msgstr "bearbeiten"
+
+#: .tmp/public/views/templates/content/admin/user/list.html
+msgid "delete"
+msgstr "löschen"
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "create new user"
+msgstr "Erstelle neuen Benutzer"
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "creates new user"
+msgstr "erstellt neuen Benutzer"
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "E-Mail address"
+msgstr "E-Mail addresse"
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+#: .tmp/public/views/templates/content/admin/user/signin.html
 msgid "Enter E-Mail"
 msgstr "E-Mail angeben"
 
-#: .tmp/public/views/index.html .tmp/public/views/layout.html
-#: .tmp/public/views/templates/content/admin/signin.html
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "Name"
+msgstr "Name"
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "Enter Name"
+msgstr "Name angeben"
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "Color"
+msgstr "Farbe"
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "Password"
+msgstr "Passwort"
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+#: .tmp/public/views/templates/content/admin/user/signin.html
 msgid "Enter Password"
 msgstr "Passwort angeben"
 
-#: .tmp/public/views/templates/content/admin/signin.html
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "Password confirmation"
+msgstr "Passwort Bestätigung"
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "Enter Password again"
+msgstr "Passwort erneut eingeben"
+
+#: .tmp/public/views/templates/content/admin/user/new.html
+msgid "Create"
+msgstr "Erstellen"
+
+#: .tmp/public/views/templates/content/admin/user/signin.html
 msgid "Please sign in"
 msgstr "Bitte melden Sie sich an"
 
-#: .tmp/public/views/templates/content/admin/signin.html
+#: .tmp/public/views/templates/content/admin/user/signin.html
 msgid "Sign in"
 msgstr "Anmelden"
+
+#: .tmp/public/views/templates/content/site_notice.html
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "site notice"
+msgstr "Impressum"

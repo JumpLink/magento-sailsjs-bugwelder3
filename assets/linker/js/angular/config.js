@@ -10,6 +10,7 @@ jumplink.magentoweb = angular.module('jumplink.magentoweb', [
   , 'jumplink.notify'
   , 'jumplink.magentoweb_navbar',
   , 'ngSails'
+  , 'colorpicker.module'
 ]);
 
 // languages

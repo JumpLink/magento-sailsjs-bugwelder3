@@ -6,24 +6,24 @@
  * @docs		:: http://sailsjs.org/#!documentation/models
  */
 
+/*
+var attributes;
+var self = this;
+*/
+
+// WORKAROUND
+var attributes = require('./ProductAttributes.json');
+
+attributes.stock_data = {
+  type: "json"
+}
+
+attributes.product_id = {
+  type: 'integer',
+  index: true
+}
+
 module.exports = {
-
   adapter: 'magento-dnode',
-
-  attributes: {
-  	
-  	/* e.g.
-  	nickname: 'string'
-  	*/
-    stock_data: {
-      type: "array"
-    }
-    stock_strichweg_qty: {
-       type: "integer"
-    }
-    stock_vwheritage_qty: {
-       type: "integer"
-    }
-  }
-
+  attributes: attributes
 };
