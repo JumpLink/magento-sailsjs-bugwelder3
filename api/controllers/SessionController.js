@@ -67,28 +67,9 @@ module.exports = {
         req.session.authenticated = true;
         req.session.User = user;
 
-        // Change status to online
-        user.online = true;
-        user.save(function(err, user) {
-          if (err) return next(err);
+        delete user.password;
+        return res.json({authenticated:true,user:user});
 
-          // Inform other sockets (e.g. connected sockets that are subscribed) that this user is now logged in
-          User.publishUpdate(user.id, {
-            loggedIn: true,
-            id: user.id,
-            name: user.name,
-            action: ' has logged in.'
-          });
-
-          // If the user is also an admin redirect to the user list (e.g. /views/user/index.ejs)
-          // This is used in conjunction with config/policies.js file
-/*          if (req.session.User.admin) {
-            res.redirect('/user');
-            return;
-          }*/
-          delete user.password;
-          return res.json({authenticated:true,user:user});
-        });
       });
     });
   },
@@ -105,26 +86,11 @@ module.exports = {
       var userId = req.session.User.id;
 
       if (user) {
-        // The user is "logging out" (e.g. destroying the session) so change the online attribute to false.
-        User.update(userId, {
-          online: false
-        }, function(err) {
-          if (err) return next(err);
-
-          // Inform other sockets (e.g. connected sockets that are subscribed) that the session for this user has ended.
-          User.publishUpdate(userId, {
-            loggedIn: false,
-            id: userId,
-            name: user.name,
-            action: ' has logged out.'
-          });
-
-          // Wipe out the session (log out)
-          //req.session.destroy(); Uncomment to not destroy socket session
-          req.session.authenticated = false;
-          delete req.session.User;
-          res.json({authenticated:false});
-        });
+        // Wipe out the session (log out)
+        //req.session.destroy(); Uncomment to not destroy socket session
+        req.session.authenticated = false;
+        delete req.session.User;
+        res.json({authenticated:false});
       } else {
 
         // Wipe out the session (log out)
