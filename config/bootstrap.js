@@ -12,7 +12,7 @@ var fs = require('fs');
 
 var createAdminUser = function (cb) {
   User.findOneByEmail("admin@admin.org", function foundUser(err, user) {
-    if (err) return cb(err);
+    if (err) return cb(err, null);
     if (!user) {
       sails.log.info("No Admin user found, create One");
       User.create({email:"admin@admin.org", name: "admin", color: "#000000", password: "sails-admin"}, function (err, result) {
@@ -20,8 +20,11 @@ var createAdminUser = function (cb) {
         sails.log.info(err);
         sails.log.info("result");
         sails.log.info(result);
-        cb();
+        cb(err, result);
       })
+    } else {
+      sails.log.info("Admin already exists");
+      cb(null, true);
     }
   })
   
@@ -39,8 +42,9 @@ module.exports.bootstrap = function (cb) {
           cb(err, null);
         } else {
           sails.log.info("./api/models/ProductAttributes.json saved.");
-          createAdminUser(function() {
-            cb(null, attributes);
+          createAdminUser(function(err, result) {
+            sails.log.info("admin checked");
+            cb(err, result);
           })
         }
       }); 
