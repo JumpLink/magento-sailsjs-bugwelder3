@@ -43,33 +43,33 @@
         "type": "date",
         "required": false
     },
-    "news_to_date": {
-        "type": "date",
-        "required": false
-    },
     "url_path": {
         "type": "string",
+        "required": false
+    },
+    "news_to_date": {
+        "type": "date",
         "required": false
     },
     "status": {
         "type": "string",
         "required": true
     },
+    "category_ids": {
+        "type": "array",
+        "required": false
+    },
     "url_key": {
         "type": "string",
         "required": false
     },
-    "category_ids": {
-        "type": "array",
+    "required_options": {
+        "type": "string",
         "required": false
     },
     "visibility": {
         "type": "string",
         "required": true
-    },
-    "required_options": {
-        "type": "string",
-        "required": false
     },
     "country_of_manufacture": {
         "type": "string",
@@ -87,13 +87,13 @@
         "type": "string",
         "required": false
     },
-    "small_image_label": {
-        "type": "string",
-        "required": false
-    },
     "delivery_time": {
         "type": "string",
         "required": true
+    },
+    "small_image_label": {
+        "type": "string",
+        "required": false
     },
     "manufacturer": {
         "type": "string",

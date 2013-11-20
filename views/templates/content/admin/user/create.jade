@@ -1,14 +1,13 @@
 navbar(mode="admin")
-notify
 .container
   h1 {{ 'create new user' | translate }}
   ul.media-list
     li.media
-      a.pull-left(href="#/user/{{ getUser().email }}")
-        userimage(img="getUser()._id", color="getUser().color", username="getUser().name", size="64")
+      a.pull-left(href="#/user/{{ getSigninUser().email }}")
+        userimage(img="getSigninUser()._id", color="getSigninUser().color", username="getSigninUser().name", size="64")
       .media-body
         h4.media-heading
-          a(href="#/user/{{ getUser().email }}"){{ getUser().name }} 
+          a(href="#/user/{{ getSigninUser().email }}"){{ getSigninUser().name }} 
           small {{ 'creates new user' | translate }}
         form(ng-submit="create()", method="POST", name="userForm")
           .form-group

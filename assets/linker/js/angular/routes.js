@@ -9,8 +9,12 @@ jumplink.magentoweb.config(['$routeProvider',
         templateUrl: 'content/admin.jade',
         //controller: 'CategoryCtrl'
       }).
-      when('/admin/user/new', {
-        templateUrl: 'content/admin/user/new.jade',
+      when('/admin/user', {
+        templateUrl: 'content/admin/user/index.jade',
+        controller: 'UserListController'
+      }).
+      when('/admin/user/create', {
+        templateUrl: 'content/admin/user/create.jade',
         controller: 'UserCreateController'
       }).
       when('/admin/user/signin', {
@@ -21,9 +25,9 @@ jumplink.magentoweb.config(['$routeProvider',
         templateUrl: 'content/admin/user/show.jade',
         controller: 'UserShowController'
       }).
-      when('/admin/user', {
-        templateUrl: 'content/admin/user/list.jade',
-        controller: 'UserListController'
+      when('/admin/user/edit/:email', {
+        templateUrl: 'content/admin/user/edit.jade',
+        controller: 'UserShowController'
       }).
       when('/admin/barcode-scanner', {
         templateUrl: 'content/admin/barcode-scanner.jade',

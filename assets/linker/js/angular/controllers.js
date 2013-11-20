@@ -1,34 +1,69 @@
-jumplink.magentoweb.controller('UserCreateController', function($scope, $sails, $routeParams, $location) {
+
+jumplink.magentoweb.controller('UserCreateController', function($scope, $sails, AuthenticationService) {
   $scope.create = function () {
     $sails.post("/user", $scope.new_user, function (response) {
       console.log(response);
     });
   }
+
+  $scope.getSigninUser = function() {
+    return AuthenticationService.getUser();
+  };
+
 });
 
-jumplink.magentoweb.controller('UserListController', function($scope, $sails, $routeParams, $location) {
+jumplink.magentoweb.controller('UserListController', function($scope, $sails) {
   var getUsers = function () {
     $sails.get("/user", function (response) {
       console.log(response);
       $scope.users = response;
     });
   }
+
   getUsers();
 });
 
-jumplink.magentoweb.controller('UserShowController', function($scope, $sails, $routeParams, $location) {
+jumplink.magentoweb.controller('UserShowController', function($scope, $sails, $routeParams, NotifyService) {
+
+  $scope.user = {
+    email: $routeParams.email
+  }
+
   var getUser = function () {
-    $sails.get("/user", function (response) {
-      $scope.users = response;
+    $sails.get("/user?email="+$scope.user.email, function (response) {
+      console.log("get user in UserShowController ");
+      console.log(response);
+      $scope.user = response[0];
     });
   }
+
+  $scope.update = function () {
+    var user = $scope.user;
+    $sails.put("/user/"+user.id, user, function (response) {
+      console.log(response);
+      NotifyService.show("Saved", "User "+user.name+" saved", "info");
+    });
+  }
+
   getUser();
+});
+
+jumplink.magentoweb.controller('UserSigninController', function($scope, $location, NotifyService, AuthenticationService) {
+  $scope.signin = function () {
+    AuthenticationService.signin ($scope.user, function (success, user) {
+      if(success) {
+        $location.path( "/admin" );
+        NotifyService.show("Signin", "User "+user.name+" is signed in", "info");
+      }
+    });
+   }
 });
 
 jumplink.magentoweb.controller('TryController', function($scope, NotifyService) {
   $scope.notify_show = function (try_notify) {
     NotifyService.show(try_notify.title, try_notify.message, try_notify.type);
   }
+
 });
 
 jumplink.magentoweb.controller('BarcodeScannerController', function($scope, $sails, NotifyService) {

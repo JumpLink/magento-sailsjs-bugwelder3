@@ -61,7 +61,10 @@ module.exports = function (grunt) {
     'bower_components/angular/angular.js',
     'bower_components/angular-animate/angular-animate.js',
     'bower_components/angular-route/angular-route.js',
+    'bower_components/angular-sanitize/angular-sanitize.js',
     'bower_components/angular-sails/angular-sails.js',
+    'bower_components/underscore/underscore.js',
+    'bower_components/angular-underscore/angular-underscore.js',
     'bower_components/angular-gettext/dist/angular-gettext.js',
     'linker/js/translations.js',
     // TODO use tpls with templates, do not use this fork, just use the stuff you need
@@ -80,6 +83,7 @@ module.exports = function (grunt) {
     'linker/js/angular/services.js',
     'linker/js/angular/controllers.js',
     'linker/js/angular/routes.js',
+    'linker/js/angular/policies.js',
 
     'bower_components/angular-ui-bootstrap3/ui-bootstrap.js',
     'bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',

@@ -1,5 +1,5 @@
 /**
- * CustomerController
+ * IndexController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -16,11 +16,15 @@
  */
 
 module.exports = {
-
-
+    
+  
+  
+  index: function (req, res, next) {
+    res.render('index');
+  },
   /**
    * Overrides for the settings in `config/controllers.js`
-   * (specific to CustomerController)
+   * (specific to IndexController)
    */
   _config: {}
 

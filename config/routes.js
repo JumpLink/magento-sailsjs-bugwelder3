@@ -33,11 +33,11 @@ module.exports.routes = {
   // 
   // (This would also work if you had a file at: `/views/home.ejs`)
   '/': {
-    view: 'index'
+    controller  : 'index'
   },
 
-  '/user/new': function (req, res) {
-    res.redirect('#/admin/user/new');
+  '/user/create': function (req, res) {
+    res.redirect('#/admin/user/create');
   },
 
 /*

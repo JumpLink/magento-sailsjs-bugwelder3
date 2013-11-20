@@ -16,7 +16,17 @@ module.exports.policies = {
 
   // Default policy for all controllers and actions
   // (`true` allows public access) 
-  '*': true
+  '*': "isAuthenticated",
+
+  IndexController: {
+    '*': true
+  },
+
+  SessionController: {
+    '*': "isAuthenticated",
+    'create': true // signin is allowed for all
+  }
+
 
   /*
 	// Here's an example of adding some policies to a controller

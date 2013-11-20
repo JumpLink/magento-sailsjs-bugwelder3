@@ -5,12 +5,14 @@ if (typeof jumplink === 'undefined') {
 jumplink.magentoweb = angular.module('jumplink.magentoweb', [
   'ngAnimate'
   , 'ngRoute'
+  , 'ngSanitize'
   , 'ui.bootstrap'
   , 'gettext'
   , 'jumplink.notify'
-  , 'jumplink.magentoweb_navbar',
+  , 'jumplink.magentoweb_navbar'
   , 'ngSails'
   , 'colorpicker.module'
+  , 'angular-underscore'
 ]);
 
 // languages

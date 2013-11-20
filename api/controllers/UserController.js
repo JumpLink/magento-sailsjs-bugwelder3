@@ -15,6 +15,8 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
+var bcrypt = require('bcrypt');
+
 module.exports = {
    
   create: function (req, res, next) {
@@ -27,6 +29,7 @@ module.exports = {
     });
   },
 
+  //signin:  SessionController.create, // TODO better in routes?
   /**
    * Overrides for the settings in `config/controllers.js`
    * (specific to UserController)

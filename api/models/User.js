@@ -8,6 +8,17 @@
 
 var bcrypt = require('bcrypt');
 
+var beforeUpdateCreate = function(values, next) {
+  if(typeof(values.password) === "undefined") {
+    next();
+  } else {
+    bcrypt.hash(values.password, 10, function(err, hash) {
+      if(err) return next(err);
+      values.password = hash;
+      next();
+    });
+  }
+}
 module.exports = {
 
   schema: true, // save only the values defined in attributes in database 
@@ -26,7 +37,7 @@ module.exports = {
     },
     color: {
       type: "string",
-      //hexColor: true, TODO FIXME and/or report bug
+      //hexColor: true, //TODO FIXME and/or report bug
       required: true
     },
     password: {
@@ -38,12 +49,7 @@ module.exports = {
   },
 
   // Lifecycle Callbacks
-  beforeCreate: function(values, next) {
-    bcrypt.hash(values.password, 10, function(err, hash) {
-      if(err) return next(err);
-      values.password = hash;
-      next();
-    });
-  }
+  beforeCreate: beforeUpdateCreate,
+  beforeUpdate: beforeUpdateCreate,
 
 };
