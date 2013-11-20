@@ -10,6 +10,23 @@
 
 var fs = require('fs');
 
+var createAdminUser = function (cb) {
+  User.findOneByEmail("admin@admin.org", function foundUser(err, user) {
+    if (err) return cb(err);
+    if (!user) {
+      sails.log.info("No Admin user found, create One");
+      User.create({email:"admin@admin.org", name: "admin", color: "#000000", password: "sails-admin"}, function (err, result) {
+        sails.log.info("err");
+        sails.log.info(err);
+        sails.log.info("result");
+        sails.log.info(result);
+        cb();
+      })
+    }
+  })
+  
+}
+
 module.exports.bootstrap = function (cb) {
 
   DNodeService.server().start(function(json) {
@@ -22,7 +39,9 @@ module.exports.bootstrap = function (cb) {
           cb(err, null);
         } else {
           sails.log.info("./api/models/ProductAttributes.json saved.");
-          cb(null, attributes);
+          createAdminUser(function() {
+            cb(null, attributes);
+          })
         }
       }); 
     })
