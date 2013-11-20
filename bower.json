@@ -27,6 +27,8 @@
     "angular-bootstrap-colorpicker": "~3.0.0",
     "angular-sanitize": "1.2.0-rc.3",
     "angular-underscore": "*",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "angular-magento-navbar": "git@github.com:JumpLink/angular-magento-navbar.git",
+    "angular-notify": "git@github.com:JumpLink/angular-notify.git"
   }
 }
