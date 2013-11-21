@@ -14,6 +14,9 @@ var self = this;
 // WORKAROUND
 var attributes = require('./ProductAttributes.json');
 
+if(attributes === null)
+  attributes = {};
+
 attributes.stock_data = {
   type: "json"
 }
