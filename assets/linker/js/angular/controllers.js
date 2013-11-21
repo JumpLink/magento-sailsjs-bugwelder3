@@ -89,7 +89,9 @@ jumplink.magentoweb.controller('BarcodeScannerController', function($scope, $sai
         set_id: $scope.product.set.set_id
       },
       stock_strichweg_qty: $scope.product.stock_strichweg_qty.value,
-      stock_vwheritage_qty: $scope.product.stock_vwheritage_qty.value
+      stock_vwheritage_qty: $scope.product.stock_vwheritage_qty.value,
+      stock_strichweg_range: $scope.product.stock_strichweg_range.value,
+      stock_strichweg_row: $scope.product.stock_strichweg_row.value
     }
 
     console.log(product_data);
