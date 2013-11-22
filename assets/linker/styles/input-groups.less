@@ -1,1 +1,26 @@
 @import "../../bower_components/bootstrap/less/input-groups.less";
+
+span[disabled=disabled].input-group-addon {
+  background-color: @grey-dark;
+}
+
+.input-icon-addon {
+  float: right;
+  i {
+    position: absolute;
+    z-index: 1;
+    &.with-action {
+      cursor: pointer;
+    }
+    &.input-lg {
+      font-size: 25px;
+      //margin-left: -50px;
+      .input-icon-addon-every(1, 30px, 20);
+      .input-icon-addon-every(2, 30px, 20);
+      .input-icon-addon-every(3, 30px, 20);
+      .input-icon-addon-every(4, 30px, 20);
+      .input-icon-addon-every(5, 30px, 20);
+      .input-icon-addon-every(6, 30px, 20);
+    }
+  }
+}

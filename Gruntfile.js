@@ -65,6 +65,7 @@ module.exports = function (grunt) {
     'bower_components/angular-sails/angular-sails.js',
     'bower_components/underscore/underscore.js',
     'bower_components/angular-underscore/angular-underscore.js',
+    'bower_components/angular-socket-io/angular-socket-io.js',
     'bower_components/angular-gettext/dist/angular-gettext.js',
     'linker/js/translations.js',
     // TODO use tpls with templates, do not use this fork, just use the stuff you need

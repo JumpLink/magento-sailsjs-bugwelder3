@@ -67,17 +67,26 @@ jumplink.magentoweb.controller('TryController', function($scope, NotifyService) 
 });
 
 jumplink.magentoweb.controller('BarcodeScannerController', function($scope, $sails, NotifyService) {
+  $scope.removeSku = function () {
+    $scope.barcode.sku = "";
+  }
+
   $scope.get = function () {
     console.log("get barcode");
     $sails.get("/product?sku="+$scope.barcode.sku+"&limit=1", function (response) {
       console.log(response);
-      $scope.product = response[0];
+      if(typeof(response[0].id) !== "undefined") {
+        $scope.product = response[0];
+        NotifyService.show("Product loaded", "Product Name: "+$scope.product.name, "success");
+      } else {
+        NotifyService.show("Can't load product", response, "error");
+      }
     });
   }
   $scope.save = function () {
     console.log("save barcode");
 
-    var total_qty = $scope.product.stock_strichweg_qty.value+$scope.product.stock_vwheritage_qty.value
+    var total_qty = $scope.product.stock_strichweg_qty+$scope.product.stock_vwheritage_qty
     var is_in_stock = (total_qty > 0) ? 1 : 0;
     var product_data = {
       stock_data : {
@@ -88,16 +97,22 @@ jumplink.magentoweb.controller('BarcodeScannerController', function($scope, $sai
       set : {
         set_id: $scope.product.set.set_id
       },
-      stock_strichweg_qty: $scope.product.stock_strichweg_qty.value,
-      stock_vwheritage_qty: $scope.product.stock_vwheritage_qty.value,
-      stock_strichweg_range: $scope.product.stock_strichweg_range.value,
-      stock_strichweg_row: $scope.product.stock_strichweg_row.value
+      stock_strichweg_qty: $scope.product.stock_strichweg_qty,
+      stock_vwheritage_qty: $scope.product.stock_vwheritage_qty,
+      stock_strichweg_range: $scope.product.stock_strichweg_range,
+      stock_strichweg_row: $scope.product.stock_strichweg_row
     }
 
     console.log(product_data);
 
     $sails.put("/product/"+$scope.product.id, product_data, function (response) {
-      console.log(response);
+      if(typeof(response.id) !== "undefined") {
+        $scope.product = {};
+        $scope.removeSku();
+        NotifyService.show("Product saved", "Product ID: "+response.id, "success");
+      } else {
+        NotifyService.show("Product not saved", response, "error");
+      }
     });
   }
 });

@@ -20,7 +20,9 @@ var server = function(options) {
       var lookingfor = "";
       sails.log.info("dispatchEvent");
       sails.log.info(red+eventName+reset);
-      sails.log.info(blue+args+reset);
+      console.log(blue);
+      sails.log.info(args);
+      console.log(reset);
 
       /* stock */
 /*      lookingfor = "stock";

@@ -1,1 +1,10 @@
 @import "../../bower_components/bootstrap/less/mixins.less";
+
+.input-icon-addon-every(@n, @move, @static) {
+  @t: ~":nth-child(@{n})";
+  &@{t} {
+    &.input-lg {
+      margin-left: -((@n*@move)+@static);
+    }
+  }
+}
