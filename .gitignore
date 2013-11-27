@@ -57,3 +57,13 @@ bower_components
 # generated
 ########################
 api/models/ProductAttributes.json
+=======
+.\#*
+*#
+node_modules
+ssl
+.DS_STORE
+*~
+.idea
+nbproject
+npm-debug.log
