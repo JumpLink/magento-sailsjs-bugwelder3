@@ -27,6 +27,6 @@ attributes.product_id = {
 }
 
 module.exports = {
-  adapter: 'magento-dnode',
-  attributes: attributes
+  adapter: 'magento-dnode'
+  , attributes: attributes
 };

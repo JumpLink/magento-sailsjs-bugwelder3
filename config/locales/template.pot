@@ -3,6 +3,50 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: .tmp/public/views/templates/content/admin/cache.html
+msgid "Cache Configuration"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/cache.html
+msgid "Product cache"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/cache.html
+msgid "enabled"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/cache.html
+msgid "On"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/cache.html
+msgid "Off"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "Product Configuration"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "Model Attributes"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "Generate now"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
+#: .tmp/public/views/templates/content/admin/user/index.html
+msgid "action"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
+#: .tmp/public/views/templates/content/admin/user/index.html
+msgid "show"
+msgstr ""
+
 #: .tmp/public/views/templates/content/admin/user/create.html
 msgid "create new user"
 msgstr ""
@@ -92,14 +136,6 @@ msgid "name"
 msgstr ""
 
 #: .tmp/public/views/templates/content/admin/user/index.html
-msgid "action"
-msgstr ""
-
-#: .tmp/public/views/templates/content/admin/user/index.html
-msgid "show"
-msgstr ""
-
-#: .tmp/public/views/templates/content/admin/user/index.html
 msgid "edit"
 msgstr ""
 
@@ -119,14 +155,22 @@ msgstr ""
 msgid "site notice"
 msgstr ""
 
+#: .tmp/public/views/templates/content/site_notice.html
+msgid "Bugwelder uses a number of amazing open source libraries, distributed under the following licenses:"
+msgstr ""
+
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Products"
+msgstr ""
+
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Signin"
+msgstr ""
+
 #: .tmp/public/views/templates/partials/navbar.html
 msgid "Site notice"
 msgstr ""
 
 #: .tmp/public/views/templates/partials/navbar.html
 msgid "Signout"
-msgstr ""
-
-#: .tmp/public/views/templates/partials/navbar.html
-msgid "Signin"
 msgstr ""

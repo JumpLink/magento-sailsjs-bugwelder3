@@ -1,0 +1,9 @@
+navbar(mode="admin")
+notify
+.container
+  h1 {{ 'Cache Configuration' | translate }}
+  h2 {{ 'Product cache' | translate  }}
+  dl.dl-horizontal
+    dt {{ 'enabled' | translate }}
+    dd: toggle-switch(model="switchStatus", on-label="{{ 'On' | translate }}", off-label="{{ 'Off' | translate }}")
+  dl

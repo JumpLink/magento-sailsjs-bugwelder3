@@ -30,6 +30,7 @@
     "underscore": "~1.5.2",
     "angular-magento-navbar": "git@github.com:JumpLink/angular-magento-navbar.git",
     "angular-notify": "git@github.com:JumpLink/angular-notify.git",
-    "angular-socket-io": "~0.2.0"
+    "angular-socket-io": "~0.2.0",
+    "angular-toggle-switch": "~0.2.3"
   }
 }

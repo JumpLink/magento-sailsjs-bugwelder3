@@ -1,21 +1,20 @@
 
-exports.sync = function(options) {
+exports.sync = function(options, cb) {
 
   console.log("SyncService: "+options);
 
-  switch(options.model) {
+  switch(options.model.toLowerCase()) {
     case "productcache":
-    case "ProductCache":
-    case "Productcache":
-      sails.log.debug("start du sync products..");
+      sails.log.debug("start to sync products..");
       Product.find().where().done(function(err, appl) {
-          if (err) {
-            return sails.log.error(err);
-          }else{
-            sails.log.debug(appl);
-            //console.log(sails.io);
-            //MagentoEventService.server();
-          }
+        if (err) {
+          sails.log.error(err);
+          cb(err, null);
+          return 
+        }else{
+          sails.log.debug(appl);
+          cb(null, appl);
+        }
       });
 
     break;

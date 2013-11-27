@@ -66,6 +66,7 @@ module.exports = function (grunt) {
     'bower_components/underscore/underscore.js',
     'bower_components/angular-underscore/angular-underscore.js',
     'bower_components/angular-socket-io/angular-socket-io.js',
+    'bower_components/angular-toggle-switch/angular-toggle-switch.js',
     'bower_components/angular-gettext/dist/angular-gettext.js',
     'linker/js/translations.js',
     // TODO use tpls with templates, do not use this fork, just use the stuff you need
@@ -160,8 +161,12 @@ module.exports = function (grunt) {
   grunt.loadTasks(depsPath + '/grunt-contrib-watch/tasks');
   grunt.loadTasks(depsPath + '/grunt-contrib-uglify/tasks');
   grunt.loadTasks(depsPath + '/grunt-contrib-cssmin/tasks');
-  grunt.loadTasks(depsPath + '/grunt-contrib-less/tasks');
+  //grunt.loadTasks(depsPath + '/grunt-contrib-less/tasks');
   grunt.loadTasks(depsPath + '/grunt-contrib-coffee/tasks');
+
+  grunt.loadNpmTasks('grunt-angular-gettext');
+  grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-less');
 
   // Project configuration.
   grunt.initConfig({
@@ -541,9 +546,6 @@ module.exports = function (grunt) {
     'sails-linker:prodStylesJADE',
     'sails-linker:devTplJADE'
   ]);
-
-  grunt.loadNpmTasks('grunt-angular-gettext');
-  grunt.loadNpmTasks('grunt-contrib-jade');
 
   // When API files are changed:
   // grunt.event.on('watch', function(action, filepath) {

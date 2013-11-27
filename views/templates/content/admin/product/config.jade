@@ -1,0 +1,6 @@
+navbar(mode="admin")
+notify
+.container
+  h1 {{ 'Product Configuration' | translate }}
+  h2 {{ 'Model Attributes' | translate  }}
+    button.btn.btn-primary.btn-lg.btn-block(ng-click="generateAttributes()") {{ 'Generate now' | translate }}

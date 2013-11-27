@@ -1,5 +1,5 @@
 /**
- * ProductCacheController
+ * VWHeritageProductController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -17,13 +17,12 @@
 
 module.exports = {
     
-  import: function (req, res) {
-    ProductController.exportToCache(req, res);
-  },
+  
+
 
   /**
    * Overrides for the settings in `config/controllers.js`
-   * (specific to ProductCacheController)
+   * (specific to VWHeritageProductController)
    */
   _config: {}
 

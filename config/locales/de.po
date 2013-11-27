@@ -12,6 +12,34 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: .tmp/public/views/templates/content/admin/cache.html
+msgid "Cache Configuration"
+msgstr "Cache Einstellungen"
+
+#: .tmp/public/views/templates/content/admin/cache.html
+msgid "Product cache"
+msgstr "Produkt Cache"
+
+#: .tmp/public/views/templates/content/admin/cache.html
+msgid "On"
+msgstr "An"
+
+#: .tmp/public/views/templates/content/admin/cache.html
+msgid "Off"
+msgstr "Aus"
+
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "Product Configuration"
+msgstr "Produkt Einstellungen"
+
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "Model Attributes"
+msgstr "Modell Attribute"
+
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "Generate now"
+msgstr "Jetzt erzeugen"
+
 #: .tmp/public/views/templates/content/admin/user/create.html
 msgid "create new user"
 msgstr "Erstelle neuen Benutzer"
@@ -74,7 +102,7 @@ msgstr "Erstellen"
 
 #: .tmp/public/views/templates/content/admin/user/edit.html
 msgid "Edit user"
-msgstr ""
+msgstr "Benutzer bearbeiten"
 
 #: .tmp/public/views/templates/content/admin/user/edit.html
 msgid "edit user"
@@ -129,6 +157,23 @@ msgstr "Anmelden"
 msgid "site notice"
 msgstr "Impressum"
 
+#: .tmp/public/views/templates/content/site_notice.html
+msgid ""
+"Bugwelder uses a number of amazing open source libraries, distributed under "
+"the following licenses:"
+msgstr ""
+"Bugwelder verwendet eine ganze Reihe an wunderbaren Open Source Libraries, "
+"diese stehen unter den folgenden Lizenzen:"
+
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Products"
+msgstr "Produkte"
+
+#: .tmp/public/views/templates/partials/navbar.html
+#, fuzzy
+msgid "Signin"
+msgstr "Anmelden"
+
 #: .tmp/public/views/templates/partials/navbar.html
 #, fuzzy
 msgid "Site notice"
@@ -138,7 +183,5 @@ msgstr "Impressum"
 msgid "Signout"
 msgstr "Abmelden"
 
-#: .tmp/public/views/templates/partials/navbar.html
-#, fuzzy
-msgid "Signin"
-msgstr "Anmelden"
+#~ msgid "Aus"
+#~ msgstr "Aus"

@@ -15,11 +15,32 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
+var fs = require('fs');
+
 module.exports = {
 
-  sync: function (req, res) {
-    console.log("ProductCacheController sync: "+req+" "+res);
-    SyncService.sync({model:"ProductCache"});
+  exportToCache: function (req, res) {
+    console.log("ProductController exportToCache: "+req+" "+res);
+    SyncService.sync({model:"ProductCache"}, function (err, result) {
+      if(err) {
+        return res.json(err, 500);
+      } else {
+        return res.json(result);
+      }
+    });
+  },
+
+  generateAttributes: function (req, res) {
+    ProductModelAttributesGeneratorService.generator.product(function (err, attributes) {
+      fs.writeFile("./api/models/ProductAttributes.json", JSON.stringify(attributes, null, 4), function(err) {
+        if(err) {
+          return res.json(err, 500);
+        } else {
+          sails.log.info("./api/models/ProductAttributes.json saved.");
+          return res.json(attributes);
+        }
+      }); 
+    });
   },
 
   /**

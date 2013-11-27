@@ -29,9 +29,33 @@ jumplink.magentoweb.config(['$routeProvider',
         templateUrl: 'content/admin/user/edit.jade',
         controller: 'UserShowController'
       }).
-      when('/admin/barcode-scanner', {
-        templateUrl: 'content/admin/barcode-scanner.jade',
-        controller: 'BarcodeScannerController'
+      when('/admin/product/list', {
+        templateUrl: 'content/admin/product/list.jade',
+        controller: 'ProductListController'
+      }).
+      when('/admin/product/info', {
+        templateUrl: 'content/admin/product/info.jade',
+        controller: 'ProductInfoController'
+      }).
+      when('/admin/product/vwheritage-list', {
+        templateUrl: 'content/admin/product/vwheritage-list.jade',
+        controller: 'ProductVWHeritageListController'
+      }).
+      when('/admin/product/vwheritage-info', {
+        templateUrl: 'content/admin/product/vwheritage-info.jade',
+        controller: 'ProductVWHeritageInfoController'
+      }).
+      when('/admin/product/vwheritage-info/:id', {
+        templateUrl: 'content/admin/product/vwheritage-info.jade',
+        controller: 'ProductVWHeritageInfoController'
+      }).
+      when('/admin/product/config', {
+        templateUrl: 'content/admin/product/config.jade',
+        controller: 'ProductConfigController'
+      }).
+      when('/admin/cache', {
+        templateUrl: 'content/admin/cache.jade',
+        controller: 'CacheController'
       }).
       when('/products', {
         templateUrl: 'content/products.jade',

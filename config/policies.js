@@ -25,8 +25,15 @@ module.exports.policies = {
   SessionController: {
     '*': "isAuthenticated",
     'create': true // signin is allowed for all
-  }
+  },
 
+  VWHeritageProduct: {
+    '*': "isAuthenticated"
+  },
+
+  VWHeritageImage: {
+    '*': "isAuthenticated"
+  }
 
   /*
 	// Here's an example of adding some policies to a controller

@@ -37,6 +37,10 @@ module.exports.adapters = {
     port: 6060
   },
 
+  'vwheritage': {
+    module: 'sails-vwheritage'
+  },
+
   // MySQL is the world's most popular relational database.
   // Learn more: http://en.wikipedia.org/wiki/MySQL
   // myLocalMySQLDatabase: {

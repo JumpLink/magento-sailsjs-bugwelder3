@@ -13,6 +13,7 @@ jumplink.magentoweb = angular.module('jumplink.magentoweb', [
   , 'ngSails'
   , 'colorpicker.module'
   , 'angular-underscore'
+  , 'toggle-switch'
 ]);
 
 // languages
