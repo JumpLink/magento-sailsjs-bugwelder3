@@ -13,7 +13,7 @@
     "sails": "0.9.7",
     "bcrypt": "~0.7.7",
     "sails-magento": "git://github.com/JumpLink/sails-magento",
-    "sails-vwheritage": "git@github.com:JumpLink/sails-vwheritage"
+    "sails-vwheritage": "git://github.com/JumpLink/sails-vwheritage"
   },
   "scripts": {
     "start": "node app.js",
@@ -25,6 +25,7 @@
   "license": "",
   "devDependencies": {
     "grunt-angular-gettext": "~0.1.3",
-    "grunt-contrib-jade": "~0.8.0"
+    "grunt-contrib-jade": "~0.8.0",
+    "grunt-contrib-less": "~0.8.2"
   }
 }
