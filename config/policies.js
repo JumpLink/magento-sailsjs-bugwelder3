@@ -17,6 +17,7 @@ module.exports.policies = {
   // Default policy for all controllers and actions
   // (`true` allows public access) 
   '*': "isAuthenticated",
+  // '*': true, // DEBUG
 
   IndexController: {
     '*': true
@@ -25,6 +26,10 @@ module.exports.policies = {
   SessionController: {
     '*': "isAuthenticated",
     'create': true // signin is allowed for all
+  },
+
+  ProductCache: {
+    '*': "isAuthenticated"
   },
 
   VWHeritageProduct: {

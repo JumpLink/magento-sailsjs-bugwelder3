@@ -19,14 +19,69 @@ var fs = require('fs');
 
 module.exports = {
 
+  exportOneToCache: function (req, res) {
+    async.waterfall([
+      function find_product (callback) {
+        Product.findOne(req.params.id, function product_found (err, product_info) {
+          if (err) {
+            sails.log.error(err);
+            callback(err);
+          }else{
+            callback(null, product_info);
+          }
+        });
+      },
+      function import_product (product_info, callback){
+        sails.log.info(product_info);
+        sails.log.info("product getted");
+        ProductCache.update(product_info.product_id, product_info, function product_updated (err, updated) {
+          if (err) {
+            sails.log.error(err);
+            callback(err);
+          }else{
+            callback(null, updated);
+          }
+        });
+      },
+      function(updated, callback){
+        sails.log.info("product updated");
+        callback(null, updated);
+      }
+    ], function (err, result) {
+      if (err) {
+        res.json(err, 500);
+      } else {
+        res.json(result);
+      }
+    });
+  },
+
   exportToCache: function (req, res) {
     console.log("ProductController exportToCache: "+req+" "+res);
-    SyncService.sync({model:"ProductCache"}, function (err, result) {
-      if(err) {
-        return res.json(err, 500);
-      } else {
-        return res.json(result);
+    async.waterfall([
+      // get product list with less informations, just with with id, sku, name, ..
+      function get_product_list (callback){
+        Product.find().where().done(function product_list_getted (err, product_list) {
+          if (err) {
+            sails.log.error(err);
+            callback(err);
+          }else{
+            callback(null, product_list);
+          }
+        });
+      },
+      function process_each_product_id (product_list, callback){
+        async.map(product_list, function iterator (item, callback) {
+          sails.log.debug(item);
+          ProductController.exportOneToCache(item.product_id);
+        }, callback);
+      },
+      function(imported_products, callback){
+          // arg1 now equals 'three'
+          callback(null, imported_products);
       }
+    ], function (err, result) {
+      res.json(result);
     });
   },
 

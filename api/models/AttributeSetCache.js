@@ -1,5 +1,5 @@
 /**
- * AttributeSet
+ * AttributeSetCache
  *
  * @module      :: Model
  * @description :: A short summary of how this model works and what it represents.
@@ -8,10 +8,10 @@
 
 module.exports = {
 
-  adapter: 'magento-dnode',
+  adapter: 'mongo',
 
   attributes: {
-  	
+    
     id : {
       type: 'integer',
       index: true,
@@ -22,7 +22,7 @@ module.exports = {
       type: 'string',
       required: true
     },
-
+    
     attributes : {
       type: 'json',
       required: true

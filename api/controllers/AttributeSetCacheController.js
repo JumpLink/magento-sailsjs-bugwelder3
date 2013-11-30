@@ -1,5 +1,5 @@
 /**
- * IndexController
+ * AttributeSetCacheController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -16,13 +16,15 @@
  */
 
 module.exports = {
-      
-  index: function (req, res, next) {
-    res.render('index');
+    
+  import: function (req, res, next) {
+    AttributeSetController.exportToCache(req, res, next);
   },
+
+
   /**
    * Overrides for the settings in `config/controllers.js`
-   * (specific to IndexController)
+   * (specific to AttributeSetCacheController)
    */
   _config: {}
 

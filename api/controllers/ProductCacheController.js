@@ -2,23 +2,20 @@
  * ProductCacheController
  *
  * @module      :: Controller
- * @description	:: A set of functions called `actions`.
+ * @description	:: Product Cache saved in MongoDB
  *
- *                 Actions contain code telling Sails how to respond to a certain type of request.
- *                 (i.e. do stuff, then send some JSON, show an HTML page, or redirect to another URL)
- *
- *                 You can configure the blueprint URLs which trigger these actions (`config/controllers.js`)
- *                 and/or override them with custom routes (`config/routes.js`)
- *
- *                 NOTE: The code you write here supports both HTTP and Socket.io automatically.
+ *                 This Controller is used for fast access to the Products.
+ *                 Each modified Magento Product will saved in MongoDB using this Controller.
+ *                 So you can use this Cache to get the current Product information
+ *                 in a faster way as directly from Magento. 
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
 module.exports = {
     
-  import: function (req, res) {
-    ProductController.exportToCache(req, res);
+  import: function (req, res, next) {
+    Product.exportToCache(req, res, next);
   },
 
   /**

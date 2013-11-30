@@ -17,7 +17,7 @@ navbar(mode="admin")
     tbody
         tr(ng-repeat="product in products | filter:filter  | limitTo:20 ")
           td {{product.id}} 
-          td {{product.sku}}
+          td {{product.sku}} ({{product.sku_clean}})
           td
             .btn-group
               a.btn.btn-info(href="#/admin/product/vwheritage-info/{{product.id}}") {{ 'show' | translate }}
