@@ -12,7 +12,8 @@
     "dnode": "~1.0.5",
     "sails": "0.9.7",
     "bcrypt": "~0.7.7",
-    "sails-magento": "git://github.com/JumpLink/sails-magento"
+    "sails-magento": "git://github.com/JumpLink/sails-magento",
+    "sails-vwheritage": "git@github.com:JumpLink/sails-vwheritage",
   },
   "scripts": {
     "start": "node app.js",
