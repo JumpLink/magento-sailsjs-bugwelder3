@@ -13,7 +13,6 @@ module.exports = {
   schema: true,
 
   attributes: {
-  	
     customer_id: {
       type: "integer",
       unique: true

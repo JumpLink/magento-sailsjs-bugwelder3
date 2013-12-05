@@ -194,15 +194,16 @@ jumplink.magentoweb.controller('ProductVWHeritageListController', function($scop
 
   var skuWithoutSpezialKeys = function (product_list) {
     for (var i = 0; i < product_list.length; i++) {
-      product_list[i].sku_clean = product_list[i].sku.replace(/\/|-|\s/g, ""); // replace "/", "-" and " " with nothing 
+      product_list[i].sku_clean = product_list[i].sku.replace(/\/|-|\.|\s/g, ""); // replace "/", "-", "." and " " with nothing 
     };
     return product_list;
   }
 
   $sails.get("/vwheritageproduct", function (response) {
     console.log(response);
-    if(typeof(response[0].id) !== "undefined") {
-       $scope.products = skuWithoutSpezialKeys (response);
+    if(response != null && typeof(response[0].id) !== "undefined") {
+      $scope.products = response;
+      //$scope.products = skuWithoutSpezialKeys (response);
       NotifyService.show("Products loaded", "", "success");
     } else {
       NotifyService.show("Can't load products", response, "error");

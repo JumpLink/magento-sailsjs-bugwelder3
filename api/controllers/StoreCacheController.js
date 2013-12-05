@@ -1,5 +1,5 @@
 /**
- * AttributeSetCacheController
+ * StoreCacheController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -18,13 +18,13 @@
 module.exports = {
     
   import: function (req, res, next) {
-    sails.controllers.attributeset.exportToCache(req, res, next);
+    sails.controllers.store.exportToCache(req, res, next);
   },
 
 
   /**
    * Overrides for the settings in `config/controllers.js`
-   * (specific to AttributeSetCacheController)
+   * (specific to StoreCacheController)
    */
   _config: {}
 

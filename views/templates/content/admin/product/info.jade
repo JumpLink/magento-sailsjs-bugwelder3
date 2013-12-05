@@ -54,6 +54,6 @@ notify
                 .input-group
                   span.input-group-addon(ng-disabled="!product.id", title="Heritage Quantity")
                     #
-                  .form-control#stock_vwheritage_qty(required, type="number", disabled="disabled") {{product.stock_strichweg_qty+product.stock_vwheritage_qty}}
+                  .form-control#stock_total(required, type="number", disabled="disabled") {{product.stock_strichweg_qty+product.stock_vwheritage_qty}}
       .panel-footer
         button.btn.btn-primary(ng-disabled="!product.id", type='submit', ng-click="save()") Save

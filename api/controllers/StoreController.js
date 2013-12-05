@@ -1,5 +1,5 @@
 /**
- * AttributeSetCacheController
+ * StoreController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -17,14 +17,27 @@
 
 module.exports = {
     
-  import: function (req, res, next) {
-    sails.controllers.attributeset.exportToCache(req, res, next);
+  exportToCache: function (req, res) {
+    sails.log.debug("StoreController exportToCache: "+req+" "+res);
+    ExportToCacheService(Store, StoreCache, function (error, result) {
+      if(error)
+        res.json(error, 500);
+      else
+        res.json(result);
+    });
+  },
+
+  tree: function(req, res, next) {
+
+    Store.store_tree(function getTree(err, store_tree) {
+      res.json(store_tree);
+    });
   },
 
 
   /**
    * Overrides for the settings in `config/controllers.js`
-   * (specific to AttributeSetCacheController)
+   * (specific to StoreController)
    */
   _config: {}
 

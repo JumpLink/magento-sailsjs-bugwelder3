@@ -15,7 +15,7 @@
 module.exports = {
     
   import: function (req, res, next) {
-    Product.exportToCache(req, res, next);
+    sails.controllers.product.exportToCache(req, res, next);
   },
 
   /**

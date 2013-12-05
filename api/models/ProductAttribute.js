@@ -7,7 +7,7 @@
  */
 
 module.exports = {
-
+  adapter: 'magento-dnode',
   attributes: {
   	
   	/* e.g.

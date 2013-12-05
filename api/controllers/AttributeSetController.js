@@ -17,32 +17,11 @@
 
 module.exports = {
     
-  
   exportToCache: function (req, res) {
-    console.log("AttributeSetController exportToCache: "+req+" "+res);
-    async.waterfall([
-      // get all attributes with all information
-      function get_attributeset_list (callback){
-        AttributeSet.find().where().done(function attributeset_getted (err, attributeset_list) {
-          if (err) {
-            sails.log.error(err);
-            callback(err);
-          }else{
-            sails.log.debug(attributeset_list);
-            callback(null, attributeset_list);
-          }
-        });
-      },
-      function process_each_attribute_id (attributeset_list, callback){
-        AttributeSetCache.createEach(attributeset_list, callback)
-      },
-      function(imported_attributes, callback){
-          // arg1 now equals 'three'
-          callback(null, imported_attributes);
-      }
-    ], function (err, result) {
-      if(err)
-        res.json(err, 500);
+    sails.log.debug("AttributeSetController exportToCache: "+req+" "+res);
+    ExportToCacheService(AttributeSet, AttributeSetCache, function (error, result) {
+      if(error)
+        res.json(error, 500);
       else
         res.json(result);
     });
