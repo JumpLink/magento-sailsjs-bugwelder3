@@ -15,185 +15,191 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
-var arrayOfAttribute = function (object_array, attribute_name) {
-  var results = [];
-  object_array.forEach(function(obj){
-      results.push(obj[attribute_name]);
-  });
-  return results;
-}
+var _ = require('underscore');
 
-var hashTableOfIds = function (array) {
-  var ids = {}
-  array.forEach(function(obj){
-      ids[obj.id] = obj;
-  });
-  return ids;
-}
-
+/**
+ * Check if product exists in product list.
+ * Use "attribute_name" to specify the attribute to check equal.
+ */
 var productExists = function (product, productList, attribute_name) {
-  productList.forEach(function(current_product){
-    if(current_product[attribute_name] == product[attribute_name]) {
+  for (var i = 0; i < productList.length; i++) {
+    if(productList[i][attribute_name] == product[attribute_name])
       return true;
-    }
-  });
+  };
   return false;
 }
 
-var getDifferenceSync = function (a, b) {
-  // Make hashtable of ids in B
-  var b_ids = hashTableOfIds (b);
-
-  // Return all elements in A, unless in B
-  return a.filter(function(obj){
-      return !(obj.id in b_ids);
-  });
-}
-
+/**
+ * Get Products in a but not in b
+ */
 var getDifference = function (a, b, callback) {
   async.filter(
     a
     , function iterator (item, iterator_callback) {
-      iterator_callback(!productExists(item, b, 'id'));
+      var exists = productExists(item, b, 'id');
+      iterator_callback(!exists);
     }
     , callback
   );
 }
 
-var getIntersection = function (a, b, callback) {
-  async.filter(
-    a
-    , function iterator (item, callback) {
-      callback(productExists(item, b, 'id'));
-    }
-    , callback
-  );
-}
-
-var getIntersectionSync = function (a, b) {
-  var set = [];
-  if (a.length > 0 && b.length > 0) {
-    for (var i = 0; i < a.length; i++) {
-      for (var k = 0; k < b.length; k++) {
-        if (a[i].id == b[k].id) {
-          set.push(a[i]);
-          break;
-        }
-      };
-    };
-  }
-  return set;
-}
-
-var getDublicates = function (products) {
-  var set = [];
-  var dubs = [];
-  for (var i = 0; i < products.length; i++) {
-    for (var k = 0; k < set.length; k++) {
-      if (products[i].id == set[k].id) {
-        dubs.push(products[i]);
-      }
-    };
-    set.push(products[i]);
+/**
+ * Get changes of new product by old product 
+ */
+var getChanges = function (new_product, old_product) {
+  var result = {
+    id: old_product.id,
+    has_changes : false,
+    changes : {}
   };
-  return dubs;
+  for (var attribute in new_product) {
+    if(attribute != 'id' && !_.isEqual(new_product[attribute], old_product[attribute]) ) {
+      result.changes[attribute] = new_product[attribute];
+      result.has_changes = true;
+    }
+  }
+  return result;
 }
 
+/**
+ * Update Product, if this is not possible try to create.
+ */
+var updateOrCreate = function (extern_product, callback) {
+  VWHeritageProductCache.findOne({id:extern_product.id}, function(error, old_extern_product) {
+    if(error || !old_extern_product || !old_extern_product.id) {
+      VWHeritageProductCache.create(extern_product, function (error, result) {
+        sails.log.debug("created");
+        callback (error, {created:result});
+      });
+    } else {
+      var changes = getChanges(extern_product, old_extern_product);
+      if(changes.has_changes) {
+        VWHeritageProductCache.update({id:extern_product.id}, changes.changes, function (error, result) {
+          sails.log.debug("updated");
+          callback (error, {updated:result});
+        });
+      } else {
+        callback (null, null);
+      }
+    }
+  });
+}
+
+/**
+ * Use updateOrCreate function for each product.
+ */
+var updateOrCreateEach = function (extern_products, callback) {
+  sails.log.debug("updateOrCreateEach");
+  sails.log.debug("extern_products.length"+extern_products.length);
+  sails.log.debug("callback");
+  sails.log.debug(callback);
+  async.map(
+    extern_products
+    , updateOrCreate
+    , callback
+  );
+}
+
+/**
+ * Get old and new Product lists,
+ * result in callback is an array of old and new lists.
+ * (result[0]: old list, result[1]: new list).
+ */
 var getProductLists = function (callback) {
   async.parallel([
     function(callback) {
       VWHeritageProductCache.find().where().done(callback);
-    } 
-    , VWHeritageProduct.infos
+    }
+    , function(callback) {
+      VWHeritageProduct.find().where().done(callback);
+    }
   ], callback);
 }
 
-var splitProductLists = function (results, callback) {
-  sails.log.info("local product length: "+results[0].length);
-  sails.log.info("extern product length: "+results[1].length);
-  callback(null, results[0], results[1]);
+/**
+ * Get unused products by an array of product lists (see getProductLists function)
+ */
+var getUnusedProductsByProductLists = function (product_lists, callback) {
+  var old_products = product_lists[0];
+  var new_products = product_lists[1];
+
+  getDifference(old_products, new_products, function (unusedProducts) {
+    sails.log.debug("unusedProducts");
+    sails.log.debug(unusedProducts);
+    callback (null, unusedProducts);
+  });
 }
 
-var updateEach = function (products, callback) {
-  async.each(
-    products
-    , function (item, callback) {
-      VWHeritageProductCache.update({id:item.id}, item, callback);
-    }
-    , callback
-  );
+/**
+ * Just get no longger used products
+ */
+var getUnusedProducts = function (callback) {
+  async.waterfall([
+    getProductLists
+    , getUnusedProductsByProductLists
+  ], callback);
 }
 
-var processEachProductLists = function (local, extern, final_callback) {
+/**
+ * Just remove products
+ */
+var destroyProducts = function (products, callback) {
+  VWHeritageProduct.destroy(products, callback);
+}
 
-  var extern_ids = arrayOfAttribute(extern);
+/**
+ * Just remove unused products
+ */
+var destroyUnusedProducts = function (callback) {
+    async.waterfall([
+      getUnusedProducts
+      , destroyProducts
+    ], callback);
+}
 
-  // var dublicated_products = getDublicates (extern, extern);
-  // sails.log.info("dublicated_products.length: "+dublicated_products.length);
-  
-  async.parallel([
-    function createEachProduct (callback) {
-      getDifference (extern, local, function(new_products) {
-        sails.log.info("new_products.length: "+new_products.length);
-        if(!new_products || new_products.length <= 0)
-          callback(null, null);
-        else
-          VWHeritageProductCache.createEach(new_products, function (error, result) {
-            callback (error, {new: new_products});
-          });
-      });
-    }
-    , function updateEachProduct (callback) {
-      VWHeritageProductCache.find(extern_ids, function (error, updated_products) {
-        sails.log.info("updated_products VWHeritageProductCache.find: "+updated_products.length);
-        if(error || !updated_products || updated_products.length <= 0)
-          callback(null, null);
-        else
-          updateEach(updated_products, function(error, result) {
-            callback(error, {updated:updated_products});
-          });
-      });
-    }
-    , function destroyEachProduct (callback){ // TODO check {not: {id : extern_ids}}
-      VWHeritageProductCache.find({not: {id : extern_ids}}, function (error, destroyed_products) {
-        sails.log.info("destroyed products VWHeritageProductCache.find id: "+destroyed_products.length); 
-        if(error || !destroyed_products || destroyed_products.length <= 0 )
-          callback(null, null);
-        else
-          VWHeritageProductCache.destroy(destroyed_products, function(error, result) {
-            callback (error, {destroyed:destroyed_products});
-          });
-      });
-    }
-  ], final_callback);
+/**
+ * Export new and updated products to cache.
+ * Note: This is not removing old products!
+ */
+var exportToCache = function (callback) {
+  async.waterfall([
+    VWHeritageProduct.infos
+    , updateOrCreateEach
+  ], callback);
 }
 
 module.exports = {
-    
-  exportToCache: function (req, res) {
-    async.waterfall([
-      getProductLists
-      , splitProductLists
-      , processEachProductLists
-    ], function (error, result) {
-      sails.log.info("VWHeritageProduct.exportToCache done!");
-      if(error) {
-        sails.log.error(error);
-        res.json(error, 500);
-      }
-      else {
-        sails.log.debug(result);
-        res.json(result);
-      }
+
+  unused: function (req, res) {
+    getUnusedProducts(function(error, result) {
+      if(error) { res.json(error, 500); }
+      else { res.json(result); }
     });
   },
 
+  destroyUnused: function (req, res) {
+    destroyUnusedProducts(function (error, result) {
+      sails.log.info("VWHeritageProduct.removeOld done!");
+      if(error) { res.json(error, 500); }
+      else { res.json(result); }
+    });
+  },
+    
+  exportToCache: function (req, res) {
+    exportToCache (function (error, result) {
+      sails.log.info("VWHeritageProduct.exportToCache done!");
+      if(error) { res.json(error, 500); }
+      else { res.json(result); }
+    });
+  },
+
+  /**
+   * Get all products with all informations.
+   */
   infos: function (req, res) {
     VWHeritageProduct.infos(function (error, result) {
-      if(error)
-        res.json(error, 500);
-      else
-        res.json(result);
+      if(error) res.json(error, 500);
+      else res.json(result);
     });
   },
 
