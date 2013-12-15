@@ -37,6 +37,10 @@ jumplink.magentoweb.config(['$routeProvider',
         templateUrl: 'content/admin/product/info.jade',
         controller: 'ProductInfoController'
       }).
+      when('/admin/product/info/:id', {
+        templateUrl: 'content/admin/product/info.jade',
+        controller: 'ProductInfoController'
+      }).
       when('/admin/product/vwheritage-list', {
         templateUrl: 'content/admin/product/vwheritage-list.jade',
         controller: 'ProductVWHeritageListController'
@@ -48,6 +52,18 @@ jumplink.magentoweb.config(['$routeProvider',
       when('/admin/product/vwheritage-info/:id', {
         templateUrl: 'content/admin/product/vwheritage-info.jade',
         controller: 'ProductVWHeritageInfoController'
+      }).
+      when('/admin/product/compare-list', {
+        templateUrl: 'content/admin/product/compare-list.jade',
+        controller: 'ProductCompareListController'
+      }).
+      when('/admin/product/compare-info', {
+        templateUrl: 'content/admin/product/compare-info.jade',
+        controller: 'ProductCompareInfoController'
+      }).
+      when('/admin/product/compare-info/:sku', {
+        templateUrl: 'content/admin/product/compare-info.jade',
+        controller: 'ProductCompareInfoController'
       }).
       when('/admin/product/config', {
         templateUrl: 'content/admin/product/config.jade',

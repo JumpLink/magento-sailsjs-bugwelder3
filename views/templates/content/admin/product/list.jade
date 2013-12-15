@@ -13,12 +13,14 @@ navbar(mode="admin")
       tr
         th ID
         th SKU
+        th SKU (Clean)
         th Name
         th {{ 'action' | translate }}
     tbody
-        tr(ng-repeat="product in products | filter:filter  | limitTo:20 ")
+        tr(ng-repeat="product in magento_products | filter:filter  | limitTo:20 ")
           td {{product.id}} 
           td {{product.sku}}
+          td {{product.sku_clean}}
           td {{product.name}}
           td
             .btn-group

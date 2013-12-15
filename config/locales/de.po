@@ -21,12 +21,34 @@ msgid "Product cache"
 msgstr "Produkt Cache"
 
 #: .tmp/public/views/templates/content/admin/cache.html
+msgid "enabled"
+msgstr "aktiviert"
+
+#: .tmp/public/views/templates/content/admin/cache.html
 msgid "On"
 msgstr "An"
 
 #: .tmp/public/views/templates/content/admin/cache.html
 msgid "Off"
 msgstr "Aus"
+
+#: .tmp/public/views/templates/content/admin/product/compare-list.html
+msgid "Clean"
+msgstr "Säubern"
+
+#: .tmp/public/views/templates/content/admin/product/compare-list.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
+#: .tmp/public/views/templates/content/admin/user/index.html
+msgid "action"
+msgstr "Aktion"
+
+#: .tmp/public/views/templates/content/admin/product/compare-list.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
+#: .tmp/public/views/templates/content/admin/user/index.html
+msgid "show"
+msgstr "anzeigen"
 
 #: .tmp/public/views/templates/content/admin/product/config.html
 msgid "Product Configuration"
@@ -130,14 +152,6 @@ msgid "name"
 msgstr "Name"
 
 #: .tmp/public/views/templates/content/admin/user/index.html
-msgid "action"
-msgstr "Aktion"
-
-#: .tmp/public/views/templates/content/admin/user/index.html
-msgid "show"
-msgstr "anzeigen"
-
-#: .tmp/public/views/templates/content/admin/user/index.html
 msgid "edit"
 msgstr "bearbeiten"
 
@@ -168,6 +182,18 @@ msgstr ""
 #: .tmp/public/views/templates/partials/navbar.html
 msgid "Products"
 msgstr "Produkte"
+
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Search"
+msgstr "Suche"
+
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Information"
+msgstr "Information"
+
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Compare"
+msgstr "Vergleich"
 
 #: .tmp/public/views/templates/partials/navbar.html
 #, fuzzy

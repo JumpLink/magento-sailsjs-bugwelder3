@@ -19,6 +19,26 @@
 
 module.exports = {
 
+  generate: function (req, res) {
+    ProductAttributeService.generate(function (error, result) {
+      if(error) {
+        return res.json(error, 500);
+      } else {
+        return res.json(result);
+      }
+    });
+  },
+
+  save: function (req, res) {
+    ProductAttributeService.generateAndSaveToFile(function (error, result) {
+      if(error) {
+        return res.json(error, 500);
+      } else {
+        return res.json(result);
+      }
+    });
+  },
+
   /**
    * Overrides for the settings in `config/controllers.js`
    * (specific to ProductAttributeController)

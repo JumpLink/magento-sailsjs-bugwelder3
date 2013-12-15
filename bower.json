@@ -16,21 +16,22 @@
   "dependencies": {
     "bugwelder-bootstrap3": "git@github.com:bugwelder/bugwelder-bootstrap3.git",
     "angular-sails": "~0.0.3",
-    "angular": "1.2.0-rc.3",
-    "angular-route": "1.2.0-rc.3",
+    "angular": "1.2.4",
+    "angular-route": "1.2.4",
     "bootstrap": "~3.0.1",
     "angular-ui-bootstrap3": "~0.6.0",
     "angular-gettext": "~0.1.4",
-    "angular-animate": "1.2.0-rc.3",
+    "angular-animate": "1.2.4",
     "components-font-awesome": "~4.0.3",
     "font-awesome": "~4.0.3",
     "angular-bootstrap-colorpicker": "~3.0.0",
-    "angular-sanitize": "1.2.0-rc.3",
+    "angular-sanitize": "1.2.4",
     "angular-underscore": "*",
     "underscore": "~1.5.2",
     "angular-magento-navbar": "git@github.com:JumpLink/angular-magento-navbar.git",
     "angular-notify": "git@github.com:JumpLink/angular-notify.git",
     "angular-socket-io": "~0.2.0",
-    "angular-toggle-switch": "~0.2.3"
+    "angular-toggle-switch": "~0.2.3",
+    "async": "~0.2.5"
   }
 }

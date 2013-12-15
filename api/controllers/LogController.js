@@ -1,5 +1,5 @@
 /**
- * AttributeSetController
+ * LogController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -17,19 +17,12 @@
 
 module.exports = {
     
-  exportToCache: function (req, res) {
-    sails.log.debug("AttributeSetController exportToCache: "+req+" "+res);
-    CacheService.syncCache(AttributeSet, AttributeSetCache, function (error, result) {
-      if(error)
-        res.json(error, 500);
-      else
-        res.json(result);
-    });
-  },
+  
+
 
   /**
    * Overrides for the settings in `config/controllers.js`
-   * (specific to AttributeSetController)
+   * (specific to LogController)
    */
   _config: {}
 

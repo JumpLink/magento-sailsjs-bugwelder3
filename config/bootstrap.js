@@ -9,27 +9,48 @@
  */
 
 var createAdminUser = function (cb) {
-
   User.findOrCreate({email:"admin@admin.org", name: "admin", color: "#000000", password: "sails-admin"}, function (err, result) {
     if(err) {
       sails.log.err(err);
+    } else {
+      sails.log.info("Admin User checked");
+      cb(err, result);
     }
-    cb(err, result);
   });  
 }
 
-module.exports.bootstrap = function (cb) {
-  DNodeService.server().start(function(json) {
-
-    createAdminUser(function(err, result) {
-      sails.log.info("admin checked");
-      cb(err, result);
-    });
-
+var StartDNodeService = function (callback) {
+  DNodeService.server().start(function StartDNodeServiceDone (json) {
+    sails.log.info("DNodeService Server started");
+    callback(null, json);
   });
+}
 
+var listenExternChangesForProductService = function (callback){
+  ProductService.listenExternChanges(function (error, activated) {
+    if(!error && activated)
+      sails.log.info("listen extern changes for ProductService started");
+    callback(error, activated);
+  });
+}
 
+var listenExternChangesForProductCacheService = function (callback){
+  ProductCacheService.listenExternChanges(function (error, activated) {
+    if(!error && activated)
+      sails.log.info("listen extern changes for ProductCacheService started");
+    callback(error, activated);
+  });
+}
+
+module.exports.bootstrap = function (final_callback) {
+
+  async.series([
+    StartDNodeService
+    , createAdminUser
+    , listenExternChangesForProductService
+    , listenExternChangesForProductCacheService
   // It's very important to trigger this callack method when you are finished 
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
-  //cb();
+  ], final_callback);
+
 };

@@ -23,6 +23,24 @@ msgstr ""
 msgid "Off"
 msgstr ""
 
+#: .tmp/public/views/templates/content/admin/product/compare-list.html
+msgid "Clean"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/product/compare-list.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
+#: .tmp/public/views/templates/content/admin/user/index.html
+msgid "action"
+msgstr ""
+
+#: .tmp/public/views/templates/content/admin/product/compare-list.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
+#: .tmp/public/views/templates/content/admin/user/index.html
+msgid "show"
+msgstr ""
+
 #: .tmp/public/views/templates/content/admin/product/config.html
 msgid "Product Configuration"
 msgstr ""
@@ -33,18 +51,6 @@ msgstr ""
 
 #: .tmp/public/views/templates/content/admin/product/config.html
 msgid "Generate now"
-msgstr ""
-
-#: .tmp/public/views/templates/content/admin/product/list.html
-#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
-#: .tmp/public/views/templates/content/admin/user/index.html
-msgid "action"
-msgstr ""
-
-#: .tmp/public/views/templates/content/admin/product/list.html
-#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
-#: .tmp/public/views/templates/content/admin/user/index.html
-msgid "show"
 msgstr ""
 
 #: .tmp/public/views/templates/content/admin/user/create.html
@@ -161,6 +167,18 @@ msgstr ""
 
 #: .tmp/public/views/templates/partials/navbar.html
 msgid "Products"
+msgstr ""
+
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Search"
+msgstr ""
+
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Information"
+msgstr ""
+
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Compare"
 msgstr ""
 
 #: .tmp/public/views/templates/partials/navbar.html

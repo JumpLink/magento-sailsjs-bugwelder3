@@ -9,24 +9,35 @@
 // WORKAROUND
 var attributes = require('./ProductAttributes.json');
 
-attributes.stock_data = {
-  type: "json"
-}
-
-attributes.id = {
-  type: 'integer',
-  index: true
-}
+if(attributes === null)
+  attributes = {};
 
 module.exports = {
-
   adapter: 'mongo'
   , types: {
-    weight: function(n){
-      return n === +n && n !== (n|0); // is float?
-    },
-    price: function(n){
-      return n === +n && n !== (n|0); // is float?
+      weight: function(n){
+      return true; // TODO is float?
+    }
+    , price: function(n){
+      return true; // TODO is float?
+    }
+    , tier_price: function(n){
+      return true; // TODO
+    }
+    , stock_data: function(n){
+      return true; // TODO
+    }
+    , select: function(n){
+      return true; // TODO
+    }
+    , "array of integer": function(n){
+      return true; // TODO
+    }
+    , "array of float": function(n){
+      return true; // TODO
+    }
+    , "array of string": function(n){
+      return true; // TODO
     }
   }
   , attributes: attributes

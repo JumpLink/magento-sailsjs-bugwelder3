@@ -1,5 +1,5 @@
 /**
- * VWHeritageProductCacheController
+ * VWHProductCacheController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -16,13 +16,22 @@
  */
 
 module.exports = {
-    
-  
 
+  import: function (req, res, next) {
+    sails.controllers.vwhproduct.exportToCache(req, res, next);
+  },
+
+  unused: function (req, res, next) {
+    sails.controllers.vwhproduct.unusedCache(req, res, next);
+  },
+
+  destroyUnused: function (req, res, next) {
+    sails.controllers.vwhproduct.destroyUnusedCache(req, res, next);
+  },
 
   /**
    * Overrides for the settings in `config/controllers.js`
-   * (specific to VWHeritageProductCacheController)
+   * (specific to VWHProductCacheController)
    */
   _config: {}
 

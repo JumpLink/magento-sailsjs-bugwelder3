@@ -33,7 +33,8 @@ module.exports.policies = {
   },
 
   VWHeritageProduct: {
-    '*': "isAuthenticated"
+    //'*': "isAuthenticated"
+    '*': true // DEBUG
   },
 
   VWHeritageImage: {

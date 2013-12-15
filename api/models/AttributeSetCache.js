@@ -16,6 +16,7 @@ module.exports = {
       type: 'integer',
       index: true,
       required: true,
+      unique : true
     },
 
     name : {

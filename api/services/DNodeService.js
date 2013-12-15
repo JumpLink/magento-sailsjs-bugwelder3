@@ -1,6 +1,8 @@
 // TODO check to use socket.io instead of dnode, on php site I could use http://elephant.io/#home . This would need to write own authorization function in config/socket.js
 
 var dnode = require('dnode');
+var events = require('events');
+var eventEmitter = new events.EventEmitter();
 
 var red, blue, reset;
 red   = '\033[31m';
@@ -17,12 +19,14 @@ var server = function(options) {
 
   var server = dnode(function (remote, conn) {
     this.dispatchEvent = function (eventName, args, cb) {
-      var lookingfor = "";
-      sails.log.info("dispatchEvent");
+      
+      sails.log.info("dispatchEvent DNode Server");
       sails.log.info(red+eventName+reset);
-      console.log(blue);
       sails.log.info(args);
-      console.log(reset);
+
+      eventEmitter.emit(eventName, null, args);
+
+      // var lookingfor = "";
 
       /* stock */
 /*      lookingfor = "stock";
@@ -148,5 +152,7 @@ var server = function(options) {
     start: start
   }
 }
-
-exports.server = server
+module.exports = {
+  server : server
+  , eventEmitter : eventEmitter
+}

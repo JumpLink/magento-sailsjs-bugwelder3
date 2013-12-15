@@ -19,7 +19,7 @@ module.exports = {
     
   exportToCache: function (req, res) {
     sails.log.debug("StoreController exportToCache: "+req+" "+res);
-    ExportToCacheService(Store, StoreCache, function (error, result) {
+    CacheService.syncCache(Store, StoreCache, function (error, result) {
       if(error)
         res.json(error, 500);
       else

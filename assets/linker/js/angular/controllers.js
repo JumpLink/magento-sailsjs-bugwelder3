@@ -77,15 +77,20 @@ jumplink.magentoweb.controller('ProductConfigController', function($scope, $sail
   }
 });
 
-jumplink.magentoweb.controller('ProductListController', function($scope, $sails, NotifyService) {
-
+jumplink.magentoweb.controller('ProductListController', function($rootScope, $scope, $sails, NotifyService) {
+  if(typeof($rootScope.magento_products) === 'undefined' || !$rootScope.magento_products.length)
+    $sails.get("/product", function (response) {
+      console.log(response);
+      if(response != null && typeof(response[0].id) !== "undefined") {
+        $rootScope.magento_products = response;
+        NotifyService.show("Products loaded", "", "success");
+      } else {
+        NotifyService.show("Can't load products", response, "error");
+      }
+    });
 });
 
-jumplink.magentoweb.controller('ProductCompareController', function($scope, $sails, NotifyService) {
-
-});
-
-jumplink.magentoweb.controller('ProductInfoController', function($scope, $sails, NotifyService) {
+jumplink.magentoweb.controller('ProductInfoController', function($scope, $sails, $routeParams, NotifyService) {
 
   $scope.search = {
     action : "SKU",
@@ -153,6 +158,28 @@ jumplink.magentoweb.controller('ProductInfoController', function($scope, $sails,
       }
     });
   }
+
+  // If id is passed in the url
+  if(typeof($routeParams.id) !== "undefined") {
+    $scope.search.value = $routeParams.id;
+    $scope.search.action = "ID";
+    $scope.get ();
+  }
+
+});
+
+jumplink.magentoweb.controller('ProductVWHeritageListController', function($rootScope, $scope, $sails, NotifyService) {
+  if(typeof($rootScope.extern_products) === 'undefined' || !$rootScope.extern_products.length)
+    $sails.get("/vwheritageproduct", function (response) {
+      console.log(response);
+      if(response != null && typeof(response[0].id) !== "undefined") {
+        $rootScope.extern_products = response;
+        NotifyService.show("Products loaded", "", "success");
+      } else {
+        NotifyService.show("Can't load products", response, "error");
+      }
+    });
+
 });
 
 jumplink.magentoweb.controller('ProductVWHeritageInfoController', function($scope, $sails, $routeParams, NotifyService) {
@@ -190,25 +217,119 @@ jumplink.magentoweb.controller('ProductVWHeritageInfoController', function($scop
 
 });
 
-jumplink.magentoweb.controller('ProductVWHeritageListController', function($scope, $sails, NotifyService) {
+jumplink.magentoweb.controller('ProductCompareListController', function($rootScope, $scope, $sails, NotifyService) {
 
-  var skuWithoutSpezialKeys = function (product_list) {
-    for (var i = 0; i < product_list.length; i++) {
-      product_list[i].sku_clean = product_list[i].sku.replace(/\/|-|\.|\s/g, ""); // replace "/", "-", "." and " " with nothing 
-    };
-    return product_list;
+  var getMagentoProducts = function (cb) {
+    if(typeof($rootScope.magento_products) === 'undefined' || !$rootScope.magento_products.length)
+      $sails.get("/product", function (response) {
+        if(response != null && typeof(response[0].id) !== "undefined") {
+          cb (null, response);
+        } else {
+          cb ("Can't load magento products", null);
+        }
+      });
+    else
+      cb (null, $rootScope.magento_products);
+  }
+  
+  var getExternProducts = function (cb) {
+    if(typeof($rootScope.extern_products) === 'undefined' || !$rootScope.extern_products.length)
+      $sails.get("/vwheritageproduct", function (response) {
+        if(response != null && typeof(response[0].id) !== "undefined") {
+          cb (null, response);
+        } else {
+          cb ("Can't load extern products", null);
+        }
+      });
+        else
+      cb (null, $rootScope.extern_products);
   }
 
-  $sails.get("/vwheritageproduct", function (response) {
-    console.log(response);
-    if(response != null && typeof(response[0].id) !== "undefined") {
-      $scope.products = response;
-      //$scope.products = skuWithoutSpezialKeys (response);
-      NotifyService.show("Products loaded", "", "success");
+  var getProducts = function (final_callback) {
+    async.parallel([
+      getMagentoProducts,
+      getExternProducts
+    ], function(err, results) {
+      if(!err) {
+        // console.log(results);
+        $rootScope.magento_products = results[0];
+        $rootScope.extern_products = results[1];
+        //NotifyService.show("All products loaded", "", "success");
+        final_callback(null, $rootScope.magento_products, $rootScope.extern_products);
+      } else {
+        console.log(err);
+        // NotifyService.show("Can't load products", err, "error");
+        final_callback(err, null);
+      }
+    });
+  }
+
+  var difference = function (a, b) {
+    // Make hashtable of ids in B
+    var b_skus = {}
+    b.forEach(function(obj){
+        b_skus[obj.sku] = obj;
+    });
+
+    // Return all elements in A, unless in B
+    return a.filter(function(obj){
+        return !(obj.sku in b_skus);
+    });
+  }
+
+  var getDifference = function (magento_products, extern_products, final_callback) {
+    var error = null;
+    $rootScope.magento_only_products = difference(magento_products, extern_products);
+    $rootScope.extern_only_products = difference(extern_products, magento_products);
+    final_callback (error, $rootScope.magento_only_products, $rootScope.extern_only_products);
+  }
+
+  async.waterfall([
+    getProducts,
+    getDifference,
+  ], function(err, results){
+    if (!err) {
+      NotifyService.show("All products and differences loaded", "", "success");
     } else {
-      NotifyService.show("Can't load products", response, "error");
+      NotifyService.show("Can't load products", err, "error");
     }
   });
+
+
+});
+
+jumplink.magentoweb.controller('ProductCompareInfoController', function($scope, $sails, $routeParams, NotifyService) {
+
+  $scope.search = {
+    action : "ID",
+    value : ""
+  };
+
+  $scope.get = function () {
+    console.log("get vwheritage");
+    $sails.get("/vwheritageproduct?id="+$scope.search.value+"&limit=1", function (product) {
+      
+      if(typeof(product.id) === "undefined") {
+        NotifyService.show("Can't load product", product, "error");
+      } else {
+        $scope.product = product;
+        
+        $sails.get("/vwheritageimage/"+$scope.product.id+"?limit=1", function (images) {
+          console.log(images);
+          NotifyService.show("Product loaded", "Product Name: "+$scope.product.name, "success");
+          $scope.product.images = images;
+        });
+
+      }
+    });
+  }
+
+  // If id is passed in the url
+  if(typeof($routeParams.id) !== "undefined") {
+    $scope.search.value = $routeParams.id;
+    $scope.search.action = "ID";
+    $scope.get ();
+  }
 
 });
 
