@@ -17,23 +17,35 @@
 
 module.exports = {
 
-  import: function (req, res, next) {
-    sails.controllers.vwhproduct.exportToCache(req, res, next);
-  },
+  find: function (req, res, next) {
+    if (req.params['id'])
+      req.params['id'] = parseInt(req.params['id']);
+    if(req.query.id)
+      req.params.id = parseInt(req.params.id);
+    SailsService.Controller.find(sails)(req, res, next);
+  }
 
-  unused: function (req, res, next) {
+  , import: function (req, res, next) {
+    VWHProductCacheService.import(function (error, result) {
+      sails.log.info("VWHProductCacheController.import done!");
+      if(error) { sails.log.error(error); next(error); }
+      else { res.json(result); }
+    });
+  }
+
+  , unused: function (req, res, next) {
     sails.controllers.vwhproduct.unusedCache(req, res, next);
-  },
+  }
 
-  destroyUnused: function (req, res, next) {
+  , destroyUnused: function (req, res, next) {
     sails.controllers.vwhproduct.destroyUnusedCache(req, res, next);
-  },
+  }
 
   /**
    * Overrides for the settings in `config/controllers.js`
    * (specific to VWHProductCacheController)
    */
-  _config: {}
+  , _config: {}
 
   
 };

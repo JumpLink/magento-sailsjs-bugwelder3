@@ -22,35 +22,35 @@ var beforeUpdateCreate = function(values, next) {
 
 module.exports = {
 
-  schema: true, // save only the values defined in attributes in database 
+  schema: true // save only the values defined in attributes in database 
 
-  adapter: 'mongo',
+  , adapter: 'mongo'
 
-  attributes: {
+  , attributes: {
     email: {
-      type: "email",
-      required: true,
-      unique: true
+      type: "email"
+      , required: true
+      , unique: true
     },
     name: {
-      type: "string",
-      required: true
+      type: "string"
+      , required: true
     },
     color: {
-      type: "string",
-      //hexColor: true, //TODO FIXME and/or report bug
-      required: true
+      type: "string"
+      //, hexColor: true //TODO FIXME 
+      , required: true
     },
     password: {
-      type: 'string',
-      minLength: 6,
-      required: true,
-      columnName: 'encrypted_password'
+      type: 'string'
+      , minLength: 6
+      , required: true
+      , columnName: 'encrypted_password'
     }
-  },
+  }
 
   // Lifecycle Callbacks
-  beforeCreate: beforeUpdateCreate,
-  beforeUpdate: beforeUpdateCreate,
+  , beforeCreate: beforeUpdateCreate
+  , beforeUpdate: beforeUpdateCreate
 
 };

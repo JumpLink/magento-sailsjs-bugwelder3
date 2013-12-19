@@ -79,9 +79,9 @@ jumplink.magentoweb.controller('ProductConfigController', function($scope, $sail
 
 jumplink.magentoweb.controller('ProductListController', function($rootScope, $scope, $sails, NotifyService) {
   if(typeof($rootScope.magento_products) === 'undefined' || !$rootScope.magento_products.length)
-    $sails.get("/product", function (response) {
+    $sails.get("/productcache", function (response) {
       console.log(response);
-      if(response != null && typeof(response[0].id) !== "undefined") {
+      if(response != null && typeof(response[0]) !== "undefined" && typeof(response[0].id) !== "undefined") {
         $rootScope.magento_products = response;
         NotifyService.show("Products loaded", "", "success");
       } else {
@@ -103,19 +103,20 @@ jumplink.magentoweb.controller('ProductInfoController', function($scope, $sails,
   }
 
   $scope.get = function () {
-    var url = "/product";
+    var url = "/productcache";
     var action = $scope.search.action;
     switch (action) {
       case "SKU":
-        url += "?sku="+$scope.search.value+"&limit=1";
+        url += "?sku="+$scope.search.value;
       break;
       case "ID":
-        url += "?id="+$scope.search.value+"&limit=1";
+        url += "/"+$scope.search.value;
       break;
     }
     console.log("get by "+$scope.search.action);
     $sails.get(url, function (response) {
-
+      console.log("response");
+      console.log(response);
       if (action !== 'ID' && response instanceof Array)
         response = response[0]
 
@@ -170,7 +171,7 @@ jumplink.magentoweb.controller('ProductInfoController', function($scope, $sails,
 
 jumplink.magentoweb.controller('ProductVWHeritageListController', function($rootScope, $scope, $sails, NotifyService) {
   if(typeof($rootScope.extern_products) === 'undefined' || !$rootScope.extern_products.length)
-    $sails.get("/vwheritageproduct", function (response) {
+    $sails.get("/vwhproductcache", function (response) {
       console.log(response);
       if(response != null && typeof(response[0].id) !== "undefined") {
         $rootScope.extern_products = response;
@@ -191,14 +192,14 @@ jumplink.magentoweb.controller('ProductVWHeritageInfoController', function($scop
 
   $scope.get = function () {
     console.log("get vwheritage");
-    $sails.get("/vwheritageproduct?id="+$scope.search.value+"&limit=1", function (product) {
+    $sails.get("/vwhproductcache/"+$scope.search.value+"&limit=1", function (product) {
       
       if(typeof(product.id) === "undefined") {
         NotifyService.show("Can't load product", product, "error");
       } else {
         $scope.product = product;
         
-        $sails.get("/vwheritageimage/"+$scope.product.id+"?limit=1", function (images) {
+        $sails.get("/vwhimage/"+$scope.product.id+"?limit=1", function (images) {
           console.log(images);
           NotifyService.show("Product loaded", "Product Name: "+$scope.product.name, "success");
           $scope.product.images = images;
@@ -234,7 +235,7 @@ jumplink.magentoweb.controller('ProductCompareListController', function($rootSco
   
   var getExternProducts = function (cb) {
     if(typeof($rootScope.extern_products) === 'undefined' || !$rootScope.extern_products.length)
-      $sails.get("/vwheritageproduct", function (response) {
+      $sails.get("/vwhproductcache", function (response) {
         if(response != null && typeof(response[0].id) !== "undefined") {
           cb (null, response);
         } else {
@@ -307,14 +308,14 @@ jumplink.magentoweb.controller('ProductCompareInfoController', function($scope, 
 
   $scope.get = function () {
     console.log("get vwheritage");
-    $sails.get("/vwheritageproduct?id="+$scope.search.value+"&limit=1", function (product) {
+    $sails.get("/vwhproductcache?id="+$scope.search.value+"&limit=1", function (product) {
       
       if(typeof(product.id) === "undefined") {
         NotifyService.show("Can't load product", product, "error");
       } else {
         $scope.product = product;
         
-        $sails.get("/vwheritageimage/"+$scope.product.id+"?limit=1", function (images) {
+        $sails.get("/vwhimage/"+$scope.product.id+"?limit=1", function (images) {
           console.log(images);
           NotifyService.show("Product loaded", "Product Name: "+$scope.product.name, "success");
           $scope.product.images = images;

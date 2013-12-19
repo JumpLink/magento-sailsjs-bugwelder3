@@ -15,6 +15,7 @@ var getChanges = function (newProduct, oldProduct) {
       result.has_changes = true;
     }
   }
+  return result;
 }
 
 /**
@@ -50,7 +51,6 @@ var updateNeedOldStock = function (newProduct) {
 }
 
 var generateStock = function (product, callback) {
- if(product.stock_data)
   product.stock_data = {};
   product.stock_data.qty = product.stock_vwheritage_qty + product.stock_strichweg_qty;
   product.stock_data.is_in_stock = (product.stock_data.qty > 0) ? 1 : 0;
@@ -58,11 +58,11 @@ var generateStock = function (product, callback) {
 }
 
 var insertOldStock = function (newProduct, oldProduct) {
-  sails.log.debug("insertOldStock");
-  sails.log.debug("newProduct");
-  sails.log.debug(newProduct);
-  sails.log.debug("oldProduct");
-  sails.log.debug(oldProduct);
+  // sails.log.debug("insertOldStock");
+  // sails.log.debug("newProduct");
+  // sails.log.debug(newProduct);
+  // sails.log.debug("oldProduct");
+  // sails.log.debug(oldProduct);
   if(typeof(newProduct.stock_vwheritage_qty) === 'undefined')
     newProduct.stock_vwheritage_qty = oldProduct.stock_vwheritage_qty;
   if(typeof(newProduct.stock_strichweg_qty) === 'undefined')
@@ -73,14 +73,14 @@ var insertOldStock = function (newProduct, oldProduct) {
 /**
  *  @param oldProduct (optinally)
  */
-var getStock = function (id, newProduct, oldProduct, callback) {
+var getOldStock = function (id, newProduct, oldProduct, callback) {
   if (updateNeedOldStock) {
     if(typeof(oldProduct) === 'undefined' || oldProduct === null) {
-      ProductCache.findOne({id:id}, function(error, result) {
+      ProductCache.findOne({id:id}, function(error, oldProduct) {
         if(error)  {
           callback(error, null);
         } else {
-          oldProduct = result;
+          oldProduct = oldProduct.toObject();
           newProduct = insertOldStock (newProduct, oldProduct);
           generateStock(newProduct, callback);
         }
@@ -94,45 +94,15 @@ var getStock = function (id, newProduct, oldProduct, callback) {
   }
 } 
 
-/**
- *  @param oldProduct (optinally)
- * TODO move stock check to modell
- */
-var update = function (id, newProduct, oldProduct, callback) {
-
-  if(typeof(id) === 'undefined' || id == 0 | id === null) {
-    if(typeof(newProduct.id) === 'undefined') {
-      if(typeof(oldProduct.id) === 'undefined') {
-        callback("Id is not set!", null);
-      } else { id = oldProduct.id; }
-    } else { id = newProduct.id; }
-  }
-  if (updateHasStockChanges) {
-    getStock(id, newProduct, oldProduct, function(error, productWithStock) {
-      Product.update({id:id}, newProduct, function (error, result) {
-        // sails.log.error(error);
-        // sails.log.debug(result);
-        callback (error, result);
-      });
-    });
-  } else {
-    Product.update({id:id}, newProduct, function (error, result) {
-      // sails.log.error(error);
-      // sails.log.debug(result);
-      callback (error, result);
-    });
-  }
-}
-
 var updateOnChanges = function (newProduct, oldProduct, callback) {
   var changes = getChanges(newProduct, oldProduct);
 
   sails.log.debug("check update");
   if(changes.has_changes) {
     var updates = changes.changes;
-    updates.id = oldProduct.id;
-    updates.sku = oldProduct.sku;
-    update (oldProduct.id, changes.changes, oldProduct, function (error, result) {
+    updates.id = newProduct.id ? newProduct.id : oldProduct.id;
+    updates.sku = newProduct.sku ? newProduct.sku : oldProduct.sku;
+    Product.update ({id:updates.id}, updates, function (error, result) {
       callback (error, {updated:changes.changes});
     });
   } else {
@@ -148,6 +118,7 @@ var updateOrCreate = function (newProduct, last_callback) {
         callback (error, {created:result});
       });
     } else {
+      oldProduct = oldProduct.toObject();
       updateOnChanges(newProduct, oldProduct, callback);
     }
   });
@@ -156,16 +127,17 @@ var updateOrCreate = function (newProduct, last_callback) {
 var updateIfExists = function (newProduct, last_callback) {
   ProductCache.findOne({sku:newProduct.sku}, function(error, oldProduct) {
     if(error || !oldProduct || !oldProduct.id) {
-      sails.log.warn("Product not exists, do nothing!");
+      sails.log.warn("Product not exists, do nothing! SKU: "+newProduct.sku);
       last_callback(null, null);
     } else {
-      updateOnChanges(newProduct, oldProduct, callback);
+      oldProduct = oldProduct.toObject();
+      updateOnChanges(newProduct, oldProduct, last_callback);
     }
   });
 };
 
 var onVWHProductCacheUpdate = function (error, product) {
-  sails.log.debug("VWHProductCacheService update_after from ProductService!");
+  
   var include_english = true;
   var include_german = false;
   var include_groupprice = false;
@@ -176,6 +148,7 @@ var onVWHProductCacheUpdate = function (error, product) {
       sails.log.debug("Magento Product updated!");
       sails.log.debug(result);
       // ...
+      return;
     });
   });
 }
@@ -185,19 +158,23 @@ var listenVWHProductCacheChanges = function (callback) {
     sails.log.warn("VWHProductCacheService update_before from ProductService!");
   });
 
-  VWHProductCacheService.eventEmitter.on('update_after', onVWHProductCacheUpdate);
+  VWHProductCacheService.eventEmitter.on('update_after', function (error, product) {
+    sails.log.debug("VWHProductCacheService update_after from ProductService!");
+    onVWHProductCacheUpdate(error, product);
+  });
 
   VWHProductCacheService.eventEmitter.on('destroy_before', function (error, product) {
-    sails.log.warn("VWHProductCacheService destroy_before from ProductService!");
+    sails.log.debug("VWHProductCacheService destroy_before from ProductService!");
   });
   VWHProductCacheService.eventEmitter.on('destroy_after', function (error, product) {
-    sails.log.warn("VWHProductCacheService destroy_after from ProductService!");
+    sails.log.debug("VWHProductCacheService destroy_after from ProductService!");
   });
   VWHProductCacheService.eventEmitter.on('create_before', function (error, product) {
-    sails.log.warn("VWHProductCacheService destroy_after from ProductService!");
+    sails.log.debug("VWHProductCacheService create_before from ProductService!");
   });
   VWHProductCacheService.eventEmitter.on('create_after', function (error, product) {
-    sails.log.warn("VWHProductCacheService destroy_after from ProductService!");
+    sails.log.debug("VWHProductCacheService create_after from ProductService!");
+    onVWHProductCacheUpdate(error, product);
   });
   callback(null, true);
 };
@@ -212,45 +189,65 @@ var exportOneToCacheByID = function (id, final_callback) {
   sails.log.debug("exportOneToCacheByID id: "+id);
   async.waterfall([
     function findProduct (callback) {
-      Product.findOne({id:id}, function findProductDone (err, product_info) {
+      Product.findOne({id:id}, function findProductDone (error, product_info) {
         sails.log.debug("findProductDone");
-        callback (err, product_info);
+        if(error) {
+          sails.log.error("ProductService.exportOneToCacheByID.findProduct:");
+          sails.log.error(error);
+          callback (error, null);
+        } else {
+          product_info = product_info.toObject();
+          if(!product_info.id)
+            product_info.id = parseInt(id);
+          sails.log.debug(product_info);
+          callback (error, product_info);
+        }
       });
     }
     , function updateOrCreateProduct (product_info, callback){
       // sails.log.info(product_info);
       sails.log.info("product getted");
-      ProductCacheService.updateOrCreate(product_info.id, product_info, function updateOrCreateProductDone (err, updated) {
+      ProductCacheService.updateOrCreate(product_info.id, product_info, function updateOrCreateProductDone (error, updated) {
         sails.log.debug("updateOrCreateProductDone");
-        callback (err, updated);
+        if(error) {
+          sails.log.error("ProductService.exportOneToCacheByID.updateOrCreateProduct:");
+          sails.log.error(error);
+          callback (error, null);
+        } else {
+          callback (error, updated);
+        }
       });
     }
-  ], function exportOneToCacheByIDDone (err, result) {
+  ], function exportOneToCacheByIDDone (error, result) {
     sails.log.debug("exportOneToCacheByIDDone");
-    final_callback (err, result);
+    final_callback (error, result);
   });
 };
 
+/**
+ * If they are invalid products in Magento, you can't export this even if you do not repair it
+ */
 var repairOneByID = function (id, final_callback) {
   async.waterfall([
     function findProduct (callback) {
-      Product.findOne({id:id}, function findProductDone (err, product_info) {
-        callback (err, product_info);
+      Product.findOne({id:id}, function findProductDone (error, product_info) {
+        if(error) { sails.log.error(error); callback (error); }
+        else { product_info = product_info.toObject(); callback (error, product_info); }
       });
     }
     , function repairProduct (product_info, callback) {
-      ProductAttributeService.makeProductValid(product_info, function repairProductDone (err, repairedProduct) {
-        callback (err, repairedProduct);
+      ProductAttributeService.makeProductValid(product_info, function repairProductDone (error, repairedProduct) {
+        callback (error, repairedProduct);
       });
     }
     , function updateProduct (repairedProduct, callback){
-      update(id, repairedProduct, null, function updateProductDone (err, updated) {
-        callback (err, updated);
+      Ṕroduct.update({id:id}, repairedProduct, function updateProductDone (error, updated) {
+        callback (error, updated);
       });
     }
-  ], function repairOneByIDDone (err, result) {
+  ], function repairOneByIDDone (error, result) {
     sails.log.debug("repairOneByIDDone");
-    final_callback (err, result);
+    final_callback (error, result);
   });
 };
 
@@ -291,10 +288,10 @@ var repairEachByProductList = function (product_list, final_callback) {
 }
 
 var getProductList = function (callback) {
-  Product.find().where().done(function getProductListDone (err, product_list) {
+  Product.find().where().done(function getProductListDone (error, product_list) {
     sails.log.debug ("product_list.length");
     sails.log.debug (product_list.length);
-    callback (err, product_list);
+    callback (error, product_list);
   });
 }
 
@@ -306,8 +303,8 @@ var exportToCache = function (callback) {
     // get product list with less informations, just with with id, sku, name, ..
     getProductList
     , exportEachByProductList
-  ], function exportToCacheDone (err, result) {
-    callback (err, result);
+  ], function exportToCacheDone (error, result) {
+    callback (error, result);
   });
 };
 
@@ -320,10 +317,10 @@ var repair = function (callback) {
     // get product list with less informations, just with with id, sku, name, ..
     getProductList
     , repairEachByProductList
-  ], function repairDone (err, result) {
+  ], function repairDone (error, result) {
     if(err)
-      sails.log.error(err);
-    callback (err, result);
+      sails.log.error(error);
+    callback (error, result);
   });
 };
 
@@ -331,7 +328,7 @@ var repair = function (callback) {
  * Generate Sails.js compatible Attributes for the Product Model.   
  */ 
 var generateAttributes = function (callback) {
-  ProductModelAttributesGeneratorService.generator.product(function (err, attributes) {
+  ProductModelAttributesGeneratorService.generator.product(function (error, attributes) {
     fs.writeFile("./api/models/ProductAttributes.json", JSON.stringify(attributes, null, 4), function generateAttributesDone (error) {
       callback (error, attributes);
     }); 
@@ -339,11 +336,13 @@ var generateAttributes = function (callback) {
 };
 
 module.exports = {
-  updateOnChanges : updateOnChanges
-  , updateOrCreate : updateOrCreate
-  , listenExternChanges : listenExternChanges
-  , exportOneToCacheByID : exportOneToCacheByID
-  , exportToCache : exportToCache
-  , generateAttributes : generateAttributes
-  , repair : repair
+  updateOnChanges             : updateOnChanges
+  , updateOrCreate            : updateOrCreate
+  , listenExternChanges       : listenExternChanges
+  , exportOneToCacheByID      : exportOneToCacheByID
+  , exportToCache             : exportToCache
+  , generateAttributes        : generateAttributes
+  , repair                    : repair
+  , updateNeedOldStock        : updateNeedOldStock
+  , getOldStock               : getOldStock
 }

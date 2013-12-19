@@ -8,8 +8,27 @@ var generate = function (callback) {
     var result = {};
     var attributeCodes = Object.keys(magentoProductAttibutes['0']);
     for (var i = 0; i < attributeCodes.length; i++) {
-      result[attributeCodes[i]] = {
-        type       : magentoProductAttibutes['0'][attributeCodes[i]]['type']
+      result[attributeCodes[i]] = {};
+      switch (magentoProductAttibutes['0'][attributeCodes[i]]['type']) {
+        case 'array of integer':
+        case 'array of float':
+        case 'array of string':
+          result[attributeCodes[i]].type = 'array';
+        break;
+        case 'select':
+          result[attributeCodes[i]].type = 'integer';
+        break;
+        case 'tier_price':
+        case 'stock_data':
+          result[attributeCodes[i]].type = 'json';
+        break;
+        case 'price':
+        case 'weight':
+          result[attributeCodes[i]].type = 'float';
+        break;
+        default:
+          result[attributeCodes[i]].type = magentoProductAttibutes['0'][attributeCodes[i]]['type'];
+        break;
       }
       if ( magentoProductAttibutes['0'][attributeCodes[i]]['unique'])
         result[attributeCodes[i]].unique = true;
@@ -46,15 +65,15 @@ var getAttributeOptions = function (attributeCode) {
   return attributes[attributeCode];
 }
 
-// Set all attributes they are required and currently not set
+// Set all attributes they are required and currently not set or null
 var setRequiredAttributes = function (productAttribute, options) {
-  if ( productAttribute === 'undefined' && options.required) {
+  if ( (productAttribute === 'undefined' || productAttribute === null) && options.required) {
     sails.log.info("repair Attribute");
     sails.log.info(productAttribute);
-    switch (options.required) {
+    switch (options.type) {
       case "string":
       case "text":
-        productAttribute = "";
+        productAttribute = "placeholder";
       break;
       case "weight":
         productAttribute = 0;
@@ -68,17 +87,33 @@ var setRequiredAttributes = function (productAttribute, options) {
 }
 
 // TODO default value from attributeset
-var makeProductValid = function (product, callback) {
+var makeProductCreateValid = function (product, callback) {
   var attributeCodes = Object.keys(product);
   for (var i = 0; i < attributeCodes.length; i++) {
     var options = getAttributeOptions(attributeCodes[i]);
-    product[attributeCodes[i]] = setRequiredAttributes (product[attributeCodes[i]], options);
+    // remove attributes they are null if it is not required
+    if ( product[attributeCodes[i]] === null || product[attributeCodes[i]] === 'undefined' ) {
+      if (!options.required) {
+        sails.log.debug("delete attributeCode: "+attributeCodes[i]+" with value: "+product[attributeCodes[i]]);
+        delete product[attributeCodes[i]];
+      } else {
+        // Set all attributes they are required and currently not set
+        product[attributeCodes[i]] = setRequiredAttributes (product[attributeCodes[i]], options);
+      }
+    }
+  };
+  callback (null, product);
+}
+
+var makeProductUpdateValid = function (product, callback) {
+  var attributeCodes = Object.keys(product);
+  for (var i = 0; i < attributeCodes.length; i++) {
+    var options = getAttributeOptions(attributeCodes[i]);
     // remove attributes they are null
     if ( product[attributeCodes[i]] === null) {
       delete product[attributeCodes[i]];
     }
   };
-  
   callback (null, product);
 }
 
@@ -87,5 +122,6 @@ module.exports = {
   , saveToFile            : saveToFile
   , generateAndSaveToFile : generateAndSaveToFile
   , attributes            : attributes // WORKAROUND
-  , makeProductValid      : makeProductValid
+  , makeProductUpdateValid      : makeProductUpdateValid
+  , makeProductCreateValid      : makeProductCreateValid
 }

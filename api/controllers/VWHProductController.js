@@ -20,23 +20,23 @@ module.exports = {
 
   unusedCache: function (req, res, next) {
     VWHProductService.getUnusedProducts(function(error, result) {
-      if(error) { next(error); }
+      if(error) { sails.log.error(error); next(error); }
       else { res.json(result); }
     });
   },
 
   destroyUnusedCache: function (req, res, next) {
     VWHProductService.destroyUnusedProducts(function (error, result) {
-      sails.log.info("VWHProduct.removeOld done!");
-      if(error) { next(error); }
+      sails.log.info("VWHProductService.destroyUnusedCache done!");
+      if(error) { sails.log.error(error); next(error); }
       else { res.json(result); }
     });
   },
     
   exportToCache: function (req, res, next) {
     VWHProductService.exportToCache (function (error, result) {
-      sails.log.info("VWHProduct.exportToCache done!");
-      if(error) { next(error); }
+      sails.log.info("VWHProductService.exportToCache done!");
+      if(error) { sails.log.error(error); next(error); }
       else { res.json(result); }
     });
   },
@@ -46,7 +46,8 @@ module.exports = {
    */
   infos: function (req, res, next) {
     VWHProduct.infos(function (error, result) {
-      if(error) next(error);
+      sails.log.info("VWHProduct.infos done!");
+      if(error) { sails.log.error(error); next(error); }
       else res.json(result);
     });
   },

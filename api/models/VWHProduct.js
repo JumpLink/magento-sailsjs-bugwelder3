@@ -8,14 +8,13 @@
 
 module.exports = {
 
-  adapter: 'vwheritage',
+  adapter: 'vwheritage'
 
-  attributes: {
+  , attributes: {
   	
   	/* e.g.
   	nickname: 'string'
   	*/
     
   }
-
 };

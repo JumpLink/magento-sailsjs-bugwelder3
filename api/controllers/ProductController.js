@@ -20,11 +20,12 @@ var fs = require('fs');
 module.exports = {
 
   exportOneToCache : function (req, res, next) {
-    ProductService.exportOneToCache(req.params.id, function exportOneToCacheDone (error, result) {
+    ProductService.exportOneToCacheByID(req.params.id, function exportOneToCacheDone (error, result) {
       if (error) {
-        next(error);
+        sails.log.error(error);
+        return next(error);
       } else {
-        res.json(result);
+        return res.json(result);
       }
     });
   },
@@ -32,38 +33,45 @@ module.exports = {
   exportToCache: function (req, res, next) {
     ProductService.exportToCache(function (error, result) {
       if (error) {
-        //next(error);
-        res.json(error, 500);
+        sails.log.error(error);
+        return next(error);
+        //return res.json(error, 500);
       } else {
-        res.json(result);
+        return res.json(result);
       }
     });
   },
 
-  generateAttributes: function (req, res) {
+  generateAttributes: function (req, res, next) {
     ProductAttributeService.generate(function (error, result) {
       if(error) {
-        return res.json(error, 500);
+        sails.log.error(error);
+        return next(error);
+        //return res.json(error, 500);
       } else {
         return res.json(result);
       }
     });
   },
 
-  saveAttributes: function (req, res) {
+  saveAttributes: function (req, res, next) {
     ProductAttributeService.generateAndSaveToFile(function (error, result) {
       if(error) {
-        return res.json(error, 500);
+        sails.log.error(error);
+        return next(error);
+        //return res.json(error, 500);
       } else {
         return res.json(result);
       }
     });
   },
 
-  repair: function (req, res) {
+  repair: function (req, res, next) {
     ProductService.repair(function (error, result) {
       if(error) {
-        return res.json(error, 500);
+        sails.log.error(error);
+        return next(error);
+        //return res.json(error, 500);
       } else {
         return res.json(result);
       }

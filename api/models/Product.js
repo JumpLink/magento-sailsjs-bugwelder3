@@ -19,31 +19,47 @@ if(attributes === null)
 
 module.exports = {
   adapter: 'magento-dnode'
-  , types: {
-      weight: function(n){
-      return true; // TODO is float?
-    }
-    , price: function(n){
-      return true; // TODO is float?
-    }
-    , tier_price: function(n){
-      return true; // TODO
-    }
-    , stock_data: function(n){
-      return true; // TODO
-    }
-    , select: function(n){
-      return true; // TODO
-    }
-    , "array of integer": function(n){
-      return true; // TODO
-    }
-    , "array of float": function(n){
-      return true; // TODO
-    }
-    , "array of string": function(n){
-      return true; // TODO
+  , attributes: attributes
+  , beforeCreate : function (values, next) {
+    sails.log.debug("Product: beforeCreate");
+    next();
+  }
+  , afterCreate : function (newlyInsertedRecord, next) {
+    Log.create({
+      //error: false,
+      model: 'Product',
+      action: 'create',
+      values: newlyInsertedRecord
+    }, function (error, result) {
+      if(error) { sails.log.error(error); next(error); }
+      else { next(); }
+    });
+  }
+  , beforeUpdate : function (newProduct, next) {
+    sails.log.debug("Product: beforeUpdate");
+    sails.log.debug(newProduct);
+    var id = newProduct.id;
+    if (ProductService.updateNeedOldStock(newProduct)) {
+      var oldProduct = null;
+      ProductService.getOldStock(id, newProduct, oldProduct, function(error, newProductWithStock) {
+        newProduct = newProductWithStock;
+        if(error) { return sails.log.error(error); next (error); }
+        else { next (); }
+      });
+    } else {
+      next ();
     }
   }
-  , attributes: attributes
+  , afterUpdate : function (updatedRecord, next) {
+    // ProductService.eventEmitter.emit('update_after', null, updatedRecord); // Product event is emitted in DNodeService
+    Log.create({
+      //error: false,
+      model: 'Product',
+      action: 'update',
+      values: updatedRecord
+    }, function (error, result) {
+      if(error) { sails.log.error(error); next(error); }
+      else { next(); }
+    });
+  }
 };

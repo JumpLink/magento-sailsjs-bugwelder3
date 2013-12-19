@@ -62,7 +62,7 @@ module.exports.controllers = {
      * `actions` are enabled by default, and are OK for production-- however,
      * you must take great care not to inadvertently expose unsafe controller logic to GET requests.
      */
-    actions: true,
+    actions: true
 
 
     
@@ -82,7 +82,7 @@ module.exports.controllers = {
      *
      * `rest` blueprints are enabled by default, and suitable for a production scenario.
      */
-    rest: true,
+    , rest: true
 
 
     /**
@@ -94,7 +94,7 @@ module.exports.controllers = {
      *
      * `shortcuts` are enabled by default, but SHOULD BE DISABLED IN PRODUCTION!!!!!
      */
-    shortcuts: true,
+    , shortcuts: true
 
 
 
@@ -115,7 +115,7 @@ module.exports.controllers = {
      *
      * By default, no prefix is used.
      */
-    prefix: '',
+    , prefix: ''
 
 
 
@@ -132,9 +132,9 @@ module.exports.controllers = {
      * PUT    /foos/:id?
      * DELETE /foos/:id?
      */
-    pluralize: false
+    , pluralize: false
 
-  },
+  }
 
 
 
@@ -148,7 +148,7 @@ module.exports.controllers = {
    *
    * Defaults to false.
    */
-  jsonp: false,
+  , jsonp: false
 
 
 
@@ -164,6 +164,6 @@ module.exports.controllers = {
    *
    * Defaults to false.
    */
-  expectIntegerId: false
+  , expectIntegerId: true
 
 };

@@ -12,17 +12,40 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
+// var SailsController = {
+//   find      : require(__dirname+'/../../node_modules/sails/lib/hooks/controllers/controller.find.js')(sails)
+//   , create  : require(__dirname+'/../../node_modules/sails/lib/hooks/controllers/controller.create.js')(sails)
+//   , update  : require(__dirname+'/../../node_modules/sails/lib/hooks/controllers/controller.update.js')(sails)
+//   , destroy : require(__dirname+'/../../node_modules/sails/lib/hooks/controllers/controller.destroy.js')(sails)
+// };
+
 module.exports = {
+
     
-  import: function (req, res, next) {
+  find: function (req, res, next) {
+    if (req.params['id'])
+      req.params['id'] = parseInt(req.params['id']);
+    if(req.query.id)
+      req.params.id = parseInt(req.params.id);
+    SailsService.Controller.find(sails)(req, res, next);
+  }
+
+  , import: function (req, res, next) {
     sails.controllers.product.exportToCache(req, res, next);
-  },
+  }
+
+  , test: function (req, res, next) {
+    ProductCache.findOne({id:5}, function (error, result) {
+      sails.log.warn(result.toObject);
+      res.json(result);
+    });
+  }
 
   /**
    * Overrides for the settings in `config/controllers.js`
    * (specific to ProductCacheController)
    */
-  _config: {}
+  , _config: {}
 
   
 };

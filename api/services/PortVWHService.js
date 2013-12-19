@@ -107,7 +107,7 @@ var portGrouPrice = function () {
 var portToMagentoProductEnglish = function (product) {
   var result = {};
   if (typeof(product.id) !== 'undefined') {
-
+    product.id = paseInt(product.id);
   }
   if (typeof(product.sku) !== 'undefined') {
 
@@ -164,7 +164,7 @@ var portToMagentoProductDefaults = function (product, include_groupprice) {
   var result = {};
 
   if (typeof(product.id) !== 'undefined') {
-    result.vwh_id = product.id;
+    result.vwh_id = parseInt(product.id);
   }
   if (typeof(product.sku) !== 'undefined') {
     result.sku = product.sku;

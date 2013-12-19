@@ -2,18 +2,34 @@ var _ = require('underscore');
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
 
+var isEqual = function (a, b) {
+  if(typeof(a) !== typeof(b))
+    return false;
+  switch (typeof(a)) {
+    case 'string':
+      if(a == b) return true;
+      else return false;
+    break;
+    case 'number':
+      if(a == b) return true;
+      else return false;
+    break;
+    default:
+      return _.isEqual(a, b);
+    break;
+  }
+}
+
 /**
  * Get changes of new product by old product 
  */
 var getChanges = function (new_product, old_product) {
   var result = {
-    id: old_product.id
-    , sku: old_product.sku
-    , has_changes : false
+    has_changes : false
     , changes : {}
   };
   for (var attribute in new_product) {
-    if(attribute != 'id' && !_.isEqual(new_product[attribute], old_product[attribute]) ) {
+    if( !isEqual(new_product[attribute], old_product[attribute]) ) {
       result.changes[attribute] = new_product[attribute];
       result.has_changes = true;
     }
@@ -26,10 +42,8 @@ var getChanges = function (new_product, old_product) {
  */
 var update = function (id, product, callback) {
   sails.log.debug("VWHProductCacheService: update product with id: "+id);
-  eventEmitter.emit('update_before', null, product);
-  VWHProductCache.update({id:id}, product, function (error, result) {
-    eventEmitter.emit('update_after', error, product);
-    callback (error, product);
+  VWHProductCache.update({id:id}, product, function(error, result) {
+    callback (error, result);
   });
 }
 
@@ -37,7 +51,7 @@ var update = function (id, product, callback) {
  * Just remove products and emit event.
  */
 var destroy = function (products, callback) {
-  eventEmitter.emit('destroy_before', null, products);
+  //eventEmitter.emit('destroy_before', null, products);
   VWHProductCache.destroy(products, function (error, result) {
     eventEmitter.emit('destroy_after', error, products);
     callback (error, result);
@@ -48,11 +62,7 @@ var destroy = function (products, callback) {
  * Just remove products and emit event.
  */
 var create = function (product, callback) {
-  eventEmitter.emit('create_before', null, product);
-  VWHProductCache.create(product, function (error, result) {
-    eventEmitter.emit('create_after', error, product);
-    callback (error, result);
-  });
+  VWHProductCache.create(product, callback);
 }
 
 /**
@@ -63,10 +73,10 @@ var updateOnChanges = function (new_product, old_product, callback) {
   // sails.log.debug("check update");
   if(changes.has_changes) {
     var updates = changes.changes;
-    updates.id = changes.id;
-    updates.sku = changes.sku;
+    updates.id = new_product.id ? new_product.id : old_product.id;
+    updates.sku = new_product.sku ? new_product.sku : old_product.sku;
 
-    update (changes.id, updates, callback);
+    update (updates.id, updates, callback);
   } else {
     callback (null, null);
   }
@@ -84,6 +94,7 @@ var updateOrCreate = function (new_product, callback) {
         callback (error, {created:result});
       });
     } else {
+      old_product = old_product.toObject();
       updateOnChanges(new_product, old_product, function (error, result) {
         callback (error, {updated:result});
       });
@@ -95,8 +106,8 @@ var updateOrCreate = function (new_product, callback) {
  * Use updateOrCreate function for each product.
  */
 var updateOrCreateEach = function (newProducts, callback) {
-  // sails.log.debug("updateOrCreateEach");
-  // sails.log.debug("newProducts.length "+newProducts.length);
+  sails.log.debug("VWHProductCacheService: updateOrCreateEach");
+  sails.log.debug("VWHProductCacheService: newProducts.length "+newProducts.length);
   async.map(
     newProducts
     , updateOrCreate

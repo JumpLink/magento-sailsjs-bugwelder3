@@ -24,21 +24,21 @@ module.exports.policies = {
   },
 
   SessionController: {
-    '*': "isAuthenticated",
+    //'*': "isAuthenticated",
     'create': true // signin is allowed for all
   },
 
   ProductCache: {
-    '*': "isAuthenticated"
+    //'*': "isAuthenticated"
   },
 
   VWHeritageProduct: {
     //'*': "isAuthenticated"
-    '*': true // DEBUG
+    //'*': true // DEBUG
   },
 
   VWHeritageImage: {
-    '*': "isAuthenticated"
+    //'*': "isAuthenticated"
   }
 
   /*
