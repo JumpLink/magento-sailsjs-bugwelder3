@@ -10,26 +10,34 @@ module.exports = {
 
   attributes: {
   	adapter: 'mongo'
-  	/* e.g.
-  	nickname: 'string'
-  	*/
     , attributes: {
+      /* on error true */
       error: {
         type: "boolean"
       }
       , model: {
         type: "string"
       }
+      , service: {
+        type: "string"
+      }
       , action: {
         type: "string"
       }
+      /* result of action */
       , value: {
         type: 'json'
       }
-      , value: {
+      /* results of action */
+      , values: {
         type: 'array'
       }
+      /* message e.g. on error */
       , message: {
+        type: "string"
+      }
+      /* start, done */
+      , status : {
         type: "string"
       }
     }

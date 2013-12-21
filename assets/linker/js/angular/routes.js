@@ -73,6 +73,10 @@ jumplink.magentoweb.config(['$routeProvider',
         templateUrl: 'content/admin/cache.jade',
         controller: 'CacheController'
       }).
+      when('/admin/log', {
+        templateUrl: 'content/admin/log.jade',
+        controller: 'LogController'
+      }).
       when('/products', {
         templateUrl: 'content/products.jade',
         controller: 'ProductController'

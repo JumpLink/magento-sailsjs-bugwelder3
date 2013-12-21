@@ -12,13 +12,6 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
-// var SailsController = {
-//   find      : require(__dirname+'/../../node_modules/sails/lib/hooks/controllers/controller.find.js')(sails)
-//   , create  : require(__dirname+'/../../node_modules/sails/lib/hooks/controllers/controller.create.js')(sails)
-//   , update  : require(__dirname+'/../../node_modules/sails/lib/hooks/controllers/controller.update.js')(sails)
-//   , destroy : require(__dirname+'/../../node_modules/sails/lib/hooks/controllers/controller.destroy.js')(sails)
-// };
-
 module.exports = {
 
     

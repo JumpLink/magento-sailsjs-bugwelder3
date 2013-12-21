@@ -14,7 +14,9 @@
     "bcrypt": "~0.7.7",
     "sails-magento": "git://github.com/JumpLink/sails-magento",
     "sails-vwheritage": "git://github.com/JumpLink/sails-vwheritage",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "cron": "~1.0.1",
+    "time": "~0.10.0"
   },
   "scripts": {
     "start": "node app.js",

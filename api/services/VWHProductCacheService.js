@@ -143,6 +143,34 @@ var importFromSource = function (callback) {
   ], callback);
 }
 
+var importFromSourceWithLog = function (callback) {
+  async.series([
+    async.apply(Log.create, { 
+      error: false
+      , model: 'VWHProductCache'
+      , action: 'import'
+      , status: 'start'
+    })
+    , importFromSource
+    , async.apply(Log.create, { 
+      error: false
+      , model: 'VWHProductCache'
+      , action: 'import'
+      , status: 'done'
+    })
+  ], function importFromSourceWithLogDone (error, results){
+    Log.create({ 
+      error: typeof(error) === 'undefined' ? false : true
+      , model: 'VWHProductCache'
+      , action: 'import'
+      , status: 'done'
+      , value: typeof(error) === 'undefined' ? results[1] : error
+      , message: typeof(error) === 'undefined' ? results[1].length + "succesfull imported" : "Can't import Products"
+    }, callback);
+    callback(error, results); // Do not wait for Log with Callbacks
+  });
+}
+
 module.exports = {
   updateOnChanges : updateOnChanges
   , updateOrCreateEach : updateOrCreateEach
@@ -151,5 +179,6 @@ module.exports = {
   , update : update
   , create : create
   , import : importFromSource
+  , importWithLog : importFromSourceWithLog
   , eventEmitter : eventEmitter
 }

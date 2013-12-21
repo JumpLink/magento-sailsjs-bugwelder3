@@ -337,3 +337,77 @@ jumplink.magentoweb.controller('ProductCompareInfoController', function($scope, 
 jumplink.magentoweb.controller('CacheController', function($scope, NotifyService) {
 
 });
+
+jumplink.magentoweb.controller('LogController', function($scope, $sails, $http, NotifyService) {
+
+  $scope.filter.error = 'any';
+  $scope.filter.model = 'any';
+  $scope.filter.service = 'any';
+  $scope.filter.action = 'any';
+  $scope.filter.status = 'any';
+  $scope.filter.limit = 100;
+  $scope.search = '';
+
+
+  /**
+   * Converts an object into a key/value par with an optional prefix.
+   * Used for converting objects to a query string.
+   * Irgnore empty strings and 'any'
+   * Source: https://gist.github.com/jonmaim/4239779
+   */
+  var qs = function(obj, prefix){
+    var str = [];
+    for (var p in obj) {
+      var k = prefix ? prefix + "[" + p + "]" : p;
+          v = obj[k];
+      if(obj[k] != 'any' && obj[k] != '') {
+        str.push(angular.isObject(v) ? qs(v, k) : (k) + "=" + encodeURIComponent(v));
+      }
+    }
+    return str.join("&");
+  }
+
+  $scope.getLogs = function () {
+
+    var querystring = qs($scope.filter, null);
+
+    $sails.get("/log?"+querystring, function (response) {
+      $scope.logs = response;
+    });
+  }
+
+  $scope.destroyAll = function () {
+    $sails.get("/log", function (response) {
+      delete $scope.logs;
+    });
+  }
+
+  $scope.logFilter = function(log) {
+    var is_equals = true;
+
+    if(typeof($scope.filter.error) !== 'undefined' && $scope.filter.error !== '' && $scope.filter.error !== 'any')
+      if(typeof(log.error) === 'undefined' || $scope.filter.error !== log.error.toString())
+        is_equals = false;
+
+    if(typeof($scope.filter.model) !== 'undefined' && $scope.filter.model !== '' && $scope.filter.model !== 'any')
+      if(typeof(log.model) === 'undefined' || $scope.filter.model !== log.model)
+        is_equals = false;
+
+    if(typeof($scope.filter.service) !== 'undefined' && $scope.filter.service !== '' && $scope.filter.service !== 'any')
+      if(typeof(log.service) === 'undefined' || $scope.filter.service !== log.service)
+        is_equals = false;
+
+    if(typeof($scope.filter.action) !== 'undefined' && $scope.filter.action !== '' && $scope.filter.action !== 'any')
+      if(typeof(log.action) === 'undefined' || $scope.filter.action !== log.action)
+        is_equals = false;
+
+    if(typeof($scope.filter.status) !== 'undefined' && $scope.filter.status !== '' && $scope.filter.status !== 'any')
+      if(typeof(log.status) === 'undefined' || $scope.filter.status !== log.status)
+        is_equals = false;
+
+    return is_equals;
+  };
+
+  $scope.getLogs();
+  
+});

@@ -12,165 +12,12 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .tmp/public/views/templates/content/admin/cache.html
-msgid "Cache Configuration"
-msgstr "Cache Einstellungen"
-
-#: .tmp/public/views/templates/content/admin/cache.html
-msgid "Product cache"
-msgstr "Produkt Cache"
-
-#: .tmp/public/views/templates/content/admin/cache.html
-msgid "enabled"
-msgstr "aktiviert"
-
-#: .tmp/public/views/templates/content/admin/cache.html
-msgid "On"
-msgstr "An"
-
-#: .tmp/public/views/templates/content/admin/cache.html
-msgid "Off"
-msgstr "Aus"
-
-#: .tmp/public/views/templates/content/admin/product/compare-list.html
-msgid "Clean"
-msgstr "Säubern"
-
-#: .tmp/public/views/templates/content/admin/product/compare-list.html
-#: .tmp/public/views/templates/content/admin/product/list.html
-#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
-#: .tmp/public/views/templates/content/admin/user/index.html
-msgid "action"
-msgstr "Aktion"
-
-#: .tmp/public/views/templates/content/admin/product/compare-list.html
-#: .tmp/public/views/templates/content/admin/product/list.html
-#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
-#: .tmp/public/views/templates/content/admin/user/index.html
-msgid "show"
-msgstr "anzeigen"
-
-#: .tmp/public/views/templates/content/admin/product/config.html
-msgid "Product Configuration"
-msgstr "Produkt Einstellungen"
-
-#: .tmp/public/views/templates/content/admin/product/config.html
-msgid "Model Attributes"
-msgstr "Modell Attribute"
-
-#: .tmp/public/views/templates/content/admin/product/config.html
-msgid "Generate now"
-msgstr "Jetzt erzeugen"
-
-#: .tmp/public/views/templates/content/admin/user/create.html
-msgid "create new user"
-msgstr "Erstelle neuen Benutzer"
-
-#: .tmp/public/views/templates/content/admin/user/create.html
-msgid "creates new user"
-msgstr "erstellt neuen Benutzer"
-
-#: .tmp/public/views/templates/content/admin/user/create.html
-#: .tmp/public/views/templates/content/admin/user/edit.html
-msgid "E-Mail address"
-msgstr "E-Mail addresse"
-
-#: .tmp/public/views/templates/content/admin/user/create.html
-#: .tmp/public/views/templates/content/admin/user/edit.html
-#: .tmp/public/views/templates/content/admin/user/signin.html
-msgid "Enter E-Mail"
-msgstr "E-Mail angeben"
-
-#: .tmp/public/views/templates/content/admin/user/create.html
-#: .tmp/public/views/templates/content/admin/user/edit.html
-msgid "Name"
-msgstr "Name"
-
-#: .tmp/public/views/templates/content/admin/user/create.html
-#: .tmp/public/views/templates/content/admin/user/edit.html
-msgid "Enter Name"
-msgstr "Name angeben"
-
-#: .tmp/public/views/templates/content/admin/user/create.html
-#: .tmp/public/views/templates/content/admin/user/edit.html
-msgid "Color"
-msgstr "Farbe"
-
-#: .tmp/public/views/templates/content/admin/user/create.html
-#: .tmp/public/views/templates/content/admin/user/edit.html
-msgid "Password"
-msgstr "Passwort"
-
-#: .tmp/public/views/templates/content/admin/user/create.html
-#: .tmp/public/views/templates/content/admin/user/edit.html
-#: .tmp/public/views/templates/content/admin/user/signin.html
-msgid "Enter Password"
-msgstr "Passwort angeben"
-
-#: .tmp/public/views/templates/content/admin/user/create.html
-#: .tmp/public/views/templates/content/admin/user/edit.html
-msgid "Password confirmation"
-msgstr "Passwort Bestätigung"
-
-#: .tmp/public/views/templates/content/admin/user/create.html
-#: .tmp/public/views/templates/content/admin/user/edit.html
-msgid "Enter Password again"
-msgstr "Passwort erneut eingeben"
-
-#: .tmp/public/views/templates/content/admin/user/create.html
-#: .tmp/public/views/templates/partials/navbar.html
-msgid "Create"
-msgstr "Erstellen"
-
-#: .tmp/public/views/templates/content/admin/user/edit.html
-msgid "Edit user"
-msgstr "Benutzer bearbeiten"
-
-#: .tmp/public/views/templates/content/admin/user/edit.html
-msgid "edit user"
-msgstr "Benutzer bearbeiten"
-
-#: .tmp/public/views/templates/content/admin/user/edit.html
-msgid "Process"
-msgstr "Ausführen"
-
-#: .tmp/public/views/templates/content/admin/user/index.html
-msgid "Users"
-msgstr "Benutzer"
-
-#: .tmp/public/views/templates/content/admin/user/index.html
-#, fuzzy
-msgid "color"
-msgstr "Farbe"
-
-#: .tmp/public/views/templates/content/admin/user/index.html
-msgid "email"
-msgstr "E-Mail"
-
-#: .tmp/public/views/templates/content/admin/user/index.html
-msgid "name"
-msgstr "Name"
-
-#: .tmp/public/views/templates/content/admin/user/index.html
-msgid "edit"
-msgstr "bearbeiten"
-
-#: .tmp/public/views/templates/content/admin/user/index.html
-msgid "delete"
-msgstr "löschen"
-
-#: .tmp/public/views/templates/content/admin/user/signin.html
-msgid "Please sign in"
-msgstr "Bitte melden Sie sich an"
-
-#: .tmp/public/views/templates/content/admin/user/signin.html
-msgid "Sign in"
-msgstr "Anmelden"
-
+#: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/site_notice.html
 msgid "site notice"
 msgstr "Impressum"
 
+#: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/site_notice.html
 msgid ""
 "Bugwelder uses a number of amazing open source libraries, distributed under "
@@ -179,35 +26,283 @@ msgstr ""
 "Bugwelder verwendet eine ganze Reihe an wunderbaren Open Source Libraries, "
 "diese stehen unter den folgenden Lizenzen:"
 
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/create.html
+#: .tmp/public/views/templates/content/admin/user/edit.html
+#: .tmp/public/views/templates/content/admin/user/signin.html
+msgid "Enter E-Mail"
+msgstr "E-Mail angeben"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/create.html
+#: .tmp/public/views/templates/content/admin/user/edit.html
+#: .tmp/public/views/templates/content/admin/user/signin.html
+msgid "Enter Password"
+msgstr "Passwort angeben"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/create.html
+msgid "create new user"
+msgstr "Erstelle neuen Benutzer"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/create.html
+msgid "creates new user"
+msgstr "erstellt neuen Benutzer"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/create.html
+#: .tmp/public/views/templates/content/admin/user/edit.html
+msgid "E-Mail address"
+msgstr "E-Mail addresse"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/create.html
+#: .tmp/public/views/templates/content/admin/user/edit.html
+msgid "Name"
+msgstr "Name"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/create.html
+#: .tmp/public/views/templates/content/admin/user/edit.html
+msgid "Enter Name"
+msgstr "Name angeben"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/create.html
+#: .tmp/public/views/templates/content/admin/user/edit.html
+msgid "Color"
+msgstr "Farbe"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/create.html
+#: .tmp/public/views/templates/content/admin/user/edit.html
+msgid "Password"
+msgstr "Passwort"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/create.html
+#: .tmp/public/views/templates/content/admin/user/edit.html
+msgid "Password confirmation"
+msgstr "Passwort Bestätigung"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/create.html
+#: .tmp/public/views/templates/content/admin/user/edit.html
+msgid "Enter Password again"
+msgstr "Passwort erneut eingeben"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/create.html
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Create"
+msgstr "Erstellen"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/edit.html
+msgid "Edit user"
+msgstr "Benutzer bearbeiten"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/edit.html
+msgid "edit user"
+msgstr "Benutzer bearbeiten"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/edit.html
+msgid "Process"
+msgstr "Ausführen"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/index.html
+msgid "Users"
+msgstr "Benutzer"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/index.html
+#, fuzzy
+msgid "color"
+msgstr "Farbe"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/index.html
+msgid "email"
+msgstr "E-Mail"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/index.html
+msgid "name"
+msgstr "Name"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/product/compare-list.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
+#: .tmp/public/views/templates/content/admin/user/index.html
+msgid "action"
+msgstr "Aktion"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/product/compare-list.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
+#: .tmp/public/views/templates/content/admin/user/index.html
+msgid "show"
+msgstr "anzeigen"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/user/index.html
+msgid "edit"
+msgstr "bearbeiten"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/user/index.html
+msgid "delete"
+msgstr "löschen"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/compare-list.html
+msgid "Clean"
+msgstr "Säubern"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "Product Configuration"
+msgstr "Produkt Einstellungen"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "Model Attributes"
+msgstr "Modell Attribute"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "Generate now"
+msgstr "Jetzt erzeugen"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/cache.html
+msgid "Cache Configuration"
+msgstr "Cache Einstellungen"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/cache.html
+msgid "Product cache"
+msgstr "Produkt Cache"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/cache.html
+msgid "enabled"
+msgstr "aktiviert"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/cache.html
+msgid "On"
+msgstr "An"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/cache.html
+msgid "Off"
+msgstr "Aus"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+msgid "Logs"
+msgstr "Protokolle"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+msgid "resfresh"
+msgstr "aktualisieren"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+msgid "remove all"
+msgstr "lösche alles"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+msgid "any"
+msgstr "beliebig"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+msgid "updated"
+msgstr "aktualisiert"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+msgid "error"
+msgstr "Fehler"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+msgid "model"
+msgstr "Modell"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+msgid "service"
+msgstr "Dienst"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+msgid "status"
+msgstr "Status"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+#, fuzzy
+msgid "actions"
+msgstr "Aktion"
+
+#: .tmp/public/views/index.html
 #: .tmp/public/views/templates/partials/navbar.html
 msgid "Products"
 msgstr "Produkte"
 
+#: .tmp/public/views/index.html
 #: .tmp/public/views/templates/partials/navbar.html
 msgid "Search"
 msgstr "Suche"
 
+#: .tmp/public/views/index.html
 #: .tmp/public/views/templates/partials/navbar.html
 msgid "Information"
 msgstr "Information"
 
+#: .tmp/public/views/index.html
 #: .tmp/public/views/templates/partials/navbar.html
 msgid "Compare"
 msgstr "Vergleich"
 
+#: .tmp/public/views/index.html
 #: .tmp/public/views/templates/partials/navbar.html
 #, fuzzy
 msgid "Signin"
 msgstr "Anmelden"
 
+#: .tmp/public/views/index.html
 #: .tmp/public/views/templates/partials/navbar.html
 #, fuzzy
 msgid "Site notice"
 msgstr "Impressum"
 
+#: .tmp/public/views/index.html
 #: .tmp/public/views/templates/partials/navbar.html
 msgid "Signout"
 msgstr "Abmelden"
+
+#: .tmp/public/views/templates/content/admin/user/signin.html
+msgid "Please sign in"
+msgstr "Bitte melden Sie sich an"
+
+#: .tmp/public/views/templates/content/admin/user/signin.html
+msgid "Sign in"
+msgstr "Anmelden"
 
 #~ msgid "Aus"
 #~ msgstr "Aus"

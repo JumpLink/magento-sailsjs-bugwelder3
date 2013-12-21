@@ -42,6 +42,13 @@ var listenExternChangesForProductCacheService = function (callback){
   });
 }
 
+var StartCronJobs = function (callback) {
+  CronJobService.VWHSyncJob.start();
+  sails.log.info("CronJobs started");
+  callback(null, null);
+}
+
+
 module.exports.bootstrap = function (final_callback) {
 
   async.series([
@@ -49,6 +56,7 @@ module.exports.bootstrap = function (final_callback) {
     , createAdminUser
     , listenExternChangesForProductService
     , listenExternChangesForProductCacheService
+    , StartCronJobs
   // It's very important to trigger this callack method when you are finished 
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   ], final_callback);

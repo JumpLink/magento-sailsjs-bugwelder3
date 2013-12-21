@@ -224,9 +224,9 @@ module.exports = function (grunt) {
             debug: true
           }
         },
-        files: grunt.file.expandMapping(['content/**.*jade', 'content/*/**.*jade', 'content/*/*/**.*jade', 'partials/**.*jade'],
-          '.tmp/public/views/templates/', {
-            cwd: 'views/templates',
+        files: grunt.file.expandMapping(['templates/content/**.*jade', 'templates/content/*/**.*jade', 'templates/content/*/*/**.*jade', 'templates/partials/**.*jade', 'index.jade'],
+          '.tmp/public/views/', {
+            cwd: 'views/',
             rename: function(destBase, destPath) {
                 return destBase + destPath.replace(/\.jade$/, '.html');
             }

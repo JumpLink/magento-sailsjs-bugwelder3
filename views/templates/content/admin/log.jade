@@ -1,0 +1,78 @@
+navbar(mode="admin")
+.container
+  h1 {{ 'Logs' | translate }} ({{logs.length}})
+  h2 Filter
+  .form-group
+    label.sr-only(for='') Filter
+    .input-icon-group
+      input.form-control.input-lg(type='text', placeholder='additional filter', ng-model="search")
+      .input-icon-addon
+        i.input-lg.with-action.fa.fa-caret-square-o-left(ng-click=" filter = '' ")
+  .row
+    .col-xs-12
+      .input-group
+        span.input-group-addon(style="min-width:80px") Error
+        select.form-control(ng-model="filter.error")
+          option(value="any") {{'any' | translate }}
+          option(value="true") true
+          option(value="false") false
+    .col-xs-12
+      .input-group
+        span.input-group-addon(style="min-width:80px") Model
+        select.form-control(ng-model="filter.model")
+          option(value="any") {{'any' | translate }}
+          option(value="Product") Product
+          option(value="ProductCache") ProductCache
+          option(value="VWHProduct") VWHProduct
+          option(value="VWHProductCache") VWHProductCache
+    .col-xs-12
+      .input-group
+        span.input-group-addon(style="min-width:80px") Service
+        select.form-control(ng-model="filter.service")
+          option(value="any") {{'any' | translate }}
+          option(value="Product") CronJobService
+    .col-xs-12
+      .input-group
+        span.input-group-addon(style="min-width:80px") Action
+        select.form-control(ng-model="filter.action")
+          option(value="any") {{'any' | translate }}
+          option(value="update") update
+          option(value="create") create
+          option(value="destroy") destroy
+    .col-xs-12
+      .input-group
+        span.input-group-addon(style="min-width:80px") Status
+        select.form-control(ng-model="filter.status")
+          option(value="any") {{'any' | translate }}
+          option(value="update") start
+          option(value="create") done
+    .col-xs-12
+      .input-group
+        span.input-group-addon(style="min-width:80px") Limit
+        input.form-control(type="number", placeholder="Enter limit", ng-model="filter.limit")
+  .center-block
+    .btn-group
+      button(type="button", ng-click="getLogs()").btn.btn-primary {{'resfresh' | translate }}
+      button(type="button").btn.btn-danger {{'delete' | translate }}
+  table.table.table-hover
+    thead
+      tr
+        th {{ 'updated' | translate }}
+        th {{ 'error' | translate }} 
+        th {{ 'model' | translate }}
+        th {{ 'service' | translate }}
+        th {{ 'action' | translate }}
+        th {{ 'status' | translate }}
+        th {{ 'actions' | translate }}
+    tbody(ng-if='logs.length')
+      tr(ng-repeat='log in logs | filter:logFilter | filter:search  | limitTo:filter.limit')
+        td {{log.updatedAt}}
+        td {{log.error}}
+        td {{log.model}}
+        td {{log.service}}
+        td {{log.action}}
+        td {{log.status}}
+        td
+          .btn-group
+            a.btn.btn-info(href="#/admin/log/{{log.id}}") {{ 'show' | translate }}
+            button.btn.btn-danger() {{ 'delete' | translate }}
