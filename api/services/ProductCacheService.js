@@ -31,6 +31,7 @@ var getChanges = function (newProduct, oldProduct) {
   };
   for (var attribute in newProduct) {
     if(typeof(attribute) !== 'function') {
+      // if attribute not equal (ignore id, sku and stores) 
       if( (attribute !== 'id' && attribute !== 'sku' && attribute !== 'stores') && !isEqual(newProduct[attribute], oldProduct[attribute]) ) {
         result.changes[attribute] = newProduct[attribute];
         // sails.log.debug("attribute has changes: "+attribute);
@@ -43,18 +44,25 @@ var getChanges = function (newProduct, oldProduct) {
         result.has_changes = true;
       }
       if(attribute === 'stores') {
-        for (var store in newProduct[attribute]) {
-          if( oldProduct[attribute][store] && !isEqual(newProduct[attribute][store], oldProduct[attribute][store])) {
-            if(typeof(result.changes[attribute]) === 'undefined' )
-              result.changes[attribute] = [];
-            if(typeof(result.changes[attribute][store]) === 'undefined')
-              result.changes[attribute][store] = {};
-            for (var storeAttribute in result.changes[attribute][store]) {
-              if(!isEqual(newProduct[attribute][store][storeAttribute], oldProduct[attribute][store][storeAttribute]) ) {
-                result.changes[attribute][store][storeAttribute] = newProduct[attribute][store][storeAttribute];
+        // iterate stores
+        for (var store in newProduct['stores']) {
+          // if value not exists in old Product or is not equal
+          if( typeof(oldProduct['stores']) === 'undefined' || typeof(oldProduct['stores'][store]) === 'undefined' || !isEqual(newProduct['stores'][store], oldProduct['stores'][store]) ) {
+            if(typeof(result.changes['stores']) === 'undefined' )
+              result.changes['stores'] = [];
+            if(typeof(result.changes['stores'][store]) === 'undefined')
+              result.changes['stores'][store] = {};
+            // iterate store attributes
+            for (var storeAttribute in newProduct['stores'][store]) {
+              // if store attribute not exists in old Product or is not equal
+              if( typeof(oldProduct['stores']) === 'undefined' || typeof(oldProduct['stores'][store]) === 'undefined' || typeof(oldProduct['stores'][store][storeAttribute]) === 'undefined' || !isEqual(newProduct['stores'][store][storeAttribute], oldProduct['stores'][store][storeAttribute]) ) {
+                result.changes['stores'][store][storeAttribute] = newProduct['stores'][store][storeAttribute];
                 result.has_changes = true;
               }
             }
+            // If store is empty, remove!
+            if( _.isEmpty(result.changes['stores'][store]) )
+              delete result.changes['stores'][store];
           }
         }
       }

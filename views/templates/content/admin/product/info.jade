@@ -1,59 +1,61 @@
-navbar(mode="admin")
-notify
-.container
-  div(style="padding: 24px;")
-    form(action='', method='POST', role='form')
-      .form-group
-        label.sr-only(for='') SKU
-        .input-group
-          .input-group-btn
-            button.btn.btn-default.dropdown-toggle.btn-lg(type="button", data-toggle="dropdown") {{search.action}}
-              span.caret
-            ul.dropdown-menu(role="menu")
-              li: a(href="", ng-click="search.action = 'SKU'") SKU
-              li: a(href="", ng-click="search.action = 'ID'") ID
-          input.form-control.input-lg(type='text', name="sku",  placeholder='{{search.action}}', ng-model="search.value")
-          .input-icon-addon
-            i.input-lg.with-action.fa.fa-caret-square-o-left(ng-click="reset()")
-          .input-group-btn
-            button.btn.btn-primary.btn-lg(type='submit', ng-click="get()") Get
-  .panel.panel-default(ng-disabled="!product.id")
-    .panel-heading
-      h3.panel-title
-        | {{product.name}}
-        i.icon-truck
-    .panel-body
-          .form-group
-            legend Strichweg
-            .row
-              .col-lg-4
-                .input-group
-                  span.input-group-addon(ng-disabled="!product.id", title="Strichweg Quantity")
-                    #
-                  input.form-control#stock_strichweg_qty(ng-disabled="!product.id", required, type="number", min="0", ng-model="product.stock_strichweg_qty")
-              .col-lg-4
-                .input-group
-                  span.input-group-addon(ng-disabled="!product.id", title="Strichweg Range")
-                    i.fa.fa-columns
-                  input.form-control#stock_strichweg_range(ng-disabled="!product.id", required, type="text", ng-model="product.stock_strichweg_range")
-              .col-lg-4
-                .input-group
-                  span.input-group-addon(ng-disabled="!product.id", title="Strichweg Row")
-                    i.fa.fa-list
-                  input.form-control#stock_strichweg_row(ng-disabled="!product.id", required, type="text", ng-model="product.stock_strichweg_row")
-            legend Heritage
-            .row
-              .col-lg-4
-                .input-group
-                  span.input-group-addon(ng-disabled="!product.id", title="Heritage Quantity")
-                    #
-                  input.form-control#stock_vwheritage_qty(ng-disabled="!product.id", required, type="number", min="0", ng-model="product.stock_vwheritage_qty")
-            legend Total
-            .row
-              .col-lg-4
-                .input-group
-                  span.input-group-addon(ng-disabled="!product.id", title="Heritage Quantity")
-                    #
-                  .form-control#stock_total(required, type="number", disabled="disabled") {{product.stock_strichweg_qty+product.stock_vwheritage_qty}}
-      .panel-footer
-        button.btn.btn-primary(ng-disabled="!product.id", type='submit', ng-click="save()") Save
+div.snap-drawer(snap-drawer="left")
+div.snap-content(snap-content)
+  navbar(mode="admin")
+  notify
+  .container
+    div(style="padding: 24px;")
+      form(action='', method='POST', role='form')
+        .form-group
+          label.sr-only(for='') SKU
+          .input-group
+            .input-group-btn
+              button.btn.btn-default.dropdown-toggle.btn-lg(type="button", data-toggle="dropdown") {{search.action}}
+                span.caret
+              ul.dropdown-menu(role="menu")
+                li: a(href="", ng-click="search.action = 'SKU'") SKU
+                li: a(href="", ng-click="search.action = 'ID'") ID
+            input.form-control.input-lg(type='text', name="sku",  placeholder='{{search.action}}', ng-model="search.value")
+            .input-icon-addon
+              i.input-lg.with-action.fa.fa-caret-square-o-left(ng-click="reset()")
+            .input-group-btn
+              button.btn.btn-primary.btn-lg(type='submit', ng-click="get()") Get
+    .panel.panel-default(ng-disabled="!product.id")
+      .panel-heading
+        h3.panel-title
+          | {{product.name}}
+          i.icon-truck
+      .panel-body
+            .form-group
+              legend Strichweg
+              .row
+                .col-lg-4
+                  .input-group
+                    span.input-group-addon(ng-disabled="!product.id", title="Strichweg Quantity")
+                      #
+                    input.form-control#stock_strichweg_qty(ng-disabled="!product.id", required, type="number", min="0", ng-model="product.stock_strichweg_qty")
+                .col-lg-4
+                  .input-group
+                    span.input-group-addon(ng-disabled="!product.id", title="Strichweg Range")
+                      i.fa.fa-columns
+                    input.form-control#stock_strichweg_range(ng-disabled="!product.id", required, type="text", ng-model="product.stock_strichweg_range")
+                .col-lg-4
+                  .input-group
+                    span.input-group-addon(ng-disabled="!product.id", title="Strichweg Row")
+                      i.fa.fa-list
+                    input.form-control#stock_strichweg_row(ng-disabled="!product.id", required, type="text", ng-model="product.stock_strichweg_row")
+              legend Heritage
+              .row
+                .col-lg-4
+                  .input-group
+                    span.input-group-addon(ng-disabled="!product.id", title="Heritage Quantity")
+                      #
+                    input.form-control#stock_vwheritage_qty(ng-disabled="!product.id", required, type="number", min="0", ng-model="product.stock_vwheritage_qty")
+              legend Total
+              .row
+                .col-lg-4
+                  .input-group
+                    span.input-group-addon(ng-disabled="!product.id", title="Heritage Quantity")
+                      #
+                    .form-control#stock_total(required, type="number", disabled="disabled") {{product.stock_strichweg_qty+product.stock_vwheritage_qty}}
+        .panel-footer
+          button.btn.btn-primary(ng-disabled="!product.id", type='submit', ng-click="save()") Save

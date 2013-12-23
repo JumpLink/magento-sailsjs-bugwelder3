@@ -1,10 +1,12 @@
-navbar(mode="admin")
-notify
-.container
-  h1 {{ 'Product Configuration' | translate }}
-  h2 {{ 'Model Attributes' | translate  }}
-  button.btn.btn-primary.btn-lg.btn-block(ng-click="generateAttributes()") {{ 'generate and save now' | translate }}
-  h2 {{ 'VWHeritage Product Cache' | translate  }}
-  button.btn.btn-primary.btn-lg.btn-block(ng-click="importVWHProductsToCache()") {{ 'import all products' | translate }}
-  h2 {{ 'Magento Product Cache' | translate  }}
-  button.btn.btn-primary.btn-lg.btn-block(ng-click="importMagentoProductsToCache()") {{ 'import all products' | translate }}
+div.snap-drawer(snap-drawer="left")
+div.snap-content(snap-content)
+  navbar(mode="admin")
+  notify
+  .container
+    h1 {{ 'Product Configuration' | translate }}
+    h2 {{ 'Model Attributes' | translate  }}
+    button.btn.btn-primary.btn-lg.btn-block(ng-click="generateAttributes()") {{ 'generate and save now' | translate }}
+    h2 {{ 'VWHeritage Product Cache' | translate  }}
+    button.btn.btn-primary.btn-lg.btn-block(ng-click="importVWHProductsToCache()") {{ 'import all products' | translate }}
+    h2 {{ 'Magento Product Cache' | translate  }}
+    button.btn.btn-primary.btn-lg.btn-block(ng-click="importMagentoProductsToCache()") {{ 'import all products' | translate }}

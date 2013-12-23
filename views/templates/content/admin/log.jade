@@ -3,14 +3,14 @@ div.snap-drawer(snap-drawer="left")
     .row
       .col-xs-12
         .input-group
-          span.input-group-addon(style="min-width:80px") Error
+          span.input-group-addon(style="min-width:101px") Error
           select.form-control(ng-model="filter.error")
             option(value="any") {{'any' | translate }}
             option(value="true") true
             option(value="false") false
       .col-xs-12
         .input-group
-          span.input-group-addon(style="min-width:80px") Model
+          span.input-group-addon(style="min-width:101px") Model
           select.form-control(ng-model="filter.model")
             option(value="any") {{'any' | translate }}
             option(value="Product") Product
@@ -19,13 +19,13 @@ div.snap-drawer(snap-drawer="left")
             option(value="VWHProductCache") VWHProductCache
       .col-xs-12
         .input-group
-          span.input-group-addon(style="min-width:80px") Service
+          span.input-group-addon(style="min-width:101px") Service
           select.form-control(ng-model="filter.service")
             option(value="any") {{'any' | translate }}
             option(value="CronJobService") CronJobService
       .col-xs-12
         .input-group
-          span.input-group-addon(style="min-width:80px") Action
+          span.input-group-addon(style="min-width:101px") Action
           select.form-control(ng-model="filter.action")
             option(value="any") {{'any' | translate }}
             option(value="update") update
@@ -33,18 +33,18 @@ div.snap-drawer(snap-drawer="left")
             option(value="destroy") destroy
       .col-xs-12
         .input-group
-          span.input-group-addon(style="min-width:80px") Status
+          span.input-group-addon(style="min-width:101px") Status
           select.form-control(ng-model="filter.status")
             option(value="any") {{'any' | translate }}
             option(value="update") start
             option(value="create") done
-    .col-xs-12
-      .input-group
-        span.input-group-addon(style="min-width:80px") Client Limit
-        input.form-control(type="number", placeholder="{{'Enter limit' | translate }}", ng-model="client_limit")
       .col-xs-12
         .input-group
-          span.input-group-addon(style="min-width:80px") Server Limit
+          span.input-group-addon(style="min-width:101px") Client Limit
+          input.form-control(type="number", placeholder="{{'Enter limit' | translate }}", ng-model="client_limit")
+      .col-xs-12
+        .input-group
+          span.input-group-addon(style="min-width:101px") Server Limit
           input.form-control(type="number", placeholder="{{'Enter limit' | translate }}", ng-model="filter.limit")
     .btn-group
       button(type="button", ng-click="getLogs()").btn.btn-primary {{'resfresh' | translate }}
@@ -63,27 +63,27 @@ div.snap-content(snap-content)
       thead
         tr
           th.sortable(ng-click="sort_by('updated')")
-            {{ 'updated' | translate }} 
+             {{ 'updated' | translate }} 
             i.fa.fa-sort
           th.sortable(ng-click="sort_by('error')")
-            {{ 'error' | translate }} 
+            | {{ 'error' | translate }} 
             i.fa.fa-sort
           th.sortable(ng-click="sort_by('model')")
-            {{ 'model' | translate }} 
+            | {{ 'model' | translate }} 
             i.fa.fa-sort
           th.sortable(ng-click="sort_by('service')")
-            {{ 'service' | translate }} 
+            | {{ 'service' | translate }} 
             i.fa.fa-sort
           th.sortable(ng-click="sort_by('action')")
-            {{ 'action' | translate }} 
+            | {{ 'action' | translate }} 
             i.fa.fa-sort
           th.sortable(ng-click="sort_by('status')")
-            {{ 'status' | translate }} 
+            | {{ 'status' | translate }} 
             i.fa.fa-sort
           th
             {{ 'actions' | translate }} 
       tbody(ng-if='logs.length')
-        tr(ng-repeat='log in logs | filter:logFilter | filter:search | limitTo:client_limit | orderBy:sortingOrder:sortReverse')
+        tr(ng-repeat='log in logs | filter:logFilter | filter:search | orderBy:sortingOrder:sortReverse | limitTo:client_limit ')
           td {{log.updatedAt}}
           td {{log.error}}
           td {{log.model}}

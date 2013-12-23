@@ -1,25 +1,113 @@
-navbar(mode="admin")
-.container
-  div(style="padding: 24px;")
-    form(action='', method='POST', role='form')
-      .form-group
-        label.sr-only(for='') Filter
-        .input-icon-group
-          input.form-control.input-lg(type='text', name="filter",  placeholder='filter', ng-model="filter")
-          .input-icon-addon
-            i.input-lg.with-action.fa.fa-caret-square-o-left(ng-click=" filter = '' ")
-  table.table.table-hover
-    thead
-      tr
-        th ID
-        th SKU
-        th SKU (Clean)
-        th {{ 'action' | translate }}
-    tbody
-        tr(ng-repeat="product in extern_products | filter:filter  | limitTo:20 ")
-          td {{product.id}} 
-          td {{product.sku}}
-          td {{product.sku_clean}}
-          td
-            .btn-group
-              a.btn.btn-info(href="#/admin/product/vwheritage-info/{{product.id}}") {{ 'show' | translate }}
+div.snap-drawer(snap-drawer="left")
+  h2 Filter
+  .row
+    .col-xs-12
+      .input-group
+        span.input-group-addon(style="min-width:101px") {{'Client Limit' | translate }}
+        input.form-control(type="number", placeholder="{{'Enter limit' | translate }}", ng-model="client_limit")
+    .col-xs-12
+      .input-group
+        span.input-group-addon(style="min-width:101px") {{'Server Limit' | translate }}
+        input.form-control(type="number", placeholder="{{'Enter limit' | translate }}", ng-model="filter.limit")
+    .col-xs-12
+      .input-group
+        span.input-group-addon(style="min-width:101px") {{'Show' | translate }}
+        select.form-control(multiple, ng-model="selectedShowTable")
+          option updatedAt
+          option id
+          option sku
+          option sku_clean
+          option name
+          option retail_price
+          option cost_price
+          option price_2
+          option price_3
+          option price_4
+          option fittinginfo
+          option quality
+          option description
+          option applications
+          option special_order
+          option free_stock_quantity
+div.snap-content(snap-content)
+  navbar(mode="admin")
+  .container
+    .form-group
+      label.sr-only(for='') {{'Search' | translate }}
+      .input-icon-group
+        input.form-control.input-lg(type='text', placeholder="{{'Search' | translate }}", ng-model="search")
+        .input-icon-addon
+              i.input-lg.with-action.fa.fa-caret-square-o-left(ng-click=" filter = '' ", title="{{'clear search' | translate }}")
+    table.table.table-hover
+      thead
+        tr
+          th.sortable(ng-if="selectedShowTableContains('updatedAt');", ng-click="sort_by('updated');")
+            | updatedAt 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('id');", ng-click="sort_by('id');")
+            | ID 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('sku');", ng-click="sort_by('sku');")
+            | SKU 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('sku_clean');", ng-click="sort_by('sku_clean');")
+            | SKU (Clean) 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('name');", ng-click="sort_by('name');")
+            | Name 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('retail_price');", ng-click="sort_by('retail_price');")
+            | Retail Price 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('cost_price');", ng-click="sort_by('cost_price');")
+            | Cost Price 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('price_2');", ng-click="sort_by('price_2');")
+            | price_2 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('price_3');", ng-click="sort_by('price_3');")
+            | price_3 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('price_4');", ng-click="sort_by('price_4');")
+            | price_4 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('fittinginfo');", ng-click="sort_by('fittinginfo');")
+            | fittinginfo 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('quality');", ng-click="sort_by('quality');")
+            | quality 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('description');", ng-click="sort_by('description');")
+            | description 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('applications');", ng-click="sort_by('applications');")
+            | applications 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('special_order');", ng-click="sort_by('special_order');")
+            | special_order 
+            i.fa.fa-sort
+          th.sortable(ng-if="selectedShowTableContains('free_stock_quantity');", ng-click="sort_by('free_stock_quantity');")
+            | free_stock_quantity 
+            i.fa.fa-sort
+          th {{ 'action' | translate }}
+      tbody
+          tr(ng-repeat="product in extern_products | filter:productFilter | filter:search | orderBy:sortingOrder:sortReverse | limitTo:client_limit")
+            td(ng-if="selectedShowTableContains('updatedAt');") {{product.updatedAt}}
+            td(ng-if="selectedShowTableContains('id');") {{product.id}}
+            td(ng-if="selectedShowTableContains('sku');") {{product.sku}}
+            td(ng-if="selectedShowTableContains('sku_clean');") {{product.sku_clean}}
+            td(ng-if="selectedShowTableContains('name');") {{product.name}}
+            td(ng-if="selectedShowTableContains('retail_price');") {{product.retail_price}}
+            td(ng-if="selectedShowTableContains('cost_price');") {{product.cost_price}}
+            td(ng-if="selectedShowTableContains('price_2');") {{product.price_2}}
+            td(ng-if="selectedShowTableContains('price_3');") {{product.price_3}}
+            td(ng-if="selectedShowTableContains('price_4');") {{product.price_4}}
+            td(ng-if="selectedShowTableContains('fittinginfo');") {{product.fittinginfo}}
+            td(ng-if="selectedShowTableContains('quality');") {{product.quality}}
+            td(ng-if="selectedShowTableContains('description');") {{product.description}}
+            td(ng-if="selectedShowTableContains('applications');") {{product.applications}}
+            td(ng-if="selectedShowTableContains('special_order');") {{product.special_order}}
+            td(ng-if="selectedShowTableContains('free_stock_quantity');") {{product.free_stock_quantity}}
+            td
+              .btn-group
+                a.btn.btn-info(href="#/admin/product/vwheritage-info/{{product.id}}") {{ 'show' | translate }}

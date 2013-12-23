@@ -159,9 +159,88 @@ msgstr "bearbeiten"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/product/list.html
 #: .tmp/public/views/templates/content/admin/user/index.html
 msgid "delete"
 msgstr "löschen"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+#, fuzzy
+msgid "Status"
+msgstr "Status"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "any"
+msgstr "beliebig"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "unset"
+msgstr "ungesetzt"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "activated"
+msgstr "aktiviert"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "disabled"
+msgstr "deaktiviert"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "Type"
+msgstr "Typ"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "Client Limit"
+msgstr "Client Limit"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "Enter limit"
+msgstr "Limit angeben"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "Server Limit"
+msgstr "Server Limit"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "Show"
+msgstr "Zeige"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "resfresh"
+msgstr "aktualisieren"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Search"
+msgstr "Suche"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "clear search"
+msgstr "Suche säubern"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Products"
+msgstr "Produkte"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/product/compare-list.html
@@ -180,8 +259,23 @@ msgstr "Modell Attribute"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/product/config.html
-msgid "Generate now"
-msgstr "Jetzt erzeugen"
+msgid "generate and save now"
+msgstr "Jetzt generieren und speichern"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "VWHeritage Product Cache"
+msgstr "VWHeritage Produkt Cache"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "import all products"
+msgstr "Alle Produkte importieren"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "Magento Product Cache"
+msgstr "Magento Produkt Cache"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/cache.html
@@ -210,23 +304,9 @@ msgstr "Aus"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/partials/navbar.html
 msgid "Logs"
 msgstr "Protokolle"
-
-#: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/log.html
-msgid "resfresh"
-msgstr "aktualisieren"
-
-#: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/log.html
-msgid "remove all"
-msgstr "lösche alles"
-
-#: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/log.html
-msgid "any"
-msgstr "beliebig"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
@@ -261,16 +341,6 @@ msgstr "Aktion"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/partials/navbar.html
-msgid "Products"
-msgstr "Produkte"
-
-#: .tmp/public/views/index.html
-#: .tmp/public/views/templates/partials/navbar.html
-msgid "Search"
-msgstr "Suche"
-
-#: .tmp/public/views/index.html
-#: .tmp/public/views/templates/partials/navbar.html
 msgid "Information"
 msgstr "Information"
 
@@ -278,6 +348,12 @@ msgstr "Information"
 #: .tmp/public/views/templates/partials/navbar.html
 msgid "Compare"
 msgstr "Vergleich"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/partials/navbar.html
+#, fuzzy
+msgid "User"
+msgstr "Benutzer"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/partials/navbar.html
@@ -303,6 +379,9 @@ msgstr "Bitte melden Sie sich an"
 #: .tmp/public/views/templates/content/admin/user/signin.html
 msgid "Sign in"
 msgstr "Anmelden"
+
+#~ msgid "remove all"
+#~ msgstr "lösche alles"
 
 #~ msgid "Aus"
 #~ msgstr "Aus"

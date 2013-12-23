@@ -250,9 +250,33 @@ jumplink.magentoweb.controller('ProductInfoController', function($scope, $sails,
 
 });
 
-jumplink.magentoweb.controller('ProductVWHeritageListController', function($rootScope, $scope, $sails, NotifyService) {
-  if(typeof($rootScope.extern_products) === 'undefined' || !$rootScope.extern_products.length)
-    $sails.get("/vwhproductcache", function (response) {
+jumplink.magentoweb.controller('ProductVWHeritageListController', function($rootScope, $scope, $sails, NotifyService, FilterService) {
+
+  $scope.filter.limit = 20000;
+  $scope.client_limit = 20;
+  $scope.search = '';
+  $scope.sortReverse = false;
+  $scope.sortingOrder = 'id';
+  $scope.selectedShowTable = ["sku", "name"]; // default selected
+
+  // change sorting order
+  $scope.sort_by = function(newSortingOrder) {
+    if ($scope.sortingOrder == newSortingOrder)
+      $scope.sortReverse = !$scope.sortReverse;
+
+    $scope.sortingOrder = newSortingOrder;
+  }
+
+  $scope.selectedShowTableContains = function (value) {
+    return _.contains($scope.selectedShowTable, value);
+  }
+
+  $scope.getProducts = function () {
+
+    var querystring = FilterService.queryString($scope.filter, null);
+    console.log("/vwhproductcache?"+querystring);
+
+    $sails.get("/vwhproductcache?"+querystring, function (response) {
       console.log(response);
       if(response != null && typeof(response[0].id) !== "undefined") {
         $rootScope.extern_products = response;
@@ -261,6 +285,22 @@ jumplink.magentoweb.controller('ProductVWHeritageListController', function($root
         NotifyService.show("Can't load products", response, "error");
       }
     });
+  }
+
+  $scope.destroyAll = function () {
+
+  }
+
+  $scope.productFilter = function(product) {
+    var is_equals = true;
+
+    // TODO
+
+    return is_equals;
+  };
+
+  if(typeof($rootScope.extern_products) === 'undefined' || !$rootScope.extern_products.length)
+    $scope.getProducts();
 
 });
 
@@ -302,45 +342,50 @@ jumplink.magentoweb.controller('ProductVWHeritageInfoController', function($scop
 jumplink.magentoweb.controller('ProductCompareListController', function($rootScope, $scope, $sails, NotifyService) {
 
   var getMagentoProducts = function (cb) {
-    if(typeof($rootScope.magento_products) === 'undefined' || !$rootScope.magento_products.length)
-      $sails.get("/productcache", function (response) {
-        if(response != null && typeof(response[0].id) !== "undefined") {
-          cb (null, response);
-        } else {
-          cb ("Can't load magento products", null);
-        }
-      });
-    else
-      cb (null, $rootScope.magento_products);
+    $sails.get("/productcache", function (response) {
+      if(response != null && typeof(response[0].id) !== "undefined") {
+        $rootScope.magento_products = response;
+        cb (null, $rootScope.magento_products);
+      } else {
+        cb ("Can't load magento products", null);
+      }
+    });
   }
   
   var getExternProducts = function (cb) {
-    if(typeof($rootScope.extern_products) === 'undefined' || !$rootScope.extern_products.length)
-      $sails.get("/vwhproductcache", function (response) {
-        if(response != null && typeof(response[0].id) !== "undefined") {
-          cb (null, response);
-        } else {
-          cb ("Can't load extern products", null);
-        }
-      });
-        else
-      cb (null, $rootScope.extern_products);
+    $sails.get("/vwhproductcache", function (response) {
+      if(response != null && typeof(response[0].id) !== "undefined") {
+        $rootScope.extern_products = response;
+        cb (null, $rootScope.extern_products);
+      } else {
+        cb ("Can't load extern products", null);
+      }
+    });
   }
 
-  var getProducts = function (final_callback) {
+  var getProductsIfNotLoaded = function (final_callback) {
     async.parallel([
-      getMagentoProducts,
-      getExternProducts
+      function getMagentoProductsIfNotLoaded (callback) {
+        if(typeof($rootScope.magento_products) === 'undefined' || !$rootScope.magento_products.length)
+          getMagentoProducts(callback);
+        else {
+          console.log("Magento Products already loaded");
+          callback (null, $rootScope.magento_products);
+        }
+      }
+      , function getExternProductsIfNotLoaded (callback) {
+        if(typeof($rootScope.extern_products) === 'undefined' || !$rootScope.extern_products.length)
+          getExternProducts(callback);
+        else {
+          console.log("Extern Products already loaded");
+          callback (null, $rootScope.extern_products);
+        }
+      }
     ], function(err, results) {
       if(!err) {
-        // console.log(results);
-        $rootScope.magento_products = results[0];
-        $rootScope.extern_products = results[1];
-        //NotifyService.show("All products loaded", "", "success");
         final_callback(null, $rootScope.magento_products, $rootScope.extern_products);
       } else {
         console.log(err);
-        // NotifyService.show("Can't load products", err, "error");
         final_callback(err, null);
       }
     });
@@ -367,8 +412,8 @@ jumplink.magentoweb.controller('ProductCompareListController', function($rootSco
   }
 
   async.waterfall([
-    getProducts,
-    getDifference,
+    getProductsIfNotLoaded
+    , getDifference
   ], function(err, results){
     if (!err) {
       NotifyService.show("All products and differences loaded", "", "success");
@@ -443,6 +488,7 @@ jumplink.magentoweb.controller('LogController', function($scope, $sails, $http, 
   $scope.getLogs = function () {
 
     var querystring = FilterService.queryString($scope.filter, null);
+    console.log("/log?"+querystring);
 
     $sails.get("/log?"+querystring, function (response) {
       $scope.logs = response;

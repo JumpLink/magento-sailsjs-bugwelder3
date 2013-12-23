@@ -151,6 +151,11 @@ msgid "delete"
 msgstr ""
 
 #: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "Status"
+msgstr ""
+
+#: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
 #: .tmp/public/views/templates/content/admin/product/list.html
 msgid "any"
@@ -172,9 +177,33 @@ msgid "disabled"
 msgstr ""
 
 #: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "Type"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
+msgid "Client Limit"
+msgstr ""
+
+#: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
 #: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
 msgid "Enter limit"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
+msgid "Server Limit"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
+msgid "Show"
 msgstr ""
 
 #: .tmp/public/views/index.html
@@ -186,6 +215,7 @@ msgstr ""
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
 #: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
 #: .tmp/public/views/templates/partials/navbar.html
 msgid "Search"
 msgstr ""
@@ -193,6 +223,7 @@ msgstr ""
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
 #: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
 msgid "clear search"
 msgstr ""
 

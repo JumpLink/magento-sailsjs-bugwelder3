@@ -1,43 +1,45 @@
-navbar(mode="admin")
-.container
-  h1 {{ 'Edit user' | translate }}
-  ul.media-list
-    li.media
-      a.pull-left(href="#/user/{{ getUser().email }}")
-        userimage(img="getUser()._id", color="getUser().color", username="getUser().name", size="64")
-      .media-body
-        h4.media-heading
-          a(href="#/user/{{ getUser().email }}"){{ getUser().name }} 
-          small {{ 'edit user' | translate }}
-        form(ng-submit="update()", method="POST", name="userForm")
-          .form-group
-            label {{ 'E-Mail address' | translate }}
-            .input-group
-              span.input-group-addon
-                i.fa.fa-envelope
-              input.form-control(type="email", name="email", autocomplete="email", id="InputEmail", placeholder="{{ 'Enter E-Mail' | translate }}", ng-model="user.email", required)
-          .form-group
-            label {{ 'Name' | translate }}
-            .input-group
-              span.input-group-addon
-                i.fa.fa-tag
-              input.form-control(type="text", name="name", autocomplete="name", id="InputName", placeholder="{{ 'Enter Name' | translate }}", ng-model="user.name", required)
-          .form-group
-            label {{ 'Color' | translate }}
-            .input-group
-              span.input-group-addon
-                i.fa.fa-asterisk(style="color: {{user.color}};")
-              input.form-control(colorpicker="hex", value="", type="text", name="color", autocomplete="color", ng-model="user.color", required)
-          .form-group
-            label {{ 'Password' | translate }}
-            .input-group
-              span.input-group-addon
-                i.fa.fa-key
-              input.form-control(type="password", name="password", id="InputPassword", placeholder="{{ 'Enter Password' | translate }}", ng-model="user.password", required)
-          .form-group,
-            label {{ 'Password confirmation' | translate }}
-            .input-group
-              span.input-group-addon
-                i.fa.fa-key
-              input.form-control(type="password", name="confirmation", id="InputPassword", placeholder="{{ 'Enter Password again' | translate }}", ng-model="user.confirmation", required)
-          button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="userForm.$invalid") {{ 'Process' | translate }}
+div.snap-drawer(snap-drawer="left")
+div.snap-content(snap-content)
+  navbar(mode="admin")
+  .container
+    h1 {{ 'Edit user' | translate }}
+    ul.media-list
+      li.media
+        a.pull-left(href="#/user/{{ getUser().email }}")
+          userimage(img="getUser()._id", color="getUser().color", username="getUser().name", size="64")
+        .media-body
+          h4.media-heading
+            a(href="#/user/{{ getUser().email }}"){{ getUser().name }} 
+            small {{ 'edit user' | translate }}
+          form(ng-submit="update()", method="POST", name="userForm")
+            .form-group
+              label {{ 'E-Mail address' | translate }}
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-envelope
+                input.form-control(type="email", name="email", autocomplete="email", id="InputEmail", placeholder="{{ 'Enter E-Mail' | translate }}", ng-model="user.email", required)
+            .form-group
+              label {{ 'Name' | translate }}
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-tag
+                input.form-control(type="text", name="name", autocomplete="name", id="InputName", placeholder="{{ 'Enter Name' | translate }}", ng-model="user.name", required)
+            .form-group
+              label {{ 'Color' | translate }}
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-asterisk(style="color: {{user.color}};")
+                input.form-control(colorpicker="hex", value="", type="text", name="color", autocomplete="color", ng-model="user.color", required)
+            .form-group
+              label {{ 'Password' | translate }}
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-key
+                input.form-control(type="password", name="password", id="InputPassword", placeholder="{{ 'Enter Password' | translate }}", ng-model="user.password", required)
+            .form-group,
+              label {{ 'Password confirmation' | translate }}
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-key
+                input.form-control(type="password", name="confirmation", id="InputPassword", placeholder="{{ 'Enter Password again' | translate }}", ng-model="user.confirmation", required)
+            button.btn.btn-lg.btn-primary.btn-block(type="submit", ng-disabled="userForm.$invalid") {{ 'Process' | translate }}

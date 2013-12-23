@@ -1,20 +1,22 @@
-navbar(mode="admin")
-.container
-  h1 {{ 'Users' | translate }}
-  table.table.table-hover(ng-if="users.length")
-    thead
-      tr
-        th {{ 'color' | translate }}
-        th {{ 'email' | translate }}
-        th {{ 'name' | translate }}
-        th {{ 'action' | translate }}
-    tbody
-      tr(ng-repeat="user in users")
-        td {{user.color}}
-        td {{user.email}}
-        td {{user.name}}
-        td
-          .btn-group
-            a.btn.btn-info(href="#/admin/user/show/{{user.email}}") {{ 'show' | translate }}
-            a.btn.btn-primary(href="#/admin/user/edit/{{user.email}}") {{ 'edit' | translate }}
-            button.btn.btn-danger() {{ 'delete' | translate }}
+div.snap-drawer(snap-drawer="left")
+div.snap-content(snap-content)
+  navbar(mode="admin")
+  .container
+    h1 {{ 'Users' | translate }}
+    table.table.table-hover(ng-if="users.length")
+      thead
+        tr
+          th {{ 'color' | translate }}
+          th {{ 'email' | translate }}
+          th {{ 'name' | translate }}
+          th {{ 'action' | translate }}
+      tbody
+        tr(ng-repeat="user in users")
+          td {{user.color}}
+          td {{user.email}}
+          td {{user.name}}
+          td
+            .btn-group
+              a.btn.btn-info(href="#/admin/user/show/{{user.email}}") {{ 'show' | translate }}
+              a.btn.btn-primary(href="#/admin/user/edit/{{user.email}}") {{ 'edit' | translate }}
+              button.btn.btn-danger() {{ 'delete' | translate }}

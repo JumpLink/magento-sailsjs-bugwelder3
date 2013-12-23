@@ -1,46 +1,48 @@
-navbar(mode="admin")
-.container
-  div(style="padding: 24px;")
-    form(action='', method='POST', role='form')
-      .form-group
-        label.sr-only(for='') Filter
-        .input-icon-group
-          input.form-control.input-lg(type='text', name="filter",  placeholder='filter', ng-model="filter")
-          .input-icon-addon
-            i.input-lg.with-action.fa.fa-caret-square-o-left(ng-click=" filter = '' ")
-  h1 Magento Products Only ({{magento_only_products.length}})
-  table.table.table-hover(ng-if="magento_products.length && extern_products.length")
-    thead
-      tr
-        th ID
-        th SKU
-        th SKU ({{ 'Clean' | translate }})
-        th Name
-        th {{ 'action' | translate }}
-    tbody
-      tr(ng-repeat="product in magento_only_products | filter:filter  | limitTo:20 ")
-        td {{product.id}} 
-        td {{product.sku}}
-        td {{product.sku_clean}}
-        td {{product.name}}
-        td
-          .btn-group
-            a.btn.btn-info(href="#/admin/product/info/{{product.id}}") {{ 'show' | translate }}
-  h1 Extern Products Only ({{extern_only_products.length}})
-  table.table.table-hover(ng-if="magento_products.length && extern_products.length")
-    thead
-      tr
-        th ID
-        th SKU
-        th SKU ({{ 'Clean' | translate }})
-        th Name
-        th {{ 'action' | translate }}
-    tbody
-      tr(ng-repeat="product in extern_only_products | filter:filter  | limitTo:20 ")
-        td {{product.id}} 
-        td {{product.sku}}
-        td {{product.sku_clean}}
-        td {{product.name}}
-        td
-          .btn-group
-            a.btn.btn-info(href="#/admin/product/info/{{product.id}}") {{ 'show' | translate }}
+div.snap-drawer(snap-drawer="left")
+div.snap-content(snap-content)
+  navbar(mode="admin")
+  .container
+    div(style="padding: 24px;")
+      form(action='', method='POST', role='form')
+        .form-group
+          label.sr-only(for='') Filter
+          .input-icon-group
+            input.form-control.input-lg(type='text', name="filter",  placeholder='filter', ng-model="filter")
+            .input-icon-addon
+              i.input-lg.with-action.fa.fa-caret-square-o-left(ng-click=" filter = '' ")
+    h1 Magento Products Only ({{magento_only_products.length}})
+    table.table.table-hover(ng-if="magento_products.length && extern_products.length")
+      thead
+        tr
+          th ID
+          th SKU
+          th SKU ({{ 'Clean' | translate }})
+          th Name
+          th {{ 'action' | translate }}
+      tbody
+        tr(ng-repeat="product in magento_only_products | filter:filter  | limitTo:20 ")
+          td {{product.id}} 
+          td {{product.sku}}
+          td {{product.sku_clean}}
+          td {{product.name}}
+          td
+            .btn-group
+              a.btn.btn-info(href="#/admin/product/info/{{product.id}}") {{ 'show' | translate }}
+    h1 Extern Products Only ({{extern_only_products.length}})
+    table.table.table-hover(ng-if="magento_products.length && extern_products.length")
+      thead
+        tr
+          th ID
+          th SKU
+          th SKU ({{ 'Clean' | translate }})
+          th Name
+          th {{ 'action' | translate }}
+      tbody
+        tr(ng-repeat="product in extern_only_products | filter:filter  | limitTo:20 ")
+          td {{product.id}} 
+          td {{product.sku}}
+          td {{product.sku_clean}}
+          td {{product.name}}
+          td
+            .btn-group
+              a.btn.btn-info(href="#/admin/product/info/{{product.id}}") {{ 'show' | translate }}
