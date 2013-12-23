@@ -145,8 +145,61 @@ msgstr ""
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/product/list.html
 #: .tmp/public/views/templates/content/admin/user/index.html
 msgid "delete"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "any"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "unset"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "activated"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "disabled"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "Enter limit"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "resfresh"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Search"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "clear search"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Products"
 msgstr ""
 
 #: .tmp/public/views/index.html
@@ -166,7 +219,22 @@ msgstr ""
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/product/config.html
-msgid "Generate now"
+msgid "generate and save now"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "VWHeritage Product Cache"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "import all products"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/config.html
+msgid "Magento Product Cache"
 msgstr ""
 
 #: .tmp/public/views/index.html
@@ -196,22 +264,8 @@ msgstr ""
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
+#: .tmp/public/views/templates/partials/navbar.html
 msgid "Logs"
-msgstr ""
-
-#: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/log.html
-msgid "resfresh"
-msgstr ""
-
-#: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/log.html
-msgid "remove all"
-msgstr ""
-
-#: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/log.html
-msgid "any"
 msgstr ""
 
 #: .tmp/public/views/index.html
@@ -246,7 +300,17 @@ msgstr ""
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/partials/navbar.html
-msgid "Products"
+msgid "Information"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Compare"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "User"
 msgstr ""
 
 #: .tmp/public/views/index.html

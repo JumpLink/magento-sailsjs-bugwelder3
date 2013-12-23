@@ -1,3 +1,33 @@
+jumplink.magentoweb.factory("NavbarService", function() {
+
+});
+
+jumplink.magentoweb.factory("FilterService", function() {
+
+  /**
+   * Converts an object into a key/value par with an optional prefix.
+   * Used for converting objects to a query string.
+   * Irgnore empty strings and 'any'
+   * Source: https://gist.github.com/jonmaim/4239779
+   */
+  var filterQueryString = function(obj, prefix){
+    var str = [];
+    for (var p in obj) {
+      var k = prefix ? prefix + "[" + p + "]" : p;
+          v = obj[k];
+      if(obj[k] != 'any' && obj[k] != '') {
+        str.push(angular.isObject(v) ? filterQueryString(v, k) : (k) + "=" + encodeURIComponent(v));
+      }
+    }
+    return str.join("&");
+  }
+
+  return {
+    queryString : filterQueryString
+  }
+
+});
+
 jumplink.magentoweb.factory("ProductService", function($sails) {
   $sails.get("/product/5", function (data) {
       console.log(data);

@@ -1,4 +1,20 @@
 
+jumplink.magentoweb.controller('NavbarController', function($scope, $location, NotifyService, AuthenticationService) {
+  $scope.getSigninUser = function() {
+    return AuthenticationService.getUser();
+  };
+
+  $scope.signout = function () {
+    AuthenticationService.signout (function signed_out (success) {
+      if(success === true) {
+        $location.path( "/admin" );
+        NotifyService.show("Signout", "You are signed out", "info");
+        $scope.$apply(); // I don't why I need this here but not on signin, maybe because this is an own module
+      }
+    });
+   }
+});
+
 jumplink.magentoweb.controller('UserCreateController', function($scope, $sails, AuthenticationService) {
   $scope.create = function () {
     $sails.post("/user", $scope.new_user, function (response) {
@@ -67,7 +83,7 @@ jumplink.magentoweb.controller('TryController', function($scope, NotifyService) 
 
 jumplink.magentoweb.controller('ProductConfigController', function($scope, $sails, NotifyService) {
   $scope.generateAttributes = function () {
-    $sails.get("/product/generateAttributes", function (response) {
+    $sails.get("/product/saveAttributes", function (response) {
       if(response.status === 500) {
         NotifyService.show("Can't generate product attributes", response, "error");
       } else {
@@ -75,12 +91,70 @@ jumplink.magentoweb.controller('ProductConfigController', function($scope, $sail
       }
     });
   }
+  $scope.importVWHProductsToCache = function () {
+    $sails.get("/vwhproductcache/import", function (response) {
+      if(response.status === 500 || response.status === 404) {
+        NotifyService.show("Can't import VWHProducts to cache", response, "error");
+      } else {
+        NotifyService.show("VWHProducts imported", "", "success");
+      }
+    });
+  }
+  $scope.importMagentoProductsToCache = function () {
+    $sails.get("/productcache/import", function (response) {
+      if(response.status === 500 || response.status === 404) {
+        NotifyService.show("Can't import MagentoProducts to cache", response, "error");
+      } else {
+        NotifyService.show("MagentoProducts imported", "", "success");
+      }
+    });
+  }
 });
 
-jumplink.magentoweb.controller('ProductListController', function($rootScope, $scope, $sails, NotifyService) {
-  if(typeof($rootScope.magento_products) === 'undefined' || !$rootScope.magento_products.length)
-    $sails.get("/productcache", function (response) {
-      console.log(response);
+jumplink.magentoweb.controller('ProductListController', function($rootScope, $scope, $sails, NotifyService, FilterService) {
+
+  $scope.filter.status = 'any';
+  $scope.filter.type = 'any';
+  $scope.filter.limit = 20000;
+  $scope.client_limit = 20;
+  $scope.search = '';
+  $scope.sortReverse = true;
+  $scope.sortingOrder = 'sku';
+  $scope.selectedShowTable = ["sku", "name"]; // default selected
+
+  $scope.$watch('selectedShowTable', function(nowSelected){
+    console.log($scope.selectedShowTable);
+  });
+
+  $scope.selectedShowTableContains = function (value) {
+    return _.contains($scope.selectedShowTable, value);
+  }
+
+  // change sorting order
+  $scope.sort_by = function(newSortingOrder) {
+    if ($scope.sortingOrder == newSortingOrder)
+      $scope.sortReverse = !$scope.sortReverse;
+    $scope.sortingOrder = newSortingOrder;
+  }
+
+  $scope.productFilter = function(product) {
+    var is_equals = true;
+
+    if(typeof($scope.filter.status) !== 'undefined' && $scope.filter.status !== '' && $scope.filter.status !== 'any')
+      if(typeof(product.status) === 'undefined' || $scope.filter.status !== product.status.toString())
+        is_equals = false;
+
+    if(typeof($scope.filter.type) !== 'undefined' && $scope.filter.type !== '' && $scope.filter.type !== 'any')
+      if(typeof(product.type) === 'undefined' || $scope.filter.type !== product.type.toString())
+        is_equals = false;
+
+    return is_equals;
+  };
+
+  $scope.getProducts = function () {
+    var querystring = FilterService.queryString($scope.filter, null);
+    console.log("/productcache?"+querystring);
+    $sails.get("/productcache?"+querystring, function (response) {
       if(response != null && typeof(response[0]) !== "undefined" && typeof(response[0].id) !== "undefined") {
         $rootScope.magento_products = response;
         NotifyService.show("Products loaded", "", "success");
@@ -88,6 +162,13 @@ jumplink.magentoweb.controller('ProductListController', function($rootScope, $sc
         NotifyService.show("Can't load products", response, "error");
       }
     });
+  }
+
+  // get products automatic on view only if the products currently not loaded
+  if(typeof($rootScope.magento_products) === 'undefined' || !$rootScope.magento_products.length) {
+    $scope.getProducts();
+  }
+
 });
 
 jumplink.magentoweb.controller('ProductInfoController', function($scope, $sails, $routeParams, NotifyService) {
@@ -222,7 +303,7 @@ jumplink.magentoweb.controller('ProductCompareListController', function($rootSco
 
   var getMagentoProducts = function (cb) {
     if(typeof($rootScope.magento_products) === 'undefined' || !$rootScope.magento_products.length)
-      $sails.get("/product", function (response) {
+      $sails.get("/productcache", function (response) {
         if(response != null && typeof(response[0].id) !== "undefined") {
           cb (null, response);
         } else {
@@ -338,38 +419,30 @@ jumplink.magentoweb.controller('CacheController', function($scope, NotifyService
 
 });
 
-jumplink.magentoweb.controller('LogController', function($scope, $sails, $http, NotifyService) {
+jumplink.magentoweb.controller('LogController', function($scope, $sails, $http, NotifyService, FilterService) {
 
   $scope.filter.error = 'any';
   $scope.filter.model = 'any';
   $scope.filter.service = 'any';
   $scope.filter.action = 'any';
   $scope.filter.status = 'any';
-  $scope.filter.limit = 100;
+  $scope.filter.limit = 20000;
+  $scope.client_limit = 20;
   $scope.search = '';
+  $scope.sortReverse = true;
+  $scope.sortingOrder = 'updated';
 
+  // change sorting order
+  $scope.sort_by = function(newSortingOrder) {
+    if ($scope.sortingOrder == newSortingOrder)
+      $scope.sortReverse = !$scope.sortReverse;
 
-  /**
-   * Converts an object into a key/value par with an optional prefix.
-   * Used for converting objects to a query string.
-   * Irgnore empty strings and 'any'
-   * Source: https://gist.github.com/jonmaim/4239779
-   */
-  var qs = function(obj, prefix){
-    var str = [];
-    for (var p in obj) {
-      var k = prefix ? prefix + "[" + p + "]" : p;
-          v = obj[k];
-      if(obj[k] != 'any' && obj[k] != '') {
-        str.push(angular.isObject(v) ? qs(v, k) : (k) + "=" + encodeURIComponent(v));
-      }
-    }
-    return str.join("&");
+    $scope.sortingOrder = newSortingOrder;
   }
 
   $scope.getLogs = function () {
 
-    var querystring = qs($scope.filter, null);
+    var querystring = FilterService.queryString($scope.filter, null);
 
     $sails.get("/log?"+querystring, function (response) {
       $scope.logs = response;
@@ -409,5 +482,5 @@ jumplink.magentoweb.controller('LogController', function($scope, $sails, $http, 
   };
 
   $scope.getLogs();
-  
+
 });

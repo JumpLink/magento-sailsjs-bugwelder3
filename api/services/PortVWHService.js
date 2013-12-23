@@ -107,7 +107,7 @@ var portGrouPrice = function () {
 var portToMagentoProductEnglish = function (product) {
   var result = {};
   if (typeof(product.id) !== 'undefined') {
-    product.id = paseInt(product.id);
+    product.id = parseInt(product.id);
   }
   if (typeof(product.sku) !== 'undefined') {
 

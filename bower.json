@@ -28,10 +28,10 @@
     "angular-sanitize": "1.2.*",
     "angular-underscore": "*",
     "underscore": "~1.5.*",
-    "angular-magento-navbar": "git@github.com:JumpLink/angular-magento-navbar.git",
     "angular-notify": "git@github.com:JumpLink/angular-notify.git",
     "angular-socket-io": "~0.2.*",
-    "angular-toggle-switch": "~0.2.*",
-    "async": "~0.2.*"
+    "angular-toggle-switch": "*",
+    "async": "~0.2.*",
+    "angular-snap": "~1.2.*"
   }
 }

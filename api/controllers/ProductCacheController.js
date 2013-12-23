@@ -16,10 +16,16 @@ module.exports = {
 
     
   find: function (req, res, next) {
+    // ID to Integer
     if (req.params['id'])
       req.params['id'] = parseInt(req.params['id']);
     if(req.query.id)
-      req.params.id = parseInt(req.params.id);
+      req.query.id = parseInt(req.query.id);
+
+    // set to Integer NOT WORKING see https://github.com/balderdashy/sails/issues/407
+    if(req.query.set)
+      req.query.set = parseInt(req.query.set);
+
     SailsService.Controller.find(sails)(req, res, next);
   }
 

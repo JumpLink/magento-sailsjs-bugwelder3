@@ -81,11 +81,11 @@ module.exports = {
     else
       var id = req.params.id;
 
-    User.findOne(id, function foundUser(err, user) {
+    User.findOne(id, function foundUser(error, user) {
 
-      var userId = req.session.User.id;
-
-      if (user) {
+      // var userId = req.session.User.id;
+      if (error) return next(error);
+      else if (user) {
         // Wipe out the session (log out)
         //req.session.destroy(); Uncomment to not destroy socket session
         req.session.authenticated = false;

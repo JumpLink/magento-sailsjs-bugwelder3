@@ -9,11 +9,11 @@ jumplink.magentoweb = angular.module('jumplink.magentoweb', [
   , 'ui.bootstrap'
   , 'gettext'
   , 'jumplink.notify'
-  , 'jumplink.magentoweb_navbar'
   , 'ngSails'
   , 'colorpicker.module'
   , 'angular-underscore'
   , 'toggle-switch'
+  , 'snap'
 ]);
 
 // languages

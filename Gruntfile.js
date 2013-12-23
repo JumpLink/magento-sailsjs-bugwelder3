@@ -77,19 +77,17 @@ module.exports = function (grunt) {
     'bower_components/angular-notify/NotifyController.js',
     'bower_components/angular-notify/NotifyDirective.js',
 
-    'bower_components/angular-magento-navbar/NavbarModule.js',
-    'bower_components/angular-magento-navbar/NavbarService.js',
-    'bower_components/angular-magento-navbar/NavbarController.js',
-    'bower_components/angular-magento-navbar/NavbarDirective.js',
+    'bower_components/angular-ui-bootstrap3/ui-bootstrap.js',
+    'bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
+    'bower_components/snapjs/snap.js',
+    'bower_components/angular-snap/angular-snap.js',
 
     'linker/js/angular/config.js',
     'linker/js/angular/services.js',
     'linker/js/angular/controllers.js',
+    'linker/js/angular/directives.js',
     'linker/js/angular/routes.js',
     'linker/js/angular/policies.js',
-
-    'bower_components/angular-ui-bootstrap3/ui-bootstrap.js',
-    'bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
 
     // All of the rest of your app scripts imported here
     'linker/**/*.js'

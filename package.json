@@ -4,19 +4,19 @@
   "version": "0.0.0",
   "description": "a Sails application",
   "dependencies": {
-    "grunt": "0.4.1",
-    "sails-disk": "~0.9.3",
-    "optimist": "0.3.4",
-    "jade": "~0.35.0",
-    "sails-mongo": "~0.9.5",
-    "dnode": "~1.0.5",
-    "sails": "0.9.8",
-    "bcrypt": "~0.7.7",
+    "grunt": "0.4.*",
+    "sails-disk": "~0.9.*",
+    "optimist": "0.3.*",
+    "jade": "~0.35.*",
+    "sails-mongo": "~0.9.*",
+    "dnode": "~1.0.*",
+    "sails": "0.9.*",
+    "bcrypt": "~0.7.*",
     "sails-magento": "git://github.com/JumpLink/sails-magento",
     "sails-vwheritage": "git://github.com/JumpLink/sails-vwheritage",
-    "underscore": "~1.5.2",
-    "cron": "~1.0.1",
-    "time": "~0.10.0"
+    "underscore": "~1.5.*",
+    "cron": "~1.0.*",
+    "time": "~0.10.*"
   },
   "scripts": {
     "start": "node app.js",
@@ -27,8 +27,8 @@
   "author": "",
   "license": "",
   "devDependencies": {
-    "grunt-angular-gettext": "~0.1.3",
-    "grunt-contrib-jade": "~0.8.0",
-    "grunt-contrib-less": "~0.8.2"
+    "grunt-angular-gettext": "~0.1.*",
+    "grunt-contrib-jade": "~0.8.*",
+    "grunt-contrib-less": "~0.8.*"
   }
 }
