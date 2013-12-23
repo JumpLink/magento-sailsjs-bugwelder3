@@ -36,30 +36,31 @@
       button(type="button", ng-click="getProducts()").btn.btn-primary {{'resfresh' | translate }}
       button(type="button").btn.btn-danger {{'delete' | translate }}
   .snap-drawer(snap-drawer="right")
-.snap-content.scrollable(snap-content)
-  navbar(mode="admin")
-  .container
-    .form-group
-      label.sr-only(for='') {{'Search' | translate }}
-      .input-icon-group
-        input.form-control.input-lg(type='text', placeholder="{{'Search' | translate }}", ng-model="search")
-        .input-icon-addon
-          i.input-lg.with-action.fa.fa-caret-square-o-left(ng-click=" filter = '' ", title="{{'clear search' | translate }}")
-    h1 Magento {{ 'Products' | translate }} ({{magento_products.length}})
-    table.table.table-hover
-      thead
-        tr
-          th(ng-if="selectedShowTableContains('id');") ID
-          th(ng-if="selectedShowTableContains('sku');") SKU
-          th(ng-if="selectedShowTableContains('sku_clean');") SKU (Clean)
-          th(ng-if="selectedShowTableContains('name');") Name
-          th {{ 'action' | translate }}
-      tbody
-        tr(ng-repeat="product in magento_products | filter:productFilter | filter:search  | limitTo:client_limit ")
-          td(ng-if="selectedShowTableContains('id');") {{product.id}} 
-          td(ng-if="selectedShowTableContains('sku');") {{product.sku}}
-          td(ng-if="selectedShowTableContains('sku_clean');") {{product.sku_clean}}
-          td(ng-if="selectedShowTableContains('name');") {{product.name}}
-          td
-            .btn-group
-              a.btn.btn-info(href="#/admin/product/info/{{product.id}}") {{ 'show' | translate }}
+.snap-content.scrollable#wrapper(snap-content, ng-iscroll="wrapper", ng-iscroll-delay="2050")
+  #scroller
+    navbar(mode="admin")
+    .container
+      .form-group
+        label.sr-only(for='') {{'Search' | translate }}
+        .input-icon-group
+          input.form-control.input-lg(type='text', placeholder="{{'Search' | translate }}", ng-model="search")
+          .input-icon-addon
+            i.input-lg.with-action.fa.fa-caret-square-o-left(ng-click=" filter = '' ", title="{{'clear search' | translate }}")
+      h1 Magento {{ 'Products' | translate }} ({{magento_products.length}})
+      table.table.table-hover
+        thead
+          tr
+            th(ng-if="selectedShowTableContains('id');") ID
+            th(ng-if="selectedShowTableContains('sku');") SKU
+            th(ng-if="selectedShowTableContains('sku_clean');") SKU (Clean)
+            th(ng-if="selectedShowTableContains('name');") Name
+            th {{ 'action' | translate }}
+        tbody
+          tr(ng-repeat="product in magento_products | filter:productFilter | filter:search  | limitTo:client_limit ")
+            td(ng-if="selectedShowTableContains('id');") {{product.id}} 
+            td(ng-if="selectedShowTableContains('sku');") {{product.sku}}
+            td(ng-if="selectedShowTableContains('sku_clean');") {{product.sku_clean}}
+            td(ng-if="selectedShowTableContains('name');") {{product.name}}
+            td
+              .btn-group
+                a.btn.btn-info(href="#/admin/product/info/{{product.id}}") {{ 'show' | translate }}

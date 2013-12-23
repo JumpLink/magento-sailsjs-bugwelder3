@@ -14,6 +14,7 @@ jumplink.magentoweb = angular.module('jumplink.magentoweb', [
   , 'angular-underscore'
   , 'toggle-switch'
   , 'snap'
+  , 'ng-iscroll'
 ]);
 
 // languages

@@ -21,7 +21,7 @@
               i.input-lg.with-action.fa.fa-caret-square-o-left(ng-click="reset()")
             .input-group-btn
               button.btn.btn-primary.btn-lg(type='submit', ng-click="get()") Get
-    .panel.panel-default.scrollable(ng-disabled="!product.id")
+    .panel.panel-default(ng-disabled="!product.id")
       .panel-heading
         h3.panel-title
           | {{product.name}}

@@ -81,6 +81,8 @@ module.exports = function (grunt) {
     'bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
     'bower_components/snapjs/snap.js',
     'bower_components/angular-snap/angular-snap.js',
+    'bower_components/iscroll/build/iscroll.js',
+    'bower_components/ng-iScroll/src/ng-iscroll.js',
 
     'linker/js/angular/config.js',
     'linker/js/angular/services.js',
