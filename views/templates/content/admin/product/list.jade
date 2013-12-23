@@ -1,40 +1,42 @@
-div.snap-drawer.scrollable(snap-drawer="left")
-  h2 Filter
-  .row
-    .col-xs-12
-      .input-group
-        span.input-group-addon(style="min-width:101px") {{'Status' | translate }}
-        select.form-control(ng-model="filter.status")
-          option(value="any") {{'any' | translate }}
-          option(value="unset") {{'unset' | translate }}
-          option(value="activated") {{'activated' | translate }}
-          option(value="disabled") {{'disabled' | translate }}
-    .col-xs-12
-      .input-group
-        span.input-group-addon(style="min-width:101px") {{'Type' | translate }}
-        select.form-control(ng-model="filter.type")
-          option(value="any") {{'any' | translate }}
-          option(value="simple") simple
-    .col-xs-12
-      .input-group
-        span.input-group-addon(style="min-width:101px") {{'Client Limit' | translate }}
-        input.form-control(type="number", placeholder="{{'Enter limit' | translate }}", ng-model="client_limit")
-    .col-xs-12
-      .input-group
-        span.input-group-addon(style="min-width:101px") {{'Server Limit' | translate }}
-        input.form-control(type="number", placeholder="{{'Enter limit' | translate }}", ng-model="filter.limit")
-    .col-xs-12
-      .input-group
-        span.input-group-addon(style="min-width:101px") {{'Show' | translate }}
-        select.form-control(multiple, ng-model="selectedShowTable")
-          option id
-          option sku
-          option sku_clean
-          option name
-  .btn-group
-    button(type="button", ng-click="getProducts()").btn.btn-primary {{'resfresh' | translate }}
-    button(type="button").btn.btn-danger {{'delete' | translate }}
-div.snap-content.scrollable(snap-content)
+.snap-drawers
+  .snap-drawer(snap-drawer="left")
+    h2 Filter
+    .row
+      .col-xs-12
+        .input-group
+          span.input-group-addon(style="min-width:101px") {{'Status' | translate }}
+          select.form-control(ng-model="filter.status")
+            option(value="any") {{'any' | translate }}
+            option(value="unset") {{'unset' | translate }}
+            option(value="activated") {{'activated' | translate }}
+            option(value="disabled") {{'disabled' | translate }}
+      .col-xs-12
+        .input-group
+          span.input-group-addon(style="min-width:101px") {{'Type' | translate }}
+          select.form-control(ng-model="filter.type")
+            option(value="any") {{'any' | translate }}
+            option(value="simple") simple
+      .col-xs-12
+        .input-group
+          span.input-group-addon(style="min-width:101px") {{'Client Limit' | translate }}
+          input.form-control(type="number", placeholder="{{'Enter limit' | translate }}", ng-model="client_limit")
+      .col-xs-12
+        .input-group
+          span.input-group-addon(style="min-width:101px") {{'Server Limit' | translate }}
+          input.form-control(type="number", placeholder="{{'Enter limit' | translate }}", ng-model="filter.limit")
+      .col-xs-12
+        .input-group
+          span.input-group-addon(style="min-width:101px") {{'Show' | translate }}
+          select.form-control(multiple, ng-model="selectedShowTable")
+            option id
+            option sku
+            option sku_clean
+            option name
+    .btn-group
+      button(type="button", ng-click="getProducts()").btn.btn-primary {{'resfresh' | translate }}
+      button(type="button").btn.btn-danger {{'delete' | translate }}
+  .snap-drawer(snap-drawer="right")
+.snap-content.scrollable(snap-content)
   navbar(mode="admin")
   .container
     .form-group
