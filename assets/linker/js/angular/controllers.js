@@ -252,12 +252,12 @@ jumplink.magentoweb.controller('ProductInfoController', function($scope, $sails,
 
 jumplink.magentoweb.controller('ProductVWHeritageListController', function($rootScope, $scope, $sails, NotifyService, FilterService) {
 
-  $scope.filter.limit = 20000;
-  $scope.client_limit = 20;
-  $scope.search = '';
-  $scope.sortReverse = false;
-  $scope.sortingOrder = 'id';
-  $scope.selectedShowTable = ["sku", "name"]; // default selected
+  $scope.filter.limit       = 20000;
+  $scope.client_limit       = 20;
+  $scope.search             = '';
+  $scope.sortReverse        = false;
+  $scope.sortingOrder       = 'id';
+  $scope.selectedShowTable  = ["sku", "name"]; // default selected
 
   // change sorting order
   $scope.sort_by = function(newSortingOrder) {

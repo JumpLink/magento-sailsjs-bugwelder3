@@ -1,4 +1,4 @@
-div.snap-drawer(snap-drawer="left")
+div.snap-drawer.scrollable(snap-drawer="left")
   h2 Filter
   .row
     .col-xs-12
@@ -34,7 +34,7 @@ div.snap-drawer(snap-drawer="left")
   .btn-group
     button(type="button", ng-click="getProducts()").btn.btn-primary {{'resfresh' | translate }}
     button(type="button").btn.btn-danger {{'delete' | translate }}
-div.snap-content(snap-content)
+div.snap-content.scrollable(snap-content)
   navbar(mode="admin")
   .container
     .form-group
