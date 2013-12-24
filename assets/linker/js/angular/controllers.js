@@ -130,6 +130,25 @@ jumplink.magentoweb.controller('ProductListController', function($rootScope, $sc
     return _.contains($scope.selectedShowTable, value);
   }
 
+  // Defines additional options such as onScrollEnd and other runtime settings
+  // exposed by iScroll can be defined per id attribute
+  $scope.$parent.myScrollOptions = {
+    'iscroll-wrapper': {
+      snap: false,
+      scrollbars: true,
+      mouseWheel: true,
+      interactiveScrollbars: true,
+      shrinkScrollbars: 'scale',
+      fadeScrollbars: true,
+      keyBindings: true
+    }
+  };
+
+  // expose refreshiScroll() function for ng-onclick or other meth
+  $scope.refreshiScroll = function () {
+    $scope.$parent.myScroll['iscroll-wrapper'].refresh();
+  };
+
   // change sorting order
   $scope.sort_by = function(newSortingOrder) {
     if ($scope.sortingOrder == newSortingOrder)

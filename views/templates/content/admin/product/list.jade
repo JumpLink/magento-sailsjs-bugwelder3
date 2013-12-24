@@ -35,9 +35,10 @@
     .btn-group
       button(type="button", ng-click="getProducts()").btn.btn-primary {{'resfresh' | translate }}
       button(type="button").btn.btn-danger {{'delete' | translate }}
+      button(type="button", ng-click="refreshiScroll()").btn.btn-warning {{'refresh scroll' | translate }}
   .snap-drawer(snap-drawer="right")
-.snap-content.scrollable#wrapper(snap-content, ng-iscroll="wrapper", ng-iscroll-delay="2050")
-  #scroller
+.snap-content#iscroll-wrapper(snap-content, ng-iscroll="iscroll-wrapper", ng-iscroll-delay="2050")
+  #iscroll-scroller
     navbar(mode="admin")
     .container
       .form-group

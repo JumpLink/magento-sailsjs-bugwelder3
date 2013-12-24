@@ -13,6 +13,7 @@ var generate = function (callback) {
         case 'array of integer':
         case 'array of float':
         case 'array of string':
+        case 'multiselect':
           result[attributeCodes[i]].type = 'array';
         break;
         case 'select':
@@ -110,7 +111,10 @@ var makeProductUpdateValid = function (product, callback) {
   for (var i = 0; i < attributeCodes.length; i++) {
     var options = getAttributeOptions(attributeCodes[i]);
     // remove attributes they are null
-    if ( product[attributeCodes[i]] === null) {
+    if ( product[attributeCodes[i]] === null
+      // or they are an empty array/object
+      // || ( ( _.isArray(product[attributeCodes[i]]) || _.isObject(product[attributeCodes[i]]) ) && _.isEmpty(product[attributeCodes[i]]) )
+    ) {
       delete product[attributeCodes[i]];
     }
   };

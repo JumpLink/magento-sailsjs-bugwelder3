@@ -213,6 +213,11 @@ msgid "resfresh"
 msgstr ""
 
 #: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "refresh scroll"
+msgstr ""
+
+#: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
 #: .tmp/public/views/templates/content/admin/product/list.html
 #: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
