@@ -89,9 +89,9 @@ var create = function (newProduct, callback) {
     if(error) { return sails.log.error(error); callback (error); }
     ProductCache.create( result, function (error, result) {
       if(error) {
-        var dup_sku = "MongoError: E11000 duplicate key error index: magento.productcache.$sku";
-        sails.log.debug(error.message);
-        sails.log.debug(error.message.substring(0, dup_sku.length));
+        var dup_sku = "E11000 duplicate key error index: magento.productcache.$sku";
+        //sails.log.debug(error.message);
+        //sails.log.debug(error.message.substring(0, dup_sku.length));
         if(error.message.substring(0, dup_sku.length) === dup_sku ) {
           newProduct.sku += "dup_sku";
           sails.log.debug("ProductCacheService: try to create product again with new sku: "+newProduct.sku);
