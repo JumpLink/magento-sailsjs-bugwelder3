@@ -57,7 +57,7 @@
             th(ng-if="selectedShowTableContains('name');") Name
             th {{ 'action' | translate }}
         tbody
-          tr(ng-repeat="product in magento_products | filter:productFilter | filter:search  | limitTo:client_limit ")
+          tr(ng-repeat="product in magento_products | filter:productFilter | filter:search  | limitTo:client_limit ", repeat-changed-event)
             td(ng-if="selectedShowTableContains('id');") {{product.id}} 
             td(ng-if="selectedShowTableContains('sku');") {{product.sku}}
             td(ng-if="selectedShowTableContains('sku_clean');") {{product.sku_clean}}

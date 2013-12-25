@@ -147,8 +147,16 @@ jumplink.magentoweb.controller('ProductListController', function($rootScope, $sc
 
   // expose refreshiScroll() function for ng-onclick or other meth
   $scope.refreshiScroll = function () {
-    $scope.$parent.myScroll['iscroll-wrapper'].refresh();
+    if(typeof($scope.$parent.myScroll) !== 'undefined')
+      $scope.$parent.myScroll['iscroll-wrapper'].refresh();
+    else
+      console.log("iScroll not ready");
   };
+
+  $scope.$on('repeatChanged', function(event) {
+    console.log("try to refresh scrollbar");
+    $scope.refreshiScroll();
+  });
 
   // change sorting order
   $scope.sort_by = function(newSortingOrder) {
