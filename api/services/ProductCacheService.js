@@ -88,7 +88,16 @@ var create = function (newProduct, callback) {
   ProductAttributeService.makeProductCreateValid(newProduct, function (error, result) {
     if(error) { return sails.log.error(error); callback (error); }
     ProductCache.create( result, function (error, result) {
-      if(error) { return sails.log.error(error); callback (error); }
+      if(error) {
+        var dup_sku = "MongoError: E11000 duplicate key error index: magento.productcache.$sku";
+        if(error.substring(0, dup_sku.length) === dup_sku ) {
+          newProduct.sku += "dup_sku";
+          sails.log.debug("ProductCacheService: try to create product again with new sku: "+newProduct.sku);
+          create(newProduct, callback);
+        }else {
+          return sails.log.error(error); callback (error);
+        }
+      }
       else { callback (error, result); }
     });
   });
@@ -124,6 +133,7 @@ var updateOnChanges = function (newProduct, oldProduct, callback) {
 
 var updateOrCreate = function (id, newProduct, callback) {
   ProductCache.findOne({id:id}, function(error, oldProduct) {
+  //ProductCache.findOne({sku:newProduct.sku}, function(error, oldProduct) { // WORKAROUND find ProductCache by sku because vwh seems to have duplicated skus 
     if(error || !oldProduct || !oldProduct.id) {
       sails.log.debug("ProductCacheService.updateOrCreate: create");
       create(newProduct, function (error, result) {

@@ -37,7 +37,7 @@
       button(type="button").btn.btn-danger {{'delete' | translate }}
       button(type="button", ng-click="refreshiScroll()").btn.btn-warning {{'refresh scroll' | translate }}
   .snap-drawer(snap-drawer="right")
-.snap-content#iscroll-wrapper(snap-content, ng-iscroll="iscroll-wrapper", ng-iscroll-delay="2050")
+.snap-content#iscroll-wrapper(snap-content, ng-iscroll="iscroll-wrapper", ng-iscroll-delay="2050", ng-iscroll-form="true")
   #iscroll-scroller
     navbar(mode="admin")
     .container

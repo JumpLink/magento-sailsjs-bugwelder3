@@ -134,13 +134,14 @@ jumplink.magentoweb.controller('ProductListController', function($rootScope, $sc
   // exposed by iScroll can be defined per id attribute
   $scope.$parent.myScrollOptions = {
     'iscroll-wrapper': {
-      snap: false,
-      scrollbars: true,
-      mouseWheel: true,
-      interactiveScrollbars: true,
-      shrinkScrollbars: 'scale',
-      fadeScrollbars: true,
-      keyBindings: true
+      snap: false
+      , scrollbars: true
+      , mouseWheel: true
+      , interactiveScrollbars: true
+      , shrinkScrollbars: 'scale'
+      , fadeScrollbars: true
+      , keyBindings: true
+      , click: true
     }
   };
 
