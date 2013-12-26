@@ -3,6 +3,10 @@
 
 .snap-content {
   background-color: @snap-content-bg;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden; /* Chrome and Safari */
+  -moz-backface-visibility:hidden; /* Firefox */
+  -ms-backface-visibility:hidden; /* Internet Explorer 10+ */
 }
 
 .snap-drawer {

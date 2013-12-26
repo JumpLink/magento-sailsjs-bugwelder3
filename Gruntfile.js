@@ -58,6 +58,7 @@ module.exports = function (grunt) {
 
     // *->    put other dependencies here   <-*
     'bower_components/jquery/jquery.js',
+    'bower_components/bootstrap/js/transition.js',
     'bower_components/async/lib/async.js',
     'bower_components/angular/angular.js',
     'bower_components/angular-animate/angular-animate.js',
