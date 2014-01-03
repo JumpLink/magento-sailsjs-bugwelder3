@@ -16,8 +16,8 @@ module.exports.policies = {
 
   // Default policy for all controllers and actions
   // (`true` allows public access) 
-  //'*': "isAuthenticated",
-   '*': true, // DEBUG
+  '*': "isAuthenticated",
+  //'*': true, // DEBUG
 
   IndexController: {
     '*': true
@@ -29,16 +29,16 @@ module.exports.policies = {
   },
 
   ProductCache: {
-    //'*': "isAuthenticated"
+    '*': "isAuthenticated"
   },
 
   VWHeritageProduct: {
-    //'*': "isAuthenticated"
+    '*': "isAuthenticated"
     //'*': true // DEBUG
   },
 
   VWHeritageImage: {
-    //'*': "isAuthenticated"
+    '*': "isAuthenticated"
   }
 
   /*

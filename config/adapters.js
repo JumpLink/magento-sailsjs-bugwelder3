@@ -27,8 +27,8 @@ module.exports.adapters = {
   mongo: {
     module:   'sails-mongo',
     host:     'localhost',
-    user:     '',
-    password: '',
+    user:     'admin',
+    password: 'AdIUm8ItAwUY0kD3WOP0',
     database: 'magento'
   },
 
