@@ -12,7 +12,7 @@ jumplink.magentoweb.directive("navbar", [function () {
 jumplink.magentoweb.directive("repeatChangedEvent", [function () {
   console.log('RepeatUpdateScroll');
   return function(scope, element, attrs) {
-    console.log(scope);
+    //console.log(scope);
     if (scope.$last) { // all are rendered
       scope.$emit('repeatChanged'); // IMPORTANT: This works only if the limit-filter will be longer but not of the limit-filter will be smaler
     }    

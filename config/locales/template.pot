@@ -274,28 +274,44 @@ msgid "Magento Product Cache"
 msgstr ""
 
 #: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/cache.html
-msgid "Cache Configuration"
+#: .tmp/public/views/templates/content/admin/config.html
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Configuration"
 msgstr ""
 
 #: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/cache.html
-msgid "Product cache"
+#: .tmp/public/views/templates/content/admin/config.html
+msgid "Magento Product cache"
 msgstr ""
 
 #: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/cache.html
+#: .tmp/public/views/templates/content/admin/config.html
 msgid "enabled"
 msgstr ""
 
 #: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/cache.html
+#: .tmp/public/views/templates/content/admin/config.html
 msgid "On"
 msgstr ""
 
 #: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/cache.html
+#: .tmp/public/views/templates/content/admin/config.html
 msgid "Off"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/config.html
+msgid "VWH Product cache"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/config.html
+msgid "Listen for extern changes"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/config.html
+msgid "VWH sync cronjob"
 msgstr ""
 
 #: .tmp/public/views/index.html

@@ -111,7 +111,7 @@ jumplink.magentoweb.controller('ProductConfigController', function($scope, $sail
   }
 });
 
-jumplink.magentoweb.controller('ProductListController', function($rootScope, $scope, $sails, NotifyService, FilterService) {
+jumplink.magentoweb.controller('ProductListController', function($rootScope, $scope, $sails, NotifyService, FilterService, MagentoProductService) {
 
   $scope.filter.status = 'any';
   $scope.filter.type = 'any';
@@ -181,13 +181,14 @@ jumplink.magentoweb.controller('ProductListController', function($rootScope, $sc
 
   $scope.getProducts = function () {
     var querystring = FilterService.queryString($scope.filter, null);
-    console.log("/productcache?"+querystring);
-    $sails.get("/productcache?"+querystring, function (response) {
-      if(response != null && typeof(response[0]) !== "undefined" && typeof(response[0].id) !== "undefined") {
+    //console.log("/productcache?"+querystring);
+    MagentoProductService.getList(querystring, function (error, response) {
+    //$sails.get("/productcache?"+querystring, function (response) {
+      if(!error) {
         $rootScope.magento_products = response;
         NotifyService.show("Products loaded", "", "success");
       } else {
-        NotifyService.show("Can't load products", response, "error");
+        NotifyService.show("Can't load products", error, "error");
       }
     });
   }
@@ -199,7 +200,7 @@ jumplink.magentoweb.controller('ProductListController', function($rootScope, $sc
 
 });
 
-jumplink.magentoweb.controller('ProductInfoController', function($scope, $sails, $routeParams, NotifyService) {
+jumplink.magentoweb.controller('ProductInfoController', function($scope, $sails, $routeParams, NotifyService, MagentoProductService) {
 
   $scope.search = {
     action : "SKU",
@@ -212,24 +213,19 @@ jumplink.magentoweb.controller('ProductInfoController', function($scope, $sails,
   }
 
   $scope.get = function () {
-    var url = "/productcache";
+    var querystring = "";
     var action = $scope.search.action;
     switch (action) {
       case "SKU":
-        url += "?sku="+$scope.search.value;
+        querystring = "?sku="+$scope.search.value;
       break;
       case "ID":
-        url += "/"+$scope.search.value;
+        querystring = "/"+$scope.search.value;
       break;
     }
     console.log("get by "+$scope.search.action);
-    $sails.get(url, function (response) {
-      console.log("response");
-      console.log(response);
-      if (action !== 'ID' && response instanceof Array)
-        response = response[0]
-
-      if(typeof(response.id) !== "undefined") {
+    MagentoProductService.getInfo(querystring, function (error, response) {
+      if(!error) {
         $scope.product = response;
         NotifyService.show("Product loaded", "Product Name: "+$scope.product.name, "success");
       } else {
@@ -488,7 +484,29 @@ jumplink.magentoweb.controller('ProductCompareInfoController', function($scope, 
 
 });
 
-jumplink.magentoweb.controller('CacheController', function($scope, NotifyService) {
+jumplink.magentoweb.controller('ConfigController', function($scope, $rootScope, $sails, NotifyService) {
+
+  $rootScope.getConfig = function () {
+    console.log("get config");
+    $sails.get("/config", function (config) {
+      $rootScope.config = config[0];
+      //console.log($rootScope.config);
+    });
+  }
+
+  $rootScope.getConfig();
+
+   $scope.$watch('config', function(newVal) {
+      if(newVal && newVal.id) {
+        console.log("update config");
+        //console.log(newVal);
+        $sails.put("/config/"+newVal.id, newVal, function (config) {
+          //console.log(config);
+        });
+      } else {
+        console.log("No ID!");
+      }
+   }, true); // true because config is an object
 
 });
 

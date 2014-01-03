@@ -7,32 +7,30 @@
  */
 
 module.exports = {
-
-  adapter: 'magento-dnode',
-
-  attributes: {
+  adapter: 'magento-dnode'
+  , attributes: {
     id: {
-      type: "integer",
-      unique: true,
-      index: true,
-      required: true
-    },
-    code: {
+      type: "integer"
+      , unique: true
+      , index: true
+      , required: true
+    }
+    , code: {
       type: "string"
-    },
-    website_id: {
+    }
+    , website_id: {
       type: "integer"
-    },
-    group_id: {
+    }
+    , group_id: {
       type: "integer"
-    },
-    name: {
+    }
+    , name: {
       type: "string"
-    },
-    sort_order: {
+    }
+    , sort_order: {
       type: "integer"
-    },
-    is_active: {
+    }
+    , is_active: {
       type: "boolean"
     }
   }

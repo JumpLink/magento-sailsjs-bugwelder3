@@ -28,11 +28,62 @@ jumplink.magentoweb.factory("FilterService", function() {
 
 });
 
-jumplink.magentoweb.factory("ProductService", function($sails) {
-  $sails.get("/product/5", function (data) {
-      console.log(data);
-      //$scope.bars = data;
+jumplink.magentoweb.factory("MagentoProductService", function($sails) {
+  var getConfig = function (callback) {
+    $sails.get("/config", function (config) {
+      callback(null, config[0]);
     });
+  }
+  var getMagentoProductList = function (querystring, callback) {
+    getConfig (function (error, config) {
+      var url = null;
+      if(config.magento_product_cache_on === true) {
+        url = "/productcache?"+querystring;
+        console.log("Get Magento Product List from Cache");
+      } else {
+        url = "/product"; // TODO querystring
+        console.log("Get Magento Product List Direct");
+      }
+      $sails.get(url, function (response) {
+        if(response != null && typeof(response[0]) !== "undefined" && typeof(response[0].id) !== "undefined") {
+          callback(null, response);
+        } else {
+          callback("Can't load products", response);
+        }
+      });
+    });
+  }
+
+  var getMagentoProductInfo = function (querystring, callback) {
+    getConfig (function (error, config) {
+      var url = null;
+      if(config.magento_product_cache_on === true) {
+        url = "/productcache"+querystring;
+        console.log("Get Magento Product Info from Cache");
+      } else {
+        url = "/product"+querystring;
+        console.log("Get Magento Product Info Direct");
+      }
+      $sails.get(url, function (response) {
+        console.log("response");
+        console.log(response);
+        if (response instanceof Array)
+          response = response[0]
+        if(typeof(response.id) !== "undefined") {
+          callback(null, response);
+        } else {
+          callback("Can't load product", response);
+        }
+      });
+    });
+  }
+
+
+  return {
+    getList : getMagentoProductList
+    , getInfo : getMagentoProductInfo
+  }
+
 });
 
 jumplink.magentoweb.factory("SessionService", function() {

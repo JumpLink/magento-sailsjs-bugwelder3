@@ -2,6 +2,9 @@ var _ = require('underscore');
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
 
+/**
+ * check if string, number or object is equal 
+ */
 var isEqual = function (a, b) {
   if(typeof(a) !== typeof(b))
     return false;
@@ -143,6 +146,9 @@ var importFromSource = function (callback) {
   ], callback);
 }
 
+/**
+ * Export new and updated products to cache with logs
+ */
 var importFromSourceWithLog = function (callback) {
   async.series([
     async.apply(Log.create, { 

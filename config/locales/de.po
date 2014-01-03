@@ -198,22 +198,26 @@ msgstr "Typ"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
 msgid "Client Limit"
 msgstr "Client Limit"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
 #: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
 msgid "Enter limit"
 msgstr "Limit angeben"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
 msgid "Server Limit"
 msgstr "Server Limit"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
 msgid "Show"
 msgstr "Zeige"
 
@@ -224,8 +228,14 @@ msgid "resfresh"
 msgstr "aktualisieren"
 
 #: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/product/list.html
+msgid "refresh scroll"
+msgstr "aktualisiere Scrollbar"
+
+#: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
 #: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
 #: .tmp/public/views/templates/partials/navbar.html
 msgid "Search"
 msgstr "Suche"
@@ -233,6 +243,7 @@ msgstr "Suche"
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
 #: .tmp/public/views/templates/content/admin/product/list.html
+#: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
 msgid "clear search"
 msgstr "Suche säubern"
 
@@ -278,29 +289,46 @@ msgid "Magento Product Cache"
 msgstr "Magento Produkt Cache"
 
 #: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/cache.html
-msgid "Cache Configuration"
-msgstr "Cache Einstellungen"
+#: .tmp/public/views/templates/content/admin/config.html
+#: .tmp/public/views/templates/partials/navbar.html
+msgid "Configuration"
+msgstr "Einstellungen"
 
 #: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/cache.html
-msgid "Product cache"
-msgstr "Produkt Cache"
+#: .tmp/public/views/templates/content/admin/config.html
+#, fuzzy
+msgid "Magento Product cache"
+msgstr "Magento Produkt Cache"
 
 #: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/cache.html
+#: .tmp/public/views/templates/content/admin/config.html
 msgid "enabled"
 msgstr "aktiviert"
 
 #: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/cache.html
+#: .tmp/public/views/templates/content/admin/config.html
 msgid "On"
 msgstr "An"
 
 #: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/cache.html
+#: .tmp/public/views/templates/content/admin/config.html
 msgid "Off"
 msgstr "Aus"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/config.html
+msgid "VWH Product cache"
+msgstr "VWH Produkt Cache"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/config.html
+msgid "Listen for extern changes"
+msgstr "Nach externen Änderungen lauschen"
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/config.html
+msgid "VWH sync cronjob"
+msgstr "VWH Sync CronJob"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
@@ -335,9 +363,8 @@ msgstr "Status"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
-#, fuzzy
 msgid "actions"
-msgstr "Aktion"
+msgstr "Aktionen"
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/partials/navbar.html

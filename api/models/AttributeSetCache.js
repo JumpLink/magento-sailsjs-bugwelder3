@@ -8,27 +8,21 @@
 
 module.exports = {
 
-  adapter: 'mongo',
-
-  attributes: {
-    
+  adapter: 'mongo'
+  , attributes: {
     id : {
-      type: 'integer',
-      index: true,
-      required: true,
-      unique : true
-    },
-
-    name : {
-      type: 'string',
-      required: true
-    },
-    
-    attributes : {
-      type: 'json',
-      required: true
+      type: 'integer'
+      , index: true
+      , required: true
+      , unique : true
     }
-    
+    , name : {
+      type: 'string'
+      , required: true
+    }
+    , attributes : {
+      type: 'json'
+      , required: true
+    }
   }
-
 };

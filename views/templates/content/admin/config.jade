@@ -1,0 +1,22 @@
+div.snap-drawer(snap-drawer="left")
+div.snap-content(snap-content)
+  navbar(mode="admin")
+  notify
+  .container
+    h1 {{ 'Configuration' | translate }}
+    h2 {{ 'Magento Product cache' | translate  }}
+    dl.dl-horizontal
+      dt {{ 'enabled' | translate }}
+      dd: toggle-switch(model="config.magento_product_cache_on", on-label="{{ 'On' | translate }}", off-label="{{ 'Off' | translate }}")
+    h2 {{ 'VWH Product cache' | translate  }}
+    dl.dl-horizontal
+      dt {{ 'enabled' | translate }}
+      dd: toggle-switch(model="config.vwh_product_cache_on", on-label="{{ 'On' | translate }}", off-label="{{ 'Off' | translate }}")
+    h2 {{ 'Listen for extern changes' | translate  }}
+    dl.dl-horizontal
+      dt {{ 'enabled' | translate }}
+      dd: toggle-switch(model="config.listen_extern_changes_on", on-label="{{ 'On' | translate }}", off-label="{{ 'Off' | translate }}")
+    h2 {{ 'VWH sync cronjob' | translate  }}
+    dl.dl-horizontal
+      dt {{ 'enabled' | translate }}
+      dd: toggle-switch(model="config.vwh_sync_cronjob_on", on-label="{{ 'On' | translate }}", off-label="{{ 'Off' | translate }}")
