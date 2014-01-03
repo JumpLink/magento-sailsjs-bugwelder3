@@ -274,7 +274,7 @@ jumplink.magentoweb.controller('ProductInfoController', function($scope, $sails,
 
 });
 
-jumplink.magentoweb.controller('ProductVWHeritageListController', function($rootScope, $scope, $sails, NotifyService, FilterService) {
+jumplink.magentoweb.controller('ProductVWHeritageListController', function($rootScope, $scope, $sails, NotifyService, FilterService, VWHProductService) {
 
   $scope.filter.limit       = 20000;
   $scope.client_limit       = 20;
@@ -297,22 +297,23 @@ jumplink.magentoweb.controller('ProductVWHeritageListController', function($root
 
   $scope.getProducts = function () {
 
-    var querystring = FilterService.queryString($scope.filter, null);
-    console.log("/vwhproductcache?"+querystring);
+    var querystring = "?"+FilterService.queryString($scope.filter, null);
+    console.log("/vwhproductcache"+querystring);
 
-    $sails.get("/vwhproductcache?"+querystring, function (response) {
-      console.log(response);
-      if(response != null && typeof(response[0].id) !== "undefined") {
+    //$sails.get("/vwhproductcache?"+querystring, function (response) {
+    VWHProductService.getList (querystring, function (error, response) {
+      //console.log(response);
+      if(!error) {
         $rootScope.extern_products = response;
         NotifyService.show("Products loaded", "", "success");
       } else {
-        NotifyService.show("Can't load products", response, "error");
+        NotifyService.show("Can't load products", error, "error");
       }
     });
   }
 
   $scope.destroyAll = function () {
-
+    console.log("Error: Not implemented!");
   }
 
   $scope.productFilter = function(product) {
@@ -328,7 +329,7 @@ jumplink.magentoweb.controller('ProductVWHeritageListController', function($root
 
 });
 
-jumplink.magentoweb.controller('ProductVWHeritageInfoController', function($scope, $sails, $routeParams, NotifyService) {
+jumplink.magentoweb.controller('ProductVWHeritageInfoController', function($scope, $sails, $routeParams, NotifyService, VWHProductService) {
 
   $scope.search = {
     action : "ID",
@@ -337,14 +338,15 @@ jumplink.magentoweb.controller('ProductVWHeritageInfoController', function($scop
 
   $scope.get = function () {
     console.log("get vwheritage");
-    $sails.get("/vwhproductcache/"+$scope.search.value+"&limit=1", function (product) {
-      
-      if(typeof(product.id) === "undefined") {
-        NotifyService.show("Can't load product", product, "error");
+    var querystring = "/"+$scope.search.value+"?limit=1";
+    VWHProductService.getInfo (querystring, function (error, response) {
+    //$sails.get("/vwhproductcache/"+$scope.search.value+"&limit=1", function (product) {
+      if(error) {
+        NotifyService.show("Can't load product", response, "error");
       } else {
-        $scope.product = product;
+        $scope.product = response;
         
-        $sails.get("/vwhimage/"+$scope.product.id+"?limit=1", function (images) {
+        $sails.get("/vwhimage/"+$scope.product.id+"?limit=1", function (images) { // TODO
           console.log(images);
           NotifyService.show("Product loaded", "Product Name: "+$scope.product.name, "success");
           $scope.product.images = images;

@@ -160,7 +160,13 @@ var listenVWHProductCacheChanges = function (callback) {
 
   VWHProductCacheService.eventEmitter.on('update_after', function (error, product) {
     sails.log.debug("VWHProductCacheService update_after from ProductService!");
-    onVWHProductCacheUpdate(error, product);
+    Config.find({}, function (error, config) {
+      config = config[0];
+      if(config.listen_extern_changes_on === true)
+        onVWHProductCacheUpdate(error, product);
+      else
+        sails.log.info("listen_extern_changes_on is off, do nothing");
+    });
   });
 
   VWHProductCacheService.eventEmitter.on('destroy_before', function (error, product) {
@@ -174,7 +180,13 @@ var listenVWHProductCacheChanges = function (callback) {
   });
   VWHProductCacheService.eventEmitter.on('create_after', function (error, product) {
     sails.log.debug("VWHProductCacheService create_after from ProductService!");
-    onVWHProductCacheUpdate(error, product);
+    Config.find({}, function (error, config) {
+      config = config[0];
+      if(config.listen_extern_changes_on === true)
+        onVWHProductCacheUpdate(error, product);
+      else
+        sails.log.info("listen_extern_changes_on is off, do nothing");
+    });
   });
   callback(null, true);
 };

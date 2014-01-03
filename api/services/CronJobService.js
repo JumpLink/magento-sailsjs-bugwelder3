@@ -58,11 +58,18 @@ var VWHSyncJob = new cronJob({
   cronTime: '0 * * * *'
   , onTick: function() {
     // Runs every hour
-    sails.log.info("Start VWHSyncJob");
-    ImportVWHProducts(function(error, result) {
-      sails.log.info("VWHSyncJob Done");
-      if(error)
-        sails.log.error(error);
+    Config.find({}, function (error, config) {
+      config = config[0];
+      if(config.vwh_sync_cronjob_on === true) {
+        sails.log.info("Start VWHSyncJob");
+        ImportVWHProducts(function(error, result) {
+          sails.log.info("VWHSyncJob Done");
+          if(error)
+            sails.log.error(error);
+        });
+      } else {
+        sails.log.info("VWHSyncJob is off, do nothing");
+      }
     });
   }
   , start: false /* Start the job right now */

@@ -8,6 +8,22 @@
  * http://sailsjs.org/#documentation
  */
 
+var createConfig = function (cb) {
+  Config.findOrCreate({
+    "listen_extern_changes_on" : false
+    , "magento_product_cache_on" : false
+    , "vwh_product_cache_on" : false
+    , "vwh_sync_cronjob_on" : false
+}, function (err, result) {
+    if(err) {
+      sails.log.err(err);
+    } else {
+      sails.log.info("Config checked");
+      cb(err, result);
+    }
+  });  
+}
+
 var createAdminUser = function (cb) {
   User.findOrCreate({email:"admin@admin.org", name: "admin", color: "#000000", password: "sails-admin"}, function (err, result) {
     if(err) {
@@ -53,6 +69,7 @@ module.exports.bootstrap = function (final_callback) {
 
   async.series([
     StartDNodeService
+    , createConfig
     , createAdminUser
     , listenExternChangesForProductService
     , listenExternChangesForProductCacheService

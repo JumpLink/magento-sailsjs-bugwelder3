@@ -158,18 +158,26 @@ var importOneByID = function (id, callback) {
 
 var listenMagentoChanges = function (callback) {
   DNodeService.eventEmitter.on('catalog_product_save_after', function (error, info) {
-    sails.log.warn("catalog_product_save_after from ProductCacheService!");
-    var id = info.product_id ? parseInt(info.product_id) : parseInt(info.id);
-    importOneByID(id, function (error, result) {
-      if(error) {
-        sails.log.error("Error on listenMagentoChanges:");
-        sails.log.error(error);
-        sails.log.error(result);
+    sails.log.info("catalog_product_save_after from ProductCacheService!");
+    Config.find({}, function (error, config) {
+      config = config[0];
+      if(config.listen_extern_changes_on === true) {
+        var id = info.product_id ? parseInt(info.product_id) : parseInt(info.id);
+        importOneByID(id, function (error, result) {
+          if(error) {
+            sails.log.error("Error on listenMagentoChanges:");
+            sails.log.error(error);
+            sails.log.error(result);
+            // no Callback, see below
+          }
+        });
+      } else {
+        sails.log.info("listen_extern_changes_on is off, do nothing");
       }
     });
   });
 
-  callback(null, true);
+  callback(null, true); // Callback don't need to wait of anything
 };
 
 var listenExternChanges = function (callback) {

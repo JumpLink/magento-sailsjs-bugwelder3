@@ -53,7 +53,6 @@ jumplink.magentoweb.factory("MagentoProductService", function($sails) {
       });
     });
   }
-
   var getMagentoProductInfo = function (querystring, callback) {
     getConfig (function (error, config) {
       var url = null;
@@ -77,13 +76,65 @@ jumplink.magentoweb.factory("MagentoProductService", function($sails) {
       });
     });
   }
-
-
   return {
     getList : getMagentoProductList
     , getInfo : getMagentoProductInfo
   }
+});
 
+jumplink.magentoweb.factory("VWHProductService", function($sails) {
+  var getConfig = function (callback) {
+    $sails.get("/config", function (config) {
+      callback(null, config[0]);
+    });
+  }
+  var getVWHProductList = function (querystring, callback) {
+    getConfig (function (error, config) {
+      var url = null;
+      if(config.vwh_product_cache_on === true) {
+        url = "/vwhproductcache"+querystring;
+        console.log("Get VWH Product List from Cache");
+      } else {
+        url = "/vwhproduct"; // TODO querystring
+        console.log("Get VWH Product List Direct");
+      }
+      $sails.get(url, function (response) {
+        if(response != null && typeof(response[0]) !== "undefined" && typeof(response[0].id) !== "undefined") {
+          callback(null, response);
+        } else {
+          callback("Can't load products", response);
+        }
+      });
+    });
+  }
+  var getVWHProductInfo = function (querystring, callback) {
+    getConfig (function (error, config) {
+      var url = null;
+      if(config.vwh_product_cache_on === true) {
+        url = "/vwhproductcache"+querystring;
+        console.log("Get VWH Product Info from Cache");
+      } else {
+        url = "/vwhproduct"+querystring;
+        console.log("Get VWH Product Info Direct");
+        console.log(url);
+      }
+      $sails.get(url, function (response) {
+        console.log("response");
+        console.log(response);
+        if (response instanceof Array)
+          response = response[0]
+        if(typeof(response.id) !== "undefined") {
+          callback(null, response);
+        } else {
+          callback("Can't load product", response);
+        }
+      });
+    });
+  }
+  return {
+    getList : getVWHProductList
+    , getInfo : getVWHProductInfo
+  }
 });
 
 jumplink.magentoweb.factory("SessionService", function() {
