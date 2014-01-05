@@ -1,41 +1,42 @@
-//-remove .container to use full size
-.container(ng-switch="mode")
-  nav(ng-switch-when="admin", role="navigation").navbar.navbar-default
-    .navbar-header
-      button(type="button", data-toggle="collapse", data-target=".navbar-ex1-collapse").navbar-toggle
-        span.sr-only Toggle navigation
-        span.fa.fa-bars
-      a.navbar-snap-toggle(snap-toggle="left").navbar-brand
-        .fa.fa-ellipsis-v
-      a(href="#/admin").navbar-brand
-        | Bugwelder Admin
-    .collapse.navbar-collapse.navbar-ex1-collapse
-      ul.nav.navbar-nav
-        li.dropdown
-          a(href="#", data-toggle="dropdown", dropdown-toggle) {{ 'Products' | translate }}
-            b.caret
-          ul.dropdown-menu
-            li: a(href="#/admin/product/config") Config
-            li: a(href="#/admin/product/list") Magento {{ 'Search' | translate }}
-            li: a(href="#/admin/product/info") Magento {{ 'Information' | translate }}
-            li: a(href="#/admin/product/vwheritage-list") VWHeritage {{ 'Search' | translate }}
-            li: a(href="#/admin/product/vwheritage-info") VWHeritage {{ 'Information' | translate }}
-            li: a(href="#/admin/product/compare-list") {{ 'Compare' | translate }} {{ 'Search' | translate }}
-            li: a(href="#/admin/product/compare-info") {{ 'Compare' | translate }} {{ 'Information' | translate }}
-        li.dropdown
-          a(href="#", data-toggle="dropdown", dropdown-toggle) {{ 'User' | translate }}
-            b.caret
-          ul.dropdown-menu
-            li: a(href="#/admin/user") Index
-            li: a(href="#/admin/user/signin") {{ 'Signin' | translate }}
-            li: a(href="#/admin/user/create") {{ 'Create' | translate }}
-        li: a(href="#/admin/config") {{ 'Configuration' | translate }}
-        li: a(href="#/admin/log") {{ 'Logs' | translate }}
-        li: a(href="#/site-notice") {{ 'Site notice' | translate }}
-      ul.nav.navbar-nav.navbar-right
-        li
-          button.btn.btn-default.navbar-btn(ng-if="getSigninUser().email.length", ng-click="signout()") {{getSigninUser().name}} {{ 'Signout' | translate }}
-          a(ng-if="!getSigninUser().email.length", href="#/admin/user/signin") {{ 'Signin' | translate }}
+span(ng-switch="mode")
+  nav(ng-switch-when="admin", role="navigation").navbar.navbar-default.navbar-static-top
+    a.navbar-snap-toggle.col-xs-3.left(snap-toggle="left")
+      .fa.fa-ellipsis-v
+      | Menu
+    .col-xs-6
+      .navbar-brand-center
+        a(href="#/admin").navbar-brand
+          | Bugwelder Admin
+    a.navbar-snap-toggle.col-xs-3.right(snap-toggle="right")
+      .fa.fa-ellipsis-v
+      .fa.fa-cog
+    //- .collapse.navbar-collapse.navbar-ex1-collapse
+    //-   ul.nav.navbar-nav
+    //-     li.dropdown
+    //-       a(href="#", data-toggle="dropdown", dropdown-toggle) {{ 'Products' | translate }}
+    //-         b.caret
+    //-       ul.dropdown-menu
+    //-         li: a(href="#/admin/product/config") Config
+    //-         li: a(href="#/admin/product/list") Magento {{ 'Search' | translate }}
+    //-         li: a(href="#/admin/product/info") Magento {{ 'Information' | translate }}
+    //-         li: a(href="#/admin/product/vwheritage-list") VWHeritage {{ 'Search' | translate }}
+    //-         li: a(href="#/admin/product/vwheritage-info") VWHeritage {{ 'Information' | translate }}
+    //-         li: a(href="#/admin/product/compare-list") {{ 'Compare' | translate }} {{ 'Search' | translate }}
+    //-         li: a(href="#/admin/product/compare-info") {{ 'Compare' | translate }} {{ 'Information' | translate }}
+    //-     li.dropdown
+    //-       a(href="#", data-toggle="dropdown", dropdown-toggle) {{ 'User' | translate }}
+    //-         b.caret
+    //-       ul.dropdown-menu
+    //-         li: a(href="#/admin/user") Index
+    //-         li: a(href="#/admin/user/signin") {{ 'Signin' | translate }}
+    //-         li: a(href="#/admin/user/create") {{ 'Create' | translate }}
+    //-     li: a(href="#/admin/config") {{ 'Configuration' | translate }}
+    //-     li: a(href="#/admin/log") {{ 'Logs' | translate }}
+    //-     li: a(href="#/site-notice") {{ 'Site notice' | translate }}
+    //-   ul.nav.navbar-nav.navbar-right
+    //-     li
+    //-       button.btn.btn-default.navbar-btn(ng-if="getSigninUser().email.length", ng-click="signout()") {{getSigninUser().name}} {{ 'Signout' | translate }}
+    //-       a(ng-if="!getSigninUser().email.length", href="#/admin/user/signin") {{ 'Signin' | translate }}
   nav(ng-switch-default, role="navigation").navbar.navbar-default
     .navbar-header
       button(type="button", data-toggle="collapse", data-target=".navbar-ex1-collapse").navbar-toggle

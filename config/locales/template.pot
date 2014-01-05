@@ -81,7 +81,6 @@ msgstr ""
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/user/create.html
-#: .tmp/public/views/templates/partials/navbar.html
 msgid "Create"
 msgstr ""
 
@@ -221,7 +220,6 @@ msgstr ""
 #: .tmp/public/views/templates/content/admin/log.html
 #: .tmp/public/views/templates/content/admin/product/list.html
 #: .tmp/public/views/templates/content/admin/product/vwheritage-list.html
-#: .tmp/public/views/templates/partials/navbar.html
 msgid "Search"
 msgstr ""
 
@@ -234,7 +232,6 @@ msgstr ""
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/product/list.html
-#: .tmp/public/views/templates/partials/navbar.html
 msgid "Products"
 msgstr ""
 
@@ -275,7 +272,6 @@ msgstr ""
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/config.html
-#: .tmp/public/views/templates/partials/navbar.html
 msgid "Configuration"
 msgstr ""
 
@@ -316,7 +312,6 @@ msgstr ""
 
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
-#: .tmp/public/views/templates/partials/navbar.html
 msgid "Logs"
 msgstr ""
 
@@ -348,36 +343,6 @@ msgstr ""
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/content/admin/log.html
 msgid "actions"
-msgstr ""
-
-#: .tmp/public/views/index.html
-#: .tmp/public/views/templates/partials/navbar.html
-msgid "Information"
-msgstr ""
-
-#: .tmp/public/views/index.html
-#: .tmp/public/views/templates/partials/navbar.html
-msgid "Compare"
-msgstr ""
-
-#: .tmp/public/views/index.html
-#: .tmp/public/views/templates/partials/navbar.html
-msgid "User"
-msgstr ""
-
-#: .tmp/public/views/index.html
-#: .tmp/public/views/templates/partials/navbar.html
-msgid "Signin"
-msgstr ""
-
-#: .tmp/public/views/index.html
-#: .tmp/public/views/templates/partials/navbar.html
-msgid "Site notice"
-msgstr ""
-
-#: .tmp/public/views/index.html
-#: .tmp/public/views/templates/partials/navbar.html
-msgid "Signout"
 msgstr ""
 
 #: .tmp/public/views/templates/content/admin/user/signin.html

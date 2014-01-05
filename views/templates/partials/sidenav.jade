@@ -1,0 +1,26 @@
+.snap-drawer(snap-drawer="left")
+  ul.nav.nav-pills.nav-stacked
+    li.dropdown
+      a(href="#", data-toggle="dropdown", dropdown-toggle) {{ 'Products' | translate }}
+        b.caret
+      ul.dropdown-menu
+        li: a(href="#/admin/product/config") Config
+        li: a(href="#/admin/product/list") Magento {{ 'Search' | translate }}
+        li: a(href="#/admin/product/info") Magento {{ 'Information' | translate }}
+        li: a(href="#/admin/product/vwheritage-list") VWHeritage {{ 'Search' | translate }}
+        li: a(href="#/admin/product/vwheritage-info") VWHeritage {{ 'Information' | translate }}
+        li: a(href="#/admin/product/compare-list") {{ 'Compare' | translate }} {{ 'Search' | translate }}
+        li: a(href="#/admin/product/compare-info") {{ 'Compare' | translate }} {{ 'Information' | translate }}
+    li.dropdown
+      a(href="#", data-toggle="dropdown", dropdown-toggle) {{ 'User' | translate }}
+        b.caret
+      ul.dropdown-menu
+        li: a(href="#/admin/user") Index
+        li: a(href="#/admin/user/signin") {{ 'Signin' | translate }}
+        li: a(href="#/admin/user/create") {{ 'Create' | translate }}
+    li: a(href="#/admin/config") {{ 'Configuration' | translate }}
+    li: a(href="#/admin/log") {{ 'Logs' | translate }}
+    li: a(href="#/site-notice") {{ 'Site notice' | translate }}
+    li
+      button.btn.btn-default.navbar-btn(ng-if="getSigninUser().email.length", ng-click="signout()") {{getSigninUser().name}} {{ 'Signout' | translate }}
+      a(ng-if="!getSigninUser().email.length", href="#/admin/user/signin") {{ 'Signin' | translate }}

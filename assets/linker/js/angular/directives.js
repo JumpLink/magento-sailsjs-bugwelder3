@@ -9,6 +9,17 @@ jumplink.magentoweb.directive("navbar", [function () {
   }
 }]);
 
+jumplink.magentoweb.directive("sidenav", [function () {
+  return {
+    restrict: "E",
+    scope: {
+      mode: "@"
+    },
+    templateUrl: 'partials/sidenav.jade',
+    controller: 'SidenavController'
+  }
+}]);
+
 jumplink.magentoweb.directive("repeatChangedEvent", [function () {
   console.log('RepeatUpdateScroll');
   return function(scope, element, attrs) {

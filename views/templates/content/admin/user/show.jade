@@ -1,5 +1,7 @@
-div.snap-drawer(snap-drawer="left")
-div.snap-content(snap-content) 
+.snap-drawers
+  sidenav
+  .snap-drawer(snap-drawer="right")
+.snap-content.scrollable(snap-content)
   navbar(mode="admin")
   .container
   h1 {{ user.name}}

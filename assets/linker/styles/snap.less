@@ -14,8 +14,22 @@
   padding: 15px;
 }
 
+
+
 .navbar-snap-toggle {
   .navbar-brand();
   cursor:pointer;
-  // cursor:ew-resize;
+  &.left {
+    .fa-ellipsis-v {
+      padding-right: 5px;
+    }
+  }
+  &.right {
+    .fa {
+      float: right;
+    }
+    .fa-ellipsis-v {
+      padding-left: 5px;
+    }
+  }
 }

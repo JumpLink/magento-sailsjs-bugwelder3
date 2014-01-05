@@ -15,6 +15,10 @@ jumplink.magentoweb.controller('NavbarController', function($scope, $location, N
    }
 });
 
+jumplink.magentoweb.controller('SidenavController', function($scope) {
+
+});
+
 jumplink.magentoweb.controller('UserCreateController', function($scope, $sails, AuthenticationService) {
   $scope.create = function () {
     $sails.post("/user", $scope.new_user, function (response) {
