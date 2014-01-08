@@ -245,17 +245,15 @@ jumplink.magentoweb.controller('ProductInfoController', function($scope, $sails,
     var is_in_stock = (total_qty > 0) ? 1 : 0;
     var product_data = {
       stock_data : {
-        qty: total_qty,
-        use_config_manage_stock: 1,
-        is_in_stock: is_in_stock
-      },
-      set : {
-        set_id: $scope.product.set.set_id
-      },
-      stock_strichweg_qty: $scope.product.stock_strichweg_qty,
-      stock_vwheritage_qty: $scope.product.stock_vwheritage_qty,
-      stock_strichweg_range: $scope.product.stock_strichweg_range,
-      stock_strichweg_row: $scope.product.stock_strichweg_row
+        qty: total_qty
+        , use_config_manage_stock: 1
+        , is_in_stock: is_in_stock
+      }
+      , set : $scope.product.set
+      , stock_strichweg_qty: $scope.product.stock_strichweg_qty
+      , stock_vwheritage_qty: $scope.product.stock_vwheritage_qty
+      , stock_strichweg_range: $scope.product.stock_strichweg_range
+      ,stock_strichweg_row: $scope.product.stock_strichweg_row
     }
 
     console.log(product_data);

@@ -8,6 +8,7 @@
  * http://sailsjs.org/#documentation
  */
 
+// FIXME this is creating empty config in db if config is set
 var createConfig = function (cb) {
   Config.findOrCreate({
     "listen_extern_changes_on" : false
@@ -69,7 +70,7 @@ module.exports.bootstrap = function (final_callback) {
 
   async.series([
     StartDNodeService
-    , createConfig
+    //, createConfig
     , createAdminUser
     , listenExternChangesForProductService
     , listenExternChangesForProductCacheService
