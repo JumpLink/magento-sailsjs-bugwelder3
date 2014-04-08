@@ -19,7 +19,7 @@ jumplink.magentoweb.controller('SidenavController', function($scope) {
   
 });
 
-jumplink.magentoweb.controller('AttributeController', function($scope) {
+jumplink.magentoweb.controller('AttributeController', function($scope, $sails, NotifyService) {
   $scope.getAttributes = function () {
     $sails.get("/product/generateAttributes", function (response) {
       if(response.status === 500) {

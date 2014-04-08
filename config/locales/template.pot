@@ -239,6 +239,7 @@ msgid "Products"
 msgstr ""
 
 #: .tmp/public/views/index.html
+#: .tmp/public/views/templates/content/admin/attribute/list.html
 #: .tmp/public/views/templates/content/admin/product/compare-list.html
 msgid "Clean"
 msgstr ""
@@ -358,6 +359,16 @@ msgstr ""
 #: .tmp/public/views/index.html
 #: .tmp/public/views/templates/partials/sidenav.html
 msgid "Compare"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/partials/sidenav.html
+msgid "Attributes"
+msgstr ""
+
+#: .tmp/public/views/index.html
+#: .tmp/public/views/templates/partials/sidenav.html
+msgid "Attribute"
 msgstr ""
 
 #: .tmp/public/views/index.html
