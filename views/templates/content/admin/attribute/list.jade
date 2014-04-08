@@ -8,13 +8,13 @@
     table.table.table-hover(ng-if="attributes.length")
       thead
         tr
-          th ID
-          th SKU
-          th SKU ({{ 'Clean' | translate }})
           th Name
+          th Type
+          th Required
+          th Unique
       tbody
         tr(ng-repeat="attribute in attributes")
-          td {{attribute.id}} 
-          td {{attribute.sku}}
-          td {{attribute.sku_clean}}
-          td {{attribute.name}}
+          td {{$index}} 
+          td {{attribute.type}}
+          td {{attribute.required === true}}
+          td {{attribute.unique === true}}
