@@ -33,6 +33,8 @@ jumplink.magentoweb.controller('AttributeController', function($scope) {
     });
   }
 
+  $scope.getAttributes();
+
 });
 
 jumplink.magentoweb.controller('UserCreateController', function($scope, $sails, AuthenticationService) {
