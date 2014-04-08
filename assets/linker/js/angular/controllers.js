@@ -19,6 +19,22 @@ jumplink.magentoweb.controller('SidenavController', function($scope) {
   
 });
 
+jumplink.magentoweb.controller('AttributeController', function($scope) {
+  $scope.getAttributes = function () {
+    $sails.get("/product/generateAttributes", function (response) {
+      if(response.status === 500) {
+        NotifyService.show("Can't generate product attributes", response, "error");
+      } else {
+        NotifyService.show("Product attributes generated", "", "success");
+        $scope.attributes = response;
+        console.log("$scope.attributes");
+        console.log($scope.attributes);
+      }
+    });
+  }
+
+});
+
 jumplink.magentoweb.controller('UserCreateController', function($scope, $sails, AuthenticationService) {
   $scope.create = function () {
     $sails.post("/user", $scope.new_user, function (response) {

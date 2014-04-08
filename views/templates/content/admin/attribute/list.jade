@@ -1,0 +1,20 @@
+.snap-drawers
+  sidenav
+  .snap-drawer(snap-drawer="right")
+.snap-content(snap-content)
+  navbar(mode="admin")
+  .container
+    h1 Attribute List
+    table.table.table-hover(ng-if="attributes.length")
+      thead
+        tr
+          th ID
+          th SKU
+          th SKU ({{ 'Clean' | translate }})
+          th Name
+      tbody
+        tr(ng-repeat="attribute in attributes")
+          td {{attribute.id}} 
+          td {{attribute.sku}}
+          td {{attribute.sku_clean}}
+          td {{attribute.name}}

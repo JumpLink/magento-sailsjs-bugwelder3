@@ -12,6 +12,11 @@
         li: a(href="#/admin/product/compare-list") {{ 'Compare' | translate }} {{ 'Search' | translate }}
         li: a(href="#/admin/product/compare-info") {{ 'Compare' | translate }} {{ 'Information' | translate }}
     li.dropdown
+      a(href="#", data-toggle="dropdown", dropdown-toggle) {{ 'Attributes' | translate }}
+        b.caret
+      ul.dropdown-menu
+        li: a(href="#/admin/attribute/list") {{ 'Attribute' | translate }} {{ 'Search' | translate }}
+    li.dropdown
       a(href="#", data-toggle="dropdown", dropdown-toggle) {{ 'User' | translate }}
         b.caret
       ul.dropdown-menu
