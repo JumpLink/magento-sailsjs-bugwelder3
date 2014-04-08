@@ -92,6 +92,8 @@ module.exports = function (grunt) {
     'linker/js/angular/routes.js',
     'linker/js/angular/policies.js',
 
+    'bower_components/autofill-event/src/autofill-event.js', // fix autofill issue https://github.com/angular/angular.js/issues/1460
+
     // All of the rest of your app scripts imported here
     'linker/**/*.js'
   ];

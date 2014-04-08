@@ -34,6 +34,7 @@
     "async": "~0.2.*",
     "angular-snap": "~1.2.*",
     "iscroll": "~5.0.9",
-    "ng-iScroll": "https://github.com/ibspoof/ng-iScroll.git#v1.2b"
+    "ng-iScroll": "https://github.com/ibspoof/ng-iScroll.git#v1.2b",
+    "autofill-event": "~1.0.0"
   }
 }

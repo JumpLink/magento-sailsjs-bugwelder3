@@ -239,7 +239,6 @@ msgid "Products"
 msgstr ""
 
 #: .tmp/public/views/index.html
-#: .tmp/public/views/templates/content/admin/attribute/list.html
 #: .tmp/public/views/templates/content/admin/product/compare-list.html
 msgid "Clean"
 msgstr ""
