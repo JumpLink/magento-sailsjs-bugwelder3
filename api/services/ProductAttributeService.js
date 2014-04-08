@@ -63,7 +63,7 @@ var generateAndSaveToFile = function (callback) {
 }
 
 var getAttributeOptions = function (attributeCode) {
-  if (typeof(attributes[attributeCode]) === 'undefiend') {
+  if (typeof(attributes[attributeCode]) === 'undefined') {
     sails.log.error("attribute code '"+attributeCode+"' not found in 'ProductAttributes.json'");
     process.exit(1);
     return;
