@@ -57,16 +57,36 @@ var generateStock = function (product, callback) {
   callback(null, product);
 }
 
+var normalizeStock = function (product) {
+
+  if(typeof(product) === 'undefined' || product === null) {
+    product = {
+      stock_vwheritage_qty: 0,
+      stock_strichweg_qty: 0
+    };
+  }
+
+  if(typeof(product.stock_vwheritage_qty) === 'undefined' || product.stock_vwheritage_qty === null)
+    product.stock_vwheritage_qty = 0;
+  if(typeof(product.stock_strichweg_qty) === 'undefined' || product.stock_strichweg_qty === null)
+    product.stock_strichweg_qty = 0;
+
+  return product;
+}
+
 var insertOldStock = function (newProduct, oldProduct) {
   // sails.log.debug("insertOldStock");
   // sails.log.debug("newProduct");
   // sails.log.debug(newProduct);
   // sails.log.debug("oldProduct");
   // sails.log.debug(oldProduct);
-  if(typeof(newProduct.stock_vwheritage_qty) === 'undefined')
-    newProduct.stock_vwheritage_qty = oldProduct.stock_vwheritage_qty;
-  if(typeof(newProduct.stock_strichweg_qty) === 'undefined')
-    newProduct.stock_strichweg_qty = oldProduct.stock_strichweg_qty;
+  if(typeof(oldProduct) !== 'undefined' && oldProduct !== null) {
+    if(typeof(newProduct.stock_vwheritage_qty) === 'undefined' && typeof(oldProduct.stock_vwheritage_qty) !== 'undefined' )
+      newProduct.stock_vwheritage_qty = oldProduct.stock_vwheritage_qty;
+    if(typeof(newProduct.stock_strichweg_qty) === 'undefined' && typeof(oldProduct.stock_strichweg_qty) !== 'undefined')
+      newProduct.stock_strichweg_qty = oldProduct.stock_strichweg_qty;
+  }
+
   return newProduct;
 }
 
@@ -80,8 +100,13 @@ var getOldStock = function (id, newProduct, oldProduct, callback) {
         if(error)  {
           callback(error, null);
         } else {
-          oldProduct = oldProduct.toObject();
-          newProduct = insertOldStock (newProduct, oldProduct);
+
+          if(typeof(oldProduct) !== 'undefined' && oldProduct !== null) {
+            oldProduct = oldProduct.toObject();
+            newProduct = insertOldStock (newProduct, oldProduct);
+          }
+
+          newProduct = normalizeStock(newProduct);
           generateStock(newProduct, callback);
         }
       });
