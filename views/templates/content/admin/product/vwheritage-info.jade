@@ -35,6 +35,10 @@
           dd {{product.sku}}
           dt Name
           dd {{product.name}}
+          dt Retail Price
+          dd £{{product.retail_price}} ({{product.retail_price*1.22}}€ Netto, {{(product.retail_price*1.19)*1.22}}€ Brutto)
+          dt Cost Price
+          dd £{{product.cost_price}} ({{product.cost_price*1.22}}€ Netto, {{(product.cost_price*1.19)*1.22}}€ Brutto)
        h4 images
         div(ng-repeat="image in product.images")
           img(src="{{image.LARGE.URL}}")  
