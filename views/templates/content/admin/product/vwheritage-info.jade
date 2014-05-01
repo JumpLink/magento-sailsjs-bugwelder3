@@ -37,8 +37,8 @@
           dd {{product.name}}
           dt Retail Price
           dd £{{product.retail_price | number:2}} ({{product.retail_price*1.22 | number:2}}€ Netto, {{(product.retail_price*1.19)*1.22 | number:2}}€ Brutto)
-          dt Cost Price
-          dd £{{product.cost_price | number:2}} ({{product.cost_price*1.22 | number:2}}€ Netto, {{(product.cost_price*1.19)*1.22 | number:2}}€ Brutto)
+          //- dt Cost Price
+          //- dd £{{product.cost_price | number:2}} ({{product.cost_price*1.22 | number:2}}€ Netto, {{(product.cost_price*1.19)*1.22 | number:2}}€ Brutto)
        h4 images
         div(ng-repeat="image in product.images")
           img(src="{{image.LARGE.URL}}")  
